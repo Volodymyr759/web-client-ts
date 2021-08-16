@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { withLayout } from "../layouts/public/Layout";
-import { Htag, P, SayHelloForm, TitleCard } from "../components";
+import { BubbleBox, Htag, P, SayHelloForm, TitleCard } from "../components";
 
 function ForStartups(): JSX.Element {
 	return (
@@ -84,29 +84,17 @@ function ForStartups(): JSX.Element {
 			</section>
 
 			<section className="row">
-				<div className="col-md-6">
-					<div className="bubble">
-						<span>GROWTH</span>
-						<p>Scalable Solutions</p>
-					</div>
+				<div className="bubblewrapper">
+					<BubbleBox appearance="left-bottom" headerText="Scalable Solutions" spanText="GROWTH" />
 				</div>
-				<div className="col-md-6">
-					<div className="bubble">
-						<span>MAINTENANCE</span>
-						<p>Ongoing Support</p>
-					</div>
+				<div className="bubblewrapper">
+					<BubbleBox appearance="right-bottom" headerText="Ongoing Support" spanText="MAINTENANCE" />
 				</div>
-				<div className="col-md-6">
-					<div className="bubble">
-						<span>TIME</span>
-						<p>1-2 weeks</p>
-					</div>
+				<div className="bubblewrapper">
+					<BubbleBox appearance="right-top" headerText="1-2 weeks" spanText="TIME" />
 				</div>
-				<div className="col-md-6">
-					<div className="bubble">
-						<span>PRODUCTION</span>
-						<p>End-To-End</p>
-					</div>
+				<div className="bubblewrapper">
+					<BubbleBox appearance="left-top" headerText="End-To-End" spanText="Production" />
 				</div>
 			</section>
 

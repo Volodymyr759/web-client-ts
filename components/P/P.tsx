@@ -10,6 +10,7 @@ export const P = ({ appearance = 'middle', children, ...props }: PProps): JSX.El
 				[styles.middle]: appearance == 'middle',
 				[styles.strong]: appearance == 'strong',
 				[styles.centered]: appearance == 'centered',
+				[styles.centered]: appearance == 'colored'
 			})}
 			{...props}
 		>

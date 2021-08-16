@@ -16,9 +16,11 @@ function Outsourcing(): JSX.Element {
 				buttonLink="/contact-us"
 				objdata="/EivoloLandingPage_WhyOutsource_Illustration.svg"
 			>
-				Need help translating your ideas into functional, scalable solutions?
-				Outsourcing can greatly enhance your business’ efficiency and, if done correctly,
-				it can result in significant cost-savings for your company.
+				<p>
+					Need help translating your ideas into functional, scalable solutions?
+					Outsourcing can greatly enhance your business’ efficiency and, if done correctly,
+					it can result in significant cost-savings for your company.
+				</p>
 			</RightImageCard>
 
 			<section className="row">

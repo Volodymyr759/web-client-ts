@@ -1,7 +1,6 @@
 import { Htag } from '../Htag/Htag';
 import { RightImageCardProps } from './right-image-card.props';
 import styles from './right-image-card.module.css';
-import { P } from '../P/P';
 import { ImageObject, LinkButton } from '..';
 
 export const RightImageCard = ({
@@ -16,7 +15,7 @@ export const RightImageCard = ({
 			<div className={styles.rightimagecard}>
 				<div>
 					<Htag tag="h2">{htagText}</Htag>
-					<P>{children}</P>
+					{children}
 					<LinkButton appearance="white" linkTo={buttonLink}>
 						<span>{buttonText}</span>
 					</LinkButton>

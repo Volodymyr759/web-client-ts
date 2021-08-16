@@ -38,16 +38,9 @@ nav {
 	padding: 0 12px;
 }
 
-.col-md-6 > p {
-	margin-top: 0;
-	margin-bottom: 1.5em;
+/* .col-md-6 > p {
 
-	text-align: center;
-
-	font-size: 24px;
-	font-weight: 500;
-	line-height: 40px;
-}
+} */
 
 .icon-para {
 	width: 100%;
@@ -74,46 +67,21 @@ nav {
 
 .eiv-header-text > p {
 	text-align: center;
+
+	color: #373249;
+
+	font-size: 18px;
+	font-weight: 400;
+
+	line-height: 1.5;
 }
 
-.bubble {
-	width: 80%;
-	margin-right: 30px;
-	margin-bottom: 20px;
-	margin-left: 30px;
-	padding: 40px 70px;
+.bubblewrapper {
+	margin-top: 0;
+	margin-bottom: 1.5em;
 
-	border-radius: 100px 0 100px 100px;
-	background: #F2F5FF;
-}
-
-.bubble span {
-	display: block;
-
-	width: 100%;
-
-	text-align: right !important;
-	text-transform: uppercase;
-
-	color: #D0DAFF;
-
-	font-size: 25px;
-	font-weight: 600;
-	font-style: normal;
-	line-height: 20px;
-}
-
-.bubble p {
-	transition: inherit;
-	text-align: left;
-
-	background: -webkit-linear-gradient(left, var(--strong-blue-color) 1%, var(--light-blue-color) 50%);
-	-webkit-background-clip: text;
-
-	font-size: 24px;
-	font-weight: 800;
-	line-height: 50px;
-	-webkit-text-fill-color: transparent;
+	padding-right: 40px;
+	padding-left: 40px;
 }
 
 :root {

@@ -1,3 +1,4 @@
+export * from './BubbleBox/bubble-box';
 export * from './Htag/Htag';
 export * from './ImageObject/image-object';
 export * from './LeftImageCard/left-image-card';

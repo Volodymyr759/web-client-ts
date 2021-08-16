@@ -1,7 +1,6 @@
 import { Htag } from '../Htag/Htag';
 import { RightTextCardProps } from './right-text-card.props';
 import styles from './right-text-card.module.css';
-import { P } from '../P/P';
 import { ImageObject } from '..';
 
 export const RightTextCard = ({
@@ -17,7 +16,7 @@ export const RightTextCard = ({
 				</div>
 				<div>
 					<Htag tag="h2">{htagText}</Htag>
-					<P>{children}</P>
+					{children}
 				</div>
 			</div>
 		</>
