@@ -1,7 +1,6 @@
 import { Htag } from '../Htag/Htag';
 import { LeftImageCardProps } from './left-image-card.props';
 import styles from './left-image-card.module.css';
-import { P } from '../P/P';
 import { ImageObject, LinkButton } from '..';
 
 export const LeftImageCard = ({
@@ -19,7 +18,7 @@ export const LeftImageCard = ({
 				</div>
 				<div>
 					<Htag tag="h2">{htagText}</Htag>
-					<P>{children}</P>
+					{children}
 					<LinkButton appearance="white" linkTo={buttonLink}>
 						<span>{buttonText}</span>
 					</LinkButton>

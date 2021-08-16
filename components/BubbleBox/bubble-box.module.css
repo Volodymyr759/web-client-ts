@@ -1,0 +1,56 @@
+.bubble {
+	margin-bottom: 20px;
+	padding: 40px 70px;
+
+	background: #F2F5FF;
+}
+
+.bubbleheader {
+	transition: inherit;
+	text-align: left;
+
+	background: -webkit-linear-gradient(left, var(--strong-blue-color) 1%, var(--light-blue-color) 50%);
+	background-clip: text;
+
+	font-size: 25px;
+	font-weight: 800;
+	line-height: 50px;
+	-webkit-text-fill-color: transparent;
+}
+
+.bubblespan {
+	width: 100%;
+
+	text-transform: uppercase;
+
+	color: #D0DAFF;
+
+	font-size: 25px;
+	font-weight: 600;
+	font-style: normal;
+	line-height: 20px;
+}
+
+.bubble > p {
+	color: #373249;
+
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+}
+
+.lefttopbubble {
+	border-radius: 0 100px 100px 100px;
+}
+
+.righttopbubble {
+	border-radius: 100px 0 100px 100px;
+}
+
+.rightbottombubble {
+	border-radius: 100px 100px 100px 0;
+}
+
+.leftbottombubble {
+	border-radius: 100px 100px 0 100px;
+}

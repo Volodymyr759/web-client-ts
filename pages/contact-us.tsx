@@ -17,15 +17,17 @@ function ContactUs(): JSX.Element {
 				buttonLink="/security-auditing"
 				objdata="/EivoloLandingPage_GetinTouch_Illustration.svg"
 			>
-				We can’t wait to hear about your latest project.
-				Need to request a quote, learn more about our service offering or ask a question?<br /><br />
+				<p>
+					We can’t wait to hear about your latest project.
+					Need to request a quote, learn more about our service offering or ask a question?
+				</p>
 
-				Contact us at:<br />
-				<a href="mailto:info@eivolo.com" className={styles.email}> info@eivolo.com</a><br />
-				Give us a call on:<br />
+				<p>Contact us at:</p>
+				<a href="mailto:info@eivolo.com" className={styles.email}> info@eivolo.com</a>
+				<p>Give us a call on:</p>
 				<a href="tel:0434268269" className={styles.tel}> 0434 268 269</a><br /><br />
 
-				Or complete the contact form below and we’ll get back to you as soon as we can.
+				<p>Or complete the contact form below and we’ll get back to you as soon as we can.</p>
 			</RightImageCard>
 		</>
 	);

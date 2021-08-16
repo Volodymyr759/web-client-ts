@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Htag, LeftImageCard, P, RightImageCard, SayHelloForm, TitleCard } from "../components";
+import { Htag, LeftImageCard, RightImageCard, SayHelloForm, TitleCard } from "../components";
 import { withLayout } from "../layouts/public/Layout";
 
 function Home(): JSX.Element {
@@ -22,9 +22,9 @@ function Home(): JSX.Element {
 
       <section className="eiv-header-text">
         <Htag tag="h2">How can we evolve your business?</Htag>
-        <P>
+        <p>
           We can customise our services to meet your requirements and accommodate any of your digital needs.
-        </P>
+        </p>
       </section>
 
       <LeftImageCard
@@ -33,8 +33,10 @@ function Home(): JSX.Element {
         buttonLink="/outsourcing"
         objdata="/EivoloLandingPage_WhyOutsource_Illustration.svg"
       >
-        We understand how difficult it can be to source experienced local talent,
-        which is why we offer access to skilled technical professionals from all over the world.
+        <p>
+          We understand how difficult it can be to source experienced local talent,
+          which is why we offer access to skilled technical professionals from all over the world.
+        </p>
       </LeftImageCard>
 
       <RightImageCard
@@ -43,9 +45,11 @@ function Home(): JSX.Element {
         buttonLink="/web-development"
         objdata="/EivoloLandingPage_WebDesignandDevelopment_Illustration.svg"
       >
-        In an increasingly digital world, simple websites are no longer immersive or intuitive enough
-        to meet changing consumer expectations. We provide end-to-end solutions to help you with everything from design
-        to content writing to web development and maintenance.
+        <p>
+          In an increasingly digital world, simple websites are no longer immersive or intuitive enough
+          to meet changing consumer expectations. We provide end-to-end solutions to help you with everything from design
+          to content writing to web development and maintenance.
+        </p>
       </RightImageCard>
 
       <LeftImageCard
@@ -54,9 +58,11 @@ function Home(): JSX.Element {
         buttonLink="/mobile-development"
         objdata="/EivoloLandingPage_AppDesignandDevelopment_Illustration.svg"
       >
-        Mobile apps deliver absolute customer loyalty within an engaging, immersive format.
-        We provide end-to-end app solutions, from building product architecture to app design and development
-        as well as aftercare support and maintenance packages.
+        <p>
+          Mobile apps deliver absolute customer loyalty within an engaging, immersive format.
+          We provide end-to-end app solutions, from building product architecture to app design and development
+          as well as aftercare support and maintenance packages.
+        </p>
       </LeftImageCard>
 
       <RightImageCard
@@ -65,8 +71,10 @@ function Home(): JSX.Element {
         buttonLink="/security-auditing"
         objdata="/EivoloLandingPage_SecurityAuditServices_Illustration.svg"
       >
-        Cybersecurity is a growing concern in both private and public sectors,
-        as witnessed in the recent malicious attacks on government agencies and critical industries globally.
+        <p>
+          Cybersecurity is a growing concern in both private and public sectors,
+          as witnessed in the recent malicious attacks on government agencies and critical industries globally.
+        </p>
       </RightImageCard>
 
       <LeftImageCard
@@ -75,10 +83,12 @@ function Home(): JSX.Element {
         buttonLink="/for-startups"
         objdata="/EivoloLandingPage_ForStartups_Illustration.svg"
       >
-        In a fast-paced world that is rich with new ideas, we welcome new innovators to share their ideas with us.
-        We are here to listen, support, customise, or even provide additional support or resources for start-ups.
-        <br /><br />
+        <p>
+          In a fast-paced world that is rich with new ideas, we welcome new innovators to share their ideas with us.
+          We are here to listen, support, customise, or even provide additional support or resources for start-ups.
+        </p>
         <strong>Are you a start-up looking for help, or even just an individual seeking to develop a unique product idea?</strong>
+        <br /><br />
       </LeftImageCard>
 
       <div style={{ border: "1px solid red" }}>

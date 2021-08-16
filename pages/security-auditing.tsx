@@ -98,12 +98,14 @@ function SecurityAuditing(): JSX.Element {
 				buttonLink="/web=development"
 				objdata="/Mobility-Security-Illustration.svg"
 			>
-				As part of our auditing service, we use tools and our vast set of skills to inspect and evaluate
-				your organisation’s current standing from a security perspective including your current cybersecurity policies,
-				procedures and processes. This covers your cybersecurity compliance through to processes, communications,
-				standards, certifications, and more. Our service extends the analysis spectrum to cover risk-based assessment
-				of various organisational threats while providing proper measures and counter-measures to maintain assurance,
-				build a comprehensive security program and mitigate any future problems.
+				<p>
+					As part of our auditing service, we use tools and our vast set of skills to inspect and evaluate
+					your organisation’s current standing from a security perspective including your current cybersecurity policies,
+					procedures and processes. This covers your cybersecurity compliance through to processes, communications,
+					standards, certifications, and more. Our service extends the analysis spectrum to cover risk-based assessment
+					of various organisational threats while providing proper measures and counter-measures to maintain assurance,
+					build a comprehensive security program and mitigate any future problems.
+				</p>
 			</RightImageCard>
 
 			<LeftImageCard
@@ -112,10 +114,12 @@ function SecurityAuditing(): JSX.Element {
 				buttonLink="/outsourcing"
 				objdata="/Ethical-Testing-illustration.svg"
 			>
-				Our ethical penetration testing service attempts to test the defences of a given solution or software through
-				various techniques that malicious attackers may use. This offers businesses a complete evaluation report
-				on the strengths and capabilities of your software or solutions. This ensures that security requirements and
-				objectives are met at the highest standards.
+				<p>
+					Our ethical penetration testing service attempts to test the defences of a given solution or software through
+					various techniques that malicious attackers may use. This offers businesses a complete evaluation report
+					on the strengths and capabilities of your software or solutions. This ensures that security requirements and
+					objectives are met at the highest standards.
+				</p>
 			</LeftImageCard>
 
 			<SayHelloForm />
