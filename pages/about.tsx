@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { withLayout } from "../layouts/public/Layout";
-import { BubbleBox, Htag, LeftTextCard, RightTextCard, SayHelloForm } from "../components";
-import styles from '../styles/about.module.css';
+import { BubbleBox, Htag, IconTextBox, LeftTextCard, RightTextCard, SayHelloForm } from "../components";
 
 function About(): JSX.Element {
 	return (
@@ -42,51 +41,39 @@ function About(): JSX.Element {
 			</section>
 
 			<section className="row" style={{ backgroundImage: "url(/gradient_bg.svg)" }}>
-				<div className="col-md-6">
-					<div className="icon-para">
-						<span className={styles.iconparagraphs}>
-							<Htag tag='h3'> We’re Your Partners In Collaboration</Htag>
-						</span>
-						<span className={styles.icontext}>
+				<div className="bubblewrapper">
+					<IconTextBox appearance="exotic" headerText="We’re Your Partners In Collaboration">
+						<p>
 							We can work as an extension of your team, if you need. We operate with clear communication,
 							which allows us to manage projects seamlessly. Above all, we focus on forging long-term client
 							relationships so we can evolve together and do outstanding work.
-						</span>
-					</div>
+						</p>
+					</IconTextBox>
 				</div>
-				<div className="col-md-6">
-					<div className="icon-para">
-						<span className={styles.iconparagraphs}>
-							<Htag tag='h3'> Streamlined Processes</Htag>
-						</span>
-						<span className={styles.icontext}>
+				<div className="bubblewrapper">
+					<IconTextBox appearance="exotic" headerText="Streamlined Processes">
+						<p>
 							Our processes provide a structured framework for project progression and the perfect platform
 							to create flawless work. We believe this allows for a more streamlined way of working that means
 							projects progress more quickly.
-						</span>
-					</div>
+						</p>
+					</IconTextBox>
 				</div>
-				<div className="col-md-6">
-					<div className="icon-para">
-						<span className={styles.iconparagraphs}>
-							<Htag tag='h3'> Highly Personalised Service</Htag>
-						</span>
-						<span className={styles.icontext}>
-							We believe what sets us apart is our desire to ensure our work is uniquely personalised to each client.
-							Our systems support this tailored approach. For us, customisation is crucial.
-						</span>
-					</div>
+				<div className="bubblewrapper">
+					<IconTextBox appearance="exotic" headerText="Highly Personalised Service">
+						<p>
+							We believe what sets us apart is our desire to ensure our work is uniquely personalised to each
+							client. Our systems support this tailored approach. For us, customisation is crucial.
+						</p>
+					</IconTextBox>
 				</div>
-				<div className="col-md-6">
-					<div className="icon-para">
-						<span className={styles.iconparagraphs}>
-							<Htag tag='h3'> An Agile Approach</Htag>
-						</span>
-						<span className={styles.icontext}>
-							Our agile business model enables us to adopt a flexible approach, allowing us to tailor our systems
-							and processes to suit your needs.
-						</span>
-					</div>
+				<div className="bubblewrapper">
+					<IconTextBox appearance="exotic" headerText="An Agile Approach">
+						<p>
+							Our agile business model enables us to adopt a flexible approach, allowing us to tailor our
+							systems and processes to suit your needs.
+						</p>
+					</IconTextBox>
 				</div>
 			</section>
 
