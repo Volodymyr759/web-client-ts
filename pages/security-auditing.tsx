@@ -54,21 +54,25 @@ function SecurityAuditing(): JSX.Element {
 			</section>
 
 			<section className="row">
-				<div className="col-md-6">
+				<div className="bubblewrapper">
 					<div className="img-container">
 						<img
 							src="http://localhost:3000/OBJECTS-300x300.png"
 						/>
 					</div>
-					<p><strong>Around 98%</strong> of the web apps that have been tested are VULNERABLE TO CYBER ATTACK</p>
+					<P appearance="large">
+						<strong>Around 98%</strong> of the web apps that have been tested are VULNERABLE TO CYBER ATTACK
+					</P>
 				</div>
-				<div className="col-md-6">
+				<div className="bubblewrapper">
 					<div className="img-container">
 						<img
 							src="http://localhost:3000/illustration-300x250.png"
 						/>
 					</div>
-					<p>Cybercrime will cost the world <strong>$US 6 trillion annually by end of 2021</strong></p>
+					<P appearance="large">
+						Cybercrime will cost the world <strong>$US 6 trillion annually by end of 2021</strong>
+					</P>
 				</div>
 			</section>
 
@@ -82,23 +86,21 @@ function SecurityAuditing(): JSX.Element {
 
 			<LeftImageCard
 				htagText="Cybersecurity consultancy"
-				buttonText="Learn More >"
-				buttonLink="/outsourcing"
+				isButtonNeeded={false}
 				objdata="/EivoloLandingPage_WhyOutsource_Illustration.svg"
 			>
 				<p>We provide businesses with expert advice on various security topics, including:</p>
 				<ul>
-					<li>Company-wide cybersecurity policies, procedures and guidelines.</li>
-					<li>Solution-oriented cybersecurity policies, procedures and guidelines</li>
-					<li>Process-specific cybersecurity policies, procedures and guidelines.</li>
-					<li>Security-related cyber strategies and best-practice cybersecurity standards</li>
+					<li><p>Company-wide cybersecurity policies, procedures and guidelines.</p></li>
+					<li><p>Solution-oriented cybersecurity policies, procedures and guidelines</p></li>
+					<li><p>Process-specific cybersecurity policies, procedures and guidelines.</p></li>
+					<li><p>Security-related cyber strategies and best-practice cybersecurity standards</p></li>
 				</ul>
 			</LeftImageCard>
 
 			<RightImageCard
 				htagText="Cybersecurity Auditing & Risk Assessment"
-				buttonText="Learn More >"
-				buttonLink="/web=development"
+				isButtonNeeded={false}
 				objdata="/Mobility-Security-Illustration.svg"
 			>
 				<p>
@@ -113,8 +115,7 @@ function SecurityAuditing(): JSX.Element {
 
 			<LeftImageCard
 				htagText="Ethical Penetration Testing"
-				buttonText="Learn More >"
-				buttonLink="/outsourcing"
+				isButtonNeeded={false}
 				objdata="/Ethical-Testing-illustration.svg"
 			>
 				<p>

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { withLayout } from "../layouts/public/Layout";
-import { Htag, IconTextBox, SayHelloForm, TitleCard } from "../components";
+import { Htag, IconTextBox, RightSideCard, SayHelloForm, TitleCard } from "../components";
 
 function WebDevelopment(): JSX.Element {
 	return (
@@ -52,9 +52,17 @@ function WebDevelopment(): JSX.Element {
 				</div>
 			</section>
 
-			<div style={{ border: "1px solid red" }}>
-				<h2>RightImageCard #?</h2>
-			</div>
+			<RightSideCard htagText="Technologies" imgsrc="/Technologies-Logotypes.png">
+				<p>
+					Eivolo works with a variety of different technologies, offering our clients a wide range of flexibility.
+					A frequent mistake that businesses make is choosing unsuitable technologies that do not allow results to manifest
+					quickly or at all. Unfortunately, this results in clients having to seek our and reinvest in alternative solutions
+					that are stable and scalable.
+					At Eivolo, we will make sure that your solutions are produced using a stable technology stack. We take care in
+					choosing appropriate technology that gives you the ability to evolve your solution and maintain it over an extended
+					period of time.
+				</p>
+			</RightSideCard>
 
 			<SayHelloForm />
 		</>

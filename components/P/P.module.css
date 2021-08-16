@@ -35,16 +35,3 @@
 	font-size: 18px;
 	font-weight: 400;
 }
-
-.colored {
-	transition: inherit;
-	text-align: left;
-
-	background: -webkit-linear-gradient(left, var(--strong-blue-color) 1%, var(--light-blue-color) 50%);
-	-webkit-background-clip: text;
-
-	font-size: 24px;
-	font-weight: 800;
-	line-height: 50px;
-	-webkit-text-fill-color: transparent;
-}

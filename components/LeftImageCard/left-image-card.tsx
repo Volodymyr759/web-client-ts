@@ -5,6 +5,7 @@ import { ImageObject, LinkButton } from '..';
 
 export const LeftImageCard = ({
 	htagText,
+	isButtonNeeded = true,
 	buttonText,
 	buttonLink,
 	objdata,
@@ -19,9 +20,7 @@ export const LeftImageCard = ({
 				<div>
 					<Htag tag="h2">{htagText}</Htag>
 					{children}
-					<LinkButton appearance="white" linkTo={buttonLink}>
-						<span>{buttonText}</span>
-					</LinkButton>
+					{isButtonNeeded && <LinkButton appearance="white" linkTo={buttonLink}><span>{buttonText}</span></LinkButton>}
 				</div>
 			</div>
 		</>
