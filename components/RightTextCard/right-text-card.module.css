@@ -1,0 +1,18 @@
+.righttextcard {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	gap: 10px;
+
+	margin-top: 50px;
+}
+
+.righttextcard > div {
+	align-items: center;
+	justify-items: center;
+
+	align-self: center;
+
+	max-width: 100%;
+
+	padding: 30px;
+}

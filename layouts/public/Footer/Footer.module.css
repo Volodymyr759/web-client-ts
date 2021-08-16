@@ -1,0 +1,45 @@
+.footer {
+	display: grid;
+
+	padding-top: 50px;
+	padding-bottom: 50px;
+
+	color: var(--bs-white);
+
+	background-image: url(https://eivolo.com/wp-content/themes/eivolo/assets/images/footer.svg);
+	background-size: cover;
+	grid-template-columns: repeat(4, 1fr);
+	justify-items: center;
+}
+
+.footer img {
+	display: block;
+
+	width: 130px;
+}
+
+.footer span {
+	display: block;
+
+	margin-top: 5px;
+
+	font-size: 12px;
+	font-weight: 400;
+	font-style: normal;
+	line-height: 15px;
+}
+
+.footer a {
+	text-decoration: underline;
+
+	color: var(--light-blue-color);
+	background-color: transparent;
+}
+
+.footer address {
+	margin: 0 0 1.5em;
+	margin-bottom: 1rem;
+
+	font-style: normal;
+	line-height: inherit;
+}

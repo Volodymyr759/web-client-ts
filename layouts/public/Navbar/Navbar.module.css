@@ -1,0 +1,16 @@
+.navbar {
+	display: grid;
+	grid-template-columns: 222px 1fr;
+	gap: 10px;
+
+	justify-items: center;
+
+	align-items: center;
+
+	padding: 0.5rem;
+
+	color: var(--bs-gray-dark);
+
+	font-size: 18px;
+	font-weight: 400;
+}

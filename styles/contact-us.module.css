@@ -1,0 +1,43 @@
+.email {
+	margin-right: 10px;
+
+	text-decoration: none;
+
+	color: #373249;
+
+	font-size: 24px;
+	font-weight: 700;
+	font-style: normal;
+	line-height: 40px;
+}
+
+.email::before {
+	content: "\f0e0";
+
+	color: #2D0DB2;
+
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+}
+
+.tel {
+	margin-right: 10px;
+
+	text-decoration: none;
+
+	color: #373249;
+
+	font-size: 24px;
+	font-weight: 700;
+	font-style: normal;
+	line-height: 40px;
+}
+
+.tel::before {
+	content: "\f095";
+
+	color: #2D0DB2;
+
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+}
