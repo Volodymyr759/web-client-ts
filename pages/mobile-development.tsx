@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { withLayout } from "../layouts/public/Layout";
-import { Htag, P, SayHelloForm, TitleCard } from "../components";
+import { Htag, IconTextBox, SayHelloForm, TitleCard } from "../components";
 
 function MobileDevelopment(): JSX.Element {
 	return (
@@ -21,30 +21,29 @@ function MobileDevelopment(): JSX.Element {
 				Mobile apps deliver absolute customer loyalty within an engaging and immersive format.
 			</TitleCard>
 
-			<section className="row">
-				<Htag tag="h2">App Design & Development With Eivolo</Htag>
-				<div className="col-md-6">
+			<section className="row" style={{ backgroundImage: "url(/gradient_bg.svg)" }}>
+				<div className="bubblewrapper">
+					<Htag tag="h2">App Design & Development With Eivolo</Htag>
+				</div>
+				<div className="bubblewrapper">
 
 				</div>
-				<div className="col-md-6">
-					<div className="icon-para">
-						<Htag tag='h3'>End-To-End Solutions</Htag>
-						<P>
+				<div className="bubblewrapper">
+					<IconTextBox appearance="rocket" headerText="End-To-End Solutions">
+						<p>
 							We provide end-to-end app solutions, from building a solution or product architecture to app design
 							and development as well as aftercare support and maintenance packages. We also offer re-factoring
-							options for old coded products that require code upgrades, or need to be written in updated code
-							language.
-						</P>
-					</div>
+							options for old coded products that require code upgrades, or need to be written in updated code language.
+						</p>
+					</IconTextBox>
 				</div>
-				<div className="col-md-6">
-					<div className="icon-para">
-						<Htag tag='h3'>Technology Partner</Htag>
-						<P>
+				<div className="bubblewrapper">
+					<IconTextBox appearance="rocket" headerText="Technology Partner">
+						<p>
 							When it comes to the design and development of your app, however, working with a technology partner
 							with the capability to intuitively understand your needs is paramount.
-						</P>
-					</div>
+						</p>
+					</IconTextBox>
 				</div>
 			</section>
 

@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { withLayout } from "../layouts/public/Layout";
-import { Htag, P, RightImageCard, SayHelloForm } from "../components";
+import { Htag, IconTextBox, RightImageCard, SayHelloForm } from "../components";
+import React from 'react';
 
 function Outsourcing(): JSX.Element {
 	return (
@@ -23,10 +24,11 @@ function Outsourcing(): JSX.Element {
 				</p>
 			</RightImageCard>
 
-			<section className="row">
-				<Htag tag="h2">Outsourcing Benefits</Htag>
-				<div className="col-md-6">
-					<br /><br />
+			<section className="row" style={{ backgroundImage: "url(/gradient_bg.svg)" }}>
+				<div className="bubblewrapper">
+					<Htag tag="h2">Outsourcing Benefits</Htag>
+				</div>
+				<div className="bubblewrapper">
 					<Htag tag="h5">
 						<strong>
 							<i>
@@ -36,35 +38,31 @@ function Outsourcing(): JSX.Element {
 						</strong>
 					</Htag>
 				</div>
-				<div className="col-md-6">
-					<div className="icon-para">
-						<Htag tag='h3'>Client-Managed Outsourcing</Htag>
-						<P>
-							If you already have a well-established team and extensive technical knowledge, we can help with your outsourcing needs.
-						</P>
-						<P>
-							Drawing on our extended industry networks, we can act as a recruiter, sourcing you the best talent
-							from all over the world at a sustainable cost. This can allow you to implement a variety of
-							technological solutions without seeing projects blow out over budget or over time.
-						</P>
-					</div>
+				<div className="bubblewrapper">
+					<IconTextBox appearance="rocket" headerText="Client-Managed Outsourcing">
+						<p>
+							If you already have a well-established team and extensive technical knowledge, we can help with your
+							outsourcing needs.
+						</p>
+						<p>
+							Drawing on our extended industry networks, we can act as a recruiter, sourcing you the best talent from
+							all over the world at a sustainable cost. This can allow you to implement a variety of technological
+							solutions without seeing projects blow out over budget or over time.
+						</p>
+					</IconTextBox>
 				</div>
-				<div className="col-md-6">
-					<div className="icon-para">
-						<Htag tag='h3'>End-To-End Outsourcing</Htag>
-						<P>
+				<div className="bubblewrapper">
+					<IconTextBox appearance="rocket" headerText="End-To-End Outsourcing">
+						<p>
 							We offer an end-to-end outsourcing service for clients that require more assistance in discovering tech talent.
-							Perhaps you don&rsquo;t have a thorough understanding of the resources needed to support your complex project,
-							or simply don&rsquo;t have the time or resources to commit to recruiting.
-						</P>
-						<P>
-							Perhaps you don&rsquo;t have a thorough understanding of the resources needed to support your complex project,
-							or simply don&rsquo;t have the time or resources to commit to recruiting.
-						</P>
-					</div>
+						</p>
+						<p>
+							Perhaps you don’t have a thorough understanding of the resources needed to support your complex project,
+							or simply don’t have the time or resources to commit to recruiting.
+						</p>
+					</IconTextBox>
 				</div>
 			</section>
-
 
 			<div style={{ border: "1px solid red" }}>
 				<h2>RightImageCard #?</h2>

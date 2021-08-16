@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { withLayout } from "../layouts/public/Layout";
-import { Htag, P, SayHelloForm, TitleCard } from "../components";
+import { Htag, IconTextBox, SayHelloForm, TitleCard } from "../components";
 
 function WebDevelopment(): JSX.Element {
 	return (
@@ -21,34 +21,34 @@ function WebDevelopment(): JSX.Element {
 				immersive or intuitive enough to meet changing consumer expectations.
 			</TitleCard>
 
-			<section className="row">
-				<Htag tag="h2">Web Design And Development With Eivolo</Htag>
-				<div className="col-md-6">
+			<section className="row" style={{ backgroundImage: "url(/gradient_bg.svg)" }}>
+				<div className="bubblewrapper">
+					<Htag tag="h2">Web Design And Development With Eivolo</Htag>
+				</div>
+				<div className="bubblewrapper">
 
 				</div>
-				<div className="col-md-6">
-					<div className="icon-para">
-						<Htag tag='h3'>End-To-End</Htag>
-						<P>
+				<div className="bubblewrapper">
+					<IconTextBox appearance="rocket" headerText="End-To-End">
+						<p>
 							We provide an end-to-end solution that can help you with everything from design to content writing
 							to web development and maintenance.  Whether you need a complete overhaul of your website, are building
 							a new site or would like to re-design certain aspects of your existing site, we have a solution to fit
 							all scenarios.
-						</P>
-					</div>
+						</p>
+					</IconTextBox>
 				</div>
-				<div className="col-md-6">
-					<div className="icon-para">
-						<Htag tag='h3'>E-Commerce</Htag>
-						<P>
+				<div className="bubblewrapper">
+					<IconTextBox appearance="rocket" headerText="E-Commerce">
+						<p>
 							Consumer expectations are increasing when it comes to e-commerce; therefore, it is crucial that brands
 							build interactive and secure e-commerce websites.
-						</P>
-						<P>
+						</p>
+						<p>
 							We specialise in secure, customisable e-payment gateways and cybersecurity solutions so you can
 							safeguard customer data, all while providing users with an engaging and immersive e-shopping experience.
-						</P>
-					</div>
+						</p>
+					</IconTextBox>
 				</div>
 			</section>
 

@@ -1,5 +1,6 @@
 export * from './BubbleBox/bubble-box';
 export * from './Htag/Htag';
+export * from './IconTextBox/icon-text-box';
 export * from './ImageObject/image-object';
 export * from './LeftImageCard/left-image-card';
 export * from './LeftTextCard/left-text-card';

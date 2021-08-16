@@ -1,0 +1,49 @@
+.icontextbox {
+	margin: 0;
+}
+
+.icontextbox h4::before {
+	position: relative;
+	left: 0;
+
+	content: url(/cpu-1.png) !important;
+
+	line-height: normal;
+}
+
+.icontextbox > p {
+	font-size: 18px;
+	font-weight: initial;
+	font-style: normal;
+	line-height: 36px;
+}
+
+.icontextboxrocket h4::before {
+	position: relative;
+	left: 0;
+
+	content: url(/rocket-1.png) !important;
+
+	line-height: normal;
+}
+
+.icontextboxrocket > p {
+	font-size: 18px;
+	font-weight: initial;
+	font-style: normal;
+	line-height: 36px;
+}
+
+.boxheader {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	text-align: left;
+	text-transform: capitalize;
+
+	font-size: 24px;
+	font-weight: 700;
+	font-style: normal;
+	line-height: 36px;
+}

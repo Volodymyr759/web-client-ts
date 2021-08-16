@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { withLayout } from "../layouts/public/Layout";
-import { BubbleBox, Htag, P, SayHelloForm, TitleCard } from "../components";
+import { BubbleBox, Htag, IconTextBox, P, SayHelloForm, TitleCard } from "../components";
 
 function ForStartups(): JSX.Element {
 	return (
@@ -31,48 +31,46 @@ function ForStartups(): JSX.Element {
 				</P>
 			</section>
 
-			<section className="row">
-				<div className="col-md-6">
-					<div className="icon-para">
-						<Htag tag='h3'>Discovery Sessions</Htag>
+			<section className="row" style={{ backgroundImage: "url(/gradient_bg.svg)" }}>
+				<div className="bubblewrapper">
+					<IconTextBox appearance="rocket" headerText="Discovery Sessions">
 						<ul>
-							<li>Choosing the suitable architecture & technologies for. your solution.</li>
-							<li>Assisting in controlling your minimal operational cost.</li>
-							<li>Providing policies, procedures, and guidelines to adopt while producing POC or MVP.</li>
-							<li>Offering an understanding of the development process.</li>
+							<li><p>Choosing the suitable architecture & technologies for. your solution.</p></li>
+							<li><p>Assisting in controlling your minimal operational cost.</p></li>
+							<li><p>Providing policies, procedures, and guidelines to adopt while producing POC or MVP.</p></li>
+							<li><p>Offering an understanding of the development process.</p></li>
 						</ul>
-						<P>
+						<p>
 							We provide the best solutions from the start to avoid any rework in the future causing loss of time
 							and increase in costs.
-						</P>
-					</div>
+						</p>
+					</IconTextBox>
 				</div>
-				<div className="col-md-6">
-					<div className="icon-para">
-						<Htag tag='h3'>CTO/CIO Services</Htag>
-						<P>
+				<div className="bubblewrapper">
+					<IconTextBox appearance="rocket" headerText="CTO/CIO Services">
+						<p>
 							We provide a more comprehensive consultancy service where we can act as a CTO/CIO for your solution,
 							if needed. This will not only help in navigating the issues already mentioned, but will also help
 							cover any CTO-related gap within the organisation itself and help with critical tasks:
-						</P>
+						</p>
 						<ul>
-							<li>Selection of crucial user stories that should be part of the MVP.</li>
-							<li>Optimisation of technical operational v/s the technical team costs.</li>
-							<li>Assist in leading the technical objectives of the company.</li>
-							<li>Assist in managing your start up technical budget.</li>
-							<li>Researching, advising, planning, supervising and monitoring technical decisions v/s start up goals.</li>
+							<li><p>Selection of crucial user stories that should be part of the MVP.</p></li>
+							<li><p>Optimisation of technical operational v/s the technical team costs.</p></li>
+							<li><p>Assist in leading the technical objectives of the company.</p></li>
+							<li><p>Assist in managing your start up technical budget.</p></li>
+							<li><p>Researching, advising, planning, supervising and monitoring technical decisions v/s start up goals.</p></li>
 						</ul>
-					</div>
+
+					</IconTextBox>
 				</div>
-				<div className="col-md-6">
-					<div className="icon-para">
-						<Htag tag='h3'>Project Management</Htag>
-						<P>
+				<div className="bubblewrapper">
+					<IconTextBox appearance="rocket" headerText="Project Management">
+						<p>
 							We can work with you in an advisory capacity, implicitly supervising team performance while your
-							solution is being produced to help assist you not only during the selection phase, but also during
-							the implementation and production phases.
-						</P>
-					</div>
+							solution is being produced to help assist you not only during the selection phase, but also during the
+							implementation and production phases.
+						</p>
+					</IconTextBox>
 				</div>
 			</section>
 

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { withLayout } from "../layouts/public/Layout";
-import { Htag, LeftImageCard, P, RightImageCard, SayHelloForm, TitleCard } from "../components";
+import { Htag, IconTextBox, LeftImageCard, P, RightImageCard, SayHelloForm, TitleCard } from "../components";
 
 function SecurityAuditing(): JSX.Element {
 	return (
@@ -21,32 +21,35 @@ function SecurityAuditing(): JSX.Element {
 				It’s important to strengthen your company’s cyber resilience and ensure your IT systems are fortified against potential harm.
 			</TitleCard>
 
-			<section className="row">
-				<Htag tag="h2">Security Resilience With Eivolo</Htag>
-				<div className="col-md-6">
-					<div className="icon-para">
-						<Htag tag='h3'>Early Stage Detection</Htag>
-						<P>Understand, analyze, measure and monitor security risks that exist or might be exist within your solution.
-							This process is crucial for any system to ensure early detection of security-related traits.
-						</P>
-					</div>
+			<section className="row" style={{ backgroundImage: "url(/gradient_bg.svg)" }}>
+				<div className="bubblewrapper">
+					<Htag tag="h2">Security Resilience With Eivolo</Htag>
 				</div>
-				<div className="col-md-6">
-					<div className="icon-para">
-						<Htag tag='h3'>Boost Security</Htag>
-						<P>At Eivolo, security is not an add-on, but rather a crucial component of any system architecture,
-							system development and implementation process, or code being generated or already generated.
-							This guarantees maximum security on all levels.
-						</P>
-					</div>
+				<div className="bubblewrapper">
+					<IconTextBox appearance="rocket" headerText="Early Stage Detection">
+						<p>
+							Understand, analyze, measure and monitor security risks that exist or might be exist within your
+							solution. This process is crucial for any system to ensure early detection of security-related traits.
+						</p>
+					</IconTextBox>
 				</div>
-				<div className="col-md-6">
-					<div className="icon-para">
-						<Htag tag='h3'>Reveal Vulnerabilities</Htag>
-						<P>Whether intentionally or non-intentionally, security vulnerabilities should always be researched and
-							uncovered before malicious users do. Doing so guarantees a proper system reputation and maximizes trust.
-						</P>
-					</div>
+				<div className="bubblewrapper">
+					<IconTextBox appearance="rocket" headerText="Boost Security">
+						<p>
+							At Eivolo, security is not an add-on, but rather a crucial component of any system architecture,
+							system development and implementation process, or code being generated or already generated. This
+							guarantees maximum security on all levels.
+						</p>
+					</IconTextBox>
+				</div>
+				<div className="bubblewrapper">
+					<IconTextBox appearance="rocket" headerText="Reveal Vulnerabilities">
+						<p>
+							Whether intentionally or non-intentionally, security vulnerabilities should always be researched
+							and uncovered before malicious users do. Doing so guarantees a proper system reputation
+							and maximizes trust.
+						</p>
+					</IconTextBox>
 				</div>
 			</section>
 
