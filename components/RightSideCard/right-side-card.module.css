@@ -1,0 +1,30 @@
+.rightsidecard {
+	display: grid;
+	grid-template-columns: 50% 50%;
+	gap: 10px;
+
+	margin-top: 50px;
+}
+
+.rightsidecard > div {
+	align-items: center;
+	justify-items: center;
+
+	align-self: center;
+
+	max-width: 100%;
+
+	padding: 30px;
+}
+
+.rightsidecard > div > p {
+	font-size: 18px;
+	font-weight: 400;
+	font-style: normal;
+	line-height: 36px;
+}
+
+.rightsidecard div > img {
+	max-width: 100%;
+	height: auto;
+}

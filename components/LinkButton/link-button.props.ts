@@ -2,6 +2,6 @@ import { ReactNode } from "react";
 
 export interface LinkButtonProps {
 	appearance: 'primary' | 'white';
-	linkTo: string
+	linkTo: string | undefined;
 	children: ReactNode;
 }

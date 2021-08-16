@@ -33,20 +33,6 @@ nav {
 	margin: 40px 0;
 }
 
-.col-md-6 {
-	width: 100%;
-	padding: 0 12px;
-}
-
-/* .col-md-6 > p {
-
-} */
-
-.icon-para {
-	width: 100%;
-	padding-left: 40px;
-}
-
 .img-container {
 	display: flex;
 	align-items: center;
