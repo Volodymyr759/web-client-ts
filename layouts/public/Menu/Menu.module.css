@@ -59,6 +59,35 @@
 	float: none;
 }
 
+.navbarlist li:last-child {
+	margin-left: 10px;
+	padding: 0 15px;
+
+	transition: inherit;
+	-webkit-text-fill-color: transparent;
+
+	text-align: center;
+
+	border-radius: 30px;
+	background: -webkit-linear-gradient(left, var(--strong-blue-color) 0.46%, var(--light-blue-color) 50%);
+	background-color: #FFF;
+	-webkit-background-clip: text;
+	box-shadow: 0 8px 40px rgb(0 0 0 / 10%);
+
+	font-style: normal;
+	line-height: 20px;
+}
+
+.navbarlist li:last-child:hover {
+	color: white;
+	background-color: -webkit-linear-gradient(left, var(--strong-blue-color) 0.46%, var(--light-blue-color) 50%);
+}
+
+.navbarlist li:last-child > a {
+	font-size: 16px;
+	font-weight: 800;
+}
+
 .dropdownMenu {
 	position: absolute;
 	z-index: 1000;

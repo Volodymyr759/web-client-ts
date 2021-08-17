@@ -25,7 +25,7 @@ function SuccessStories(): JSX.Element {
 			<section className="row">
 				<div className="col-md-6">
 					<div className={styles.casestudyblock}>
-						<a href="https://eivolo.com/case-study-property-space/">
+						<a href="/cases/property-space">
 							<img src="/image-6-1.png" />
 							<h4>Property Space</h4>
 						</a>
@@ -33,7 +33,7 @@ function SuccessStories(): JSX.Element {
 				</div>
 				<div className="col-md-6">
 					<div className={styles.casestudyblock}>
-						<a href="https://eivolo.com/case-study-inspection-manager/">
+						<a href="/cases/inspection-manager/">
 							<img src="/Layer-1-1-2.png" />
 							<h4>Inspection Manager</h4>
 						</a>
@@ -41,7 +41,7 @@ function SuccessStories(): JSX.Element {
 				</div>
 				<div className="col-md-6">
 					<div className={styles.casestudyblock}>
-						<a href="https://eivolo.com/case-study-hybrid-mena-platform/">
+						<a href="/cases/hybrid-mena">
 							<img src="/logo-3.png" />
 							<h4>Hibrid Media Platform</h4>
 						</a>
@@ -49,7 +49,7 @@ function SuccessStories(): JSX.Element {
 				</div>
 				<div className="col-md-6">
 					<div className={styles.casestudyblock}>
-						<a href="https://eivolo.com/case-study-diamond-emporium/">
+						<a href="/cases/diamond-emporium">
 							<img src="/logo-4.png" />
 							<h4>Diamond Emporium</h4>
 						</a>

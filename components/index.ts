@@ -10,5 +10,6 @@ export * from './RightImageCard/right-image-card';
 export * from './RightSideCard/right-side-card';
 export * from './RightTextCard/right-text-card';
 export * from './SayHelloForm/say-hello';
+export * from './TextCard/text-card';
 export * from './TitleCard/title-card';
 

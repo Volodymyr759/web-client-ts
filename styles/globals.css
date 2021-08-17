@@ -24,9 +24,33 @@ nav {
 	box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 5%);
 }
 
+ul li {
+	list-style-image: url(/ul-point.png);
+}
+
 .row {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
+	justify-items: center;
+
+	width: 100%;
+	margin: 40px 0;
+}
+
+.row3 {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	gap: 10px;
+	justify-items: center;
+
+	width: 100%;
+	margin: 40px 0;
+}
+
+.row4 {
+	display: grid;
+	grid-template-columns: repeat(4, 25%);
+	gap: 10px;
 	justify-items: center;
 
 	width: 100%;

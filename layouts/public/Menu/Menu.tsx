@@ -3,8 +3,6 @@ import Link from 'next/link';
 import styles from './Menu.module.css';
 
 export const Menu = (): JSX.Element => {
-
-	//https://stackoverflow.com/questions/8141513/how-to-create-a-css-only-vertical-drop-down-menu
 	return (
 		<ul className={styles.navbarlist}>
 			<li>
