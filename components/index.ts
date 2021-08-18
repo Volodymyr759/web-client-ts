@@ -1,4 +1,5 @@
 export * from './BubbleBox/bubble-box';
+export * from './FormLabel/form-label';
 export * from './Htag/Htag';
 export * from './IconTextBox/icon-text-box';
 export * from './ImageObject/image-object';

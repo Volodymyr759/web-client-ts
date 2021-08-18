@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Htag } from '../Htag/Htag';
+import { Htag, FormLabel, LinkButton } from '../../components';
 import styles from './say-hello.module.css';
-import { LinkButton } from '..';
 
 export const SayHelloForm = (): JSX.Element => {
 	const [fullName, setFullName] = useState('');
@@ -29,27 +28,27 @@ export const SayHelloForm = (): JSX.Element => {
 						noValidate={true}
 					>
 						<div className="formgroup">
-							<label className={styles.formlabel}>Fullname *</label><br /><br />
-							<input
-								type="text"
-								name="fullName"
-								placeholder="Full Name *"
-								className={styles.forminput}//"wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control"
-								size={40}
-								value={fullName}
-								onChange={(e) => setFullName(e.target.value)}
-								required
-								minLength={4}
-								maxLength={30}
-							/>
+							<FormLabel>Fullname *:</FormLabel>
+							<p>
+								<input
+									type="text"
+									name="fullName"
+									className="forminput"
+									size={40}
+									value={fullName}
+									onChange={(e) => setFullName(e.target.value)}
+									required
+									minLength={4}
+									maxLength={30}
+								/>
+							</p>
 						</div>
 						<div className="formgroup">
-							<label className={styles.formlabel}>Company *</label><br /><br />
+							<FormLabel>Company *:</FormLabel>
 							<input
 								type="text"
 								name="company"
-								placeholder="Company Name *"
-								className={styles.forminput}//"wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control"
+								className="forminput"
 								size={40}
 								value={company}
 								onChange={(e) => setCompany(e.target.value)}
@@ -59,33 +58,28 @@ export const SayHelloForm = (): JSX.Element => {
 							/>
 						</div>
 						<div className="formgroup">
-							<label className={styles.formlabel}>Select A Preferable way of communication *</label><br /><br />
-							<label className={styles.formlabel}>
-								<input type="radio" name="Phone"
-									onChange={
-										() => { if (prefCommunication !== "Phone") setPrefCommunication("Phone"); }
-									}
-									checked={prefCommunication === "Phone"}
-								/>
-								<span className="wpcf7-list-item-label">Phone</span>
-							</label>
-							<label className={styles.formlabel}>
-								<input type="radio" name="Email"
-									onChange={
-										() => { if (prefCommunication !== "Email") setPrefCommunication("Email"); }
-									}
-									checked={prefCommunication === "Email"}
-								/>
-								<span className="wpcf7-list-item-label">Email</span>
-							</label>
+							<FormLabel>Select A Preferable way of communication *:</FormLabel>
+							<FormLabel>Phone</FormLabel>
+							<input type="radio" name="Phone"
+								onChange={
+									() => { if (prefCommunication !== "Phone") setPrefCommunication("Phone"); }
+								}
+								checked={prefCommunication === "Phone"}
+							/>
+							<FormLabel>Email</FormLabel>
+							<input type="radio" name="Email"
+								onChange={
+									() => { if (prefCommunication !== "Email") setPrefCommunication("Email"); }
+								}
+								checked={prefCommunication === "Email"}
+							/>
 						</div>
 						<div className="formgroup">
-							<label className={styles.formlabel}>Email *</label><br /><br />
+							<FormLabel>Email *:</FormLabel>
 							<input
 								type="email"
 								name="email"
-								placeholder="Email *"
-								className={styles.forminput}//"wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control"
+								className="forminput"
 								size={30}
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
@@ -95,12 +89,11 @@ export const SayHelloForm = (): JSX.Element => {
 							/>
 						</div>
 						<div className="formgroup">
-							<label className={styles.formlabel}>Phone Number *</label><br /><br />
+							<FormLabel>Phone Number *:</FormLabel>
 							<input
 								type="text"
 								name="phoneNumber"
-								placeholder="Phone Number *"
-								className={styles.forminput}
+								className="forminput"
 								size={240}
 								value={phoneNumber}
 								onChange={(e) => setPhoneNumber(e.target.value)}
@@ -110,12 +103,12 @@ export const SayHelloForm = (): JSX.Element => {
 							/>
 						</div>
 						<div className="formgroup">
-							<label className={styles.formlabel}>Message *</label><br /><br />
+							<FormLabel>Message *:</FormLabel>
 							<textarea
 								name="messageText"
 								cols={40}
 								rows={5}
-								className={styles.forminput}
+								className="forminput"
 								value={messageText}
 								onChange={(e) => setMessageText(e.target.value)}
 								required

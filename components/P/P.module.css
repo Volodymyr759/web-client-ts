@@ -35,3 +35,8 @@
 	font-size: 18px;
 	font-weight: 400;
 }
+
+.centered > span {
+	font-size: 12px;
+	font-weight: 400;
+}

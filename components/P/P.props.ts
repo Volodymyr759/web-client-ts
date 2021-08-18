@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
 
 export interface PProps extends DetailedHTMLProps<HTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement> {
-	appearance?: 'large' | 'middle' | 'strong' | 'centered' | 'colored';
+	appearance?: 'large' | 'middle' | 'strong' | 'centered';
 	children: ReactNode;
 }
