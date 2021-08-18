@@ -6,7 +6,7 @@ function Home(): JSX.Element {
   return (
     <>
       <Head>
-        <title>Eivolo  – Digital Solutions</title>
+        <title>Eivolo – Digital Solutions</title>
         <meta name="keywords" content="IT-company" />
       </Head>
 
