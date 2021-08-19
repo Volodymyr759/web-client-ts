@@ -4,21 +4,21 @@ import Image from 'next/image';
 import { FormLabel, P } from "../components";
 import { withLayout } from "../layouts/public/Layout";
 
-function Login(): JSX.Element {
+function Register(): JSX.Element {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
 	return (
 		<>
 			<Head>
-				<title>Login</title>
-				<meta name="keywords" content="Login" />
+				<title>Register</title>
+				<meta name="keywords" content="Register Page" />
 			</Head>
 
 			<section className="login-form-container">
 				<br />
 				<P appearance="centered">
-					<h3>Sign in</h3>
+					<h3>Create Account</h3>
 				</P>
 				<br />
 				<form
@@ -56,12 +56,9 @@ function Login(): JSX.Element {
 					</div>
 					<br />
 					<div className="formgroup">
-						<button className="primary-button">Sign In</button>
+						<button className="primary-button">Create Account</button>
 					</div>
-					<P appearance="centered">
-						<a href="/" className="link-base">Forgot your password?</a>
-					</P>
-					<hr style={{ width: "75%" }} />
+					{/* <hr style={{ width: "75%" }} /> */}
 					<P appearance="centered">
 						<h3>Or</h3>
 					</P>
@@ -94,9 +91,6 @@ function Login(): JSX.Element {
 						</div>
 					</div>
 					<P appearance="centered">
-						<a href="/register" className="link-base">Not signed up? Create an account.</a>
-					</P>
-					<P appearance="centered">
 						<span><a href="/">Personal Information Collection Statement.</a></span>
 					</P>
 					<br />
@@ -106,4 +100,4 @@ function Login(): JSX.Element {
 	);
 }
 
-export default withLayout(Login);
+export default withLayout(Register);
