@@ -2,7 +2,7 @@ import { FooterProps } from "./Footer.props";
 import styles from './Footer.module.css';
 import { format } from 'date-fns';
 import cn from 'classnames';
-import { Htag } from '../../../components';
+import { Htag } from '../Htag/Htag';
 
 
 export const Footer = ({ className, ...props }: FooterProps): JSX.Element => {
@@ -26,11 +26,6 @@ export const Footer = ({ className, ...props }: FooterProps): JSX.Element => {
 				<a href="https://www.facebook.com/eivolo/" target="_blank" className="color-white"><i className="fab fa-facebook-f"></i></a>&#160;&#160;
 				<a href="https://www.instagram.com/eivolo/" target="_blank"><i className="fab fa-instagram"></i></a>&#160;&#160;
 				<a href="https://www.linkedin.com/company/eivolo/about/" target="_blank"><i className="fab fa-linkedin-in"></i></a>
-				{/* <ul className="list-group list-group-horizontal">
-					<li><a href="https://www.facebook.com/eivolo/" target="_blank" className="color-white"><i className="fab fa-facebook-f"></i></a></li>
-					<li><a href="https://www.instagram.com/eivolo/" target="_blank"><i className="fab fa-instagram"></i></a></li>
-					<li><a href="https://www.linkedin.com/company/eivolo/about/" target="_blank"><i className="fab fa-linkedin-in"></i></a></li>
-				</ul> */}
 			</div>
 		</footer>
 	);

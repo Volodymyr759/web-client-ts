@@ -1,9 +1,7 @@
-import { LayoutProps } from "./Layout.props";
-import styles from './Layout.module.css';
 import React, { FunctionComponent } from "react";
-import { Header } from "./Header/Header";
-import { Navbar } from "./Navbar/Navbar";
-import { Footer } from "./Footer/Footer";
+import { LayoutProps } from "./Layout.props";
+import styles from '../../styles/Layout.module.css';
+import { Footer, Header, Navbar } from '../../components/';
 
 const Layout = ({ children }: LayoutProps): JSX.Element => (
 	<>
