@@ -34,6 +34,13 @@
 	grid-area: footer;
 }
 
+.admincontainer {
+	display: grid;
+	grid-template-columns: 200px auto;
+	grid-template-rows: 1fr;
+	gap: 10px;
+}
+
 @media (max-width: 765px) {
 	.wrapper {
 		display: grid;
