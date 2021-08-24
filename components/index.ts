@@ -9,6 +9,8 @@ export * from './Navbar/Navbar';
 export * from './LeftImageCard/left-image-card';
 export * from './LeftTextCard/left-text-card';
 export * from './LinkButton/link-button';
+export * from './MessageItem/message-item';
+export * from './MessageList/message-list';
 export * from './P/P';
 export * from './RightImageCard/right-image-card';
 export * from './RightSideCard/right-side-card';
