@@ -1,5 +1,5 @@
 import { MessageListProps } from './message-list.props';
-import styles from './message-list.module.css';
+// import styles from './message-list.module.css';
 import { MessageItem } from '../MessageItem/message-item';
 
 export const MessageList = ({ messages }: MessageListProps): JSX.Element => {
@@ -14,8 +14,9 @@ export const MessageList = ({ messages }: MessageListProps): JSX.Element => {
 						<th>Email</th>
 						<th>Phone</th>
 						<th>Text</th>
+						<th>Options</th>
 					</tr>
-					{messages.map(m => <MessageItem key={m._id} message={m} />)}
+					{messages.map(message => <MessageItem key={message._id} message={message} />)}
 				</tbody>
 			</table>
 		</div>
