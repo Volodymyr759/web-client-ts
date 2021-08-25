@@ -7,7 +7,6 @@ function Messages({ messages }: IMessageProps): JSX.Element {
 	return (
 		<>
 			<h1>Messages</h1>
-
 			<MessageList messages={messages} />
 		</>
 	);

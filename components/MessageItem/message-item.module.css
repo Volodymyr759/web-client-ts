@@ -1,0 +1,17 @@
+.edit::before {
+	content: "\f044";
+
+	color: #2D0DB2;
+
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+}
+
+.delete::before {
+	content: "\f2ed";
+
+	color: red;
+
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+}

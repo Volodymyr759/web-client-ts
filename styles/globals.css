@@ -28,6 +28,14 @@ ul li {
 	list-style-image: url(/ul-point.png);
 }
 
+.bubblewrapper {
+	margin-top: 0;
+	margin-bottom: 1.5em;
+
+	padding-right: 40px;
+	padding-left: 40px;
+}
+
 .row {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -35,14 +43,6 @@ ul li {
 
 	width: 100%;
 	margin: 40px 0;
-}
-
-.bubblewrapper {
-	margin-top: 0;
-	margin-bottom: 1.5em;
-
-	padding-right: 40px;
-	padding-left: 40px;
 }
 
 .row3 {
@@ -63,6 +63,14 @@ ul li {
 
 	width: 100%;
 	margin: 40px 0;
+}
+
+.far {
+	font-weight: 400;
+}
+
+.fa-edit::before {
+	content: "\f044";
 }
 
 .form-button {
