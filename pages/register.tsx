@@ -1,31 +1,16 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { Form, Field, useField, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { P } from "../components";
+import { P, TextInput } from "../components";
 import { withLayout } from "../layouts/public/Layout";
+import { ILoginUser } from '../interfaces/login-user.interface';
 
-const TextInput = ({ label, props }): JSX.Element => {
-	const [field, meta] = useField(props.name);
-	return (
-		<>
-			<label htmlFor={props.name}>{label}</label>
-			<Field className="text-input" {...props} />
-			{meta.touched && meta.error ? (<div className="errorMessage">{meta.error}</div>) : null}
-		</>
-	);
-};
-
-interface ILoginUser {
-	login: string;
-	password: string;
-}
-
-const handleSubmit = async (registerUserDto: ILoginUser): Promise<void> => {
+const submitHandler = async (user: ILoginUser): Promise<void> => {
 	const res = await fetch('https://polar-castle-18354.herokuapp.com/api/auth/register', {
 		method: "POST",
 		headers: { "Content-type": "application/json" },
-		body: JSON.stringify(registerUserDto)
+		body: JSON.stringify(user)
 	});
 	return res.status == 201 ? alert('User has been registered.') : alert('Registration error.');
 };
@@ -64,8 +49,7 @@ function Register(): JSX.Element {
 					onSubmit={
 						(values, { setSubmitting, resetForm }) => {
 							setTimeout(() => {
-								handleSubmit(values);
-								// alert(JSON.stringify(values, null, 2));
+								submitHandler(values);
 								resetForm();
 								setSubmitting(false);
 							}, 1);
@@ -75,8 +59,8 @@ function Register(): JSX.Element {
 					{props => (
 						<div className="formgroup">
 							<Form>
-								<TextInput label="Email:" props={{ name: 'login', type: 'email', className: 'forminput' }} />
-								<TextInput label="Password:" props={{ name: 'password', type: 'password', className: 'forminput' }} />
+								<TextInput label="Email:" name='login' type='email' />
+								<TextInput label="Password:" name='password' type='password' />
 								<p>
 									<button className="primary-button" type="submit">
 										{props.isSubmitting ? 'Loading' : 'Create Account'}

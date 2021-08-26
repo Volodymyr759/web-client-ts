@@ -18,5 +18,6 @@ export * from './RightTextCard/right-text-card';
 export * from './SayHelloForm/say-hello';
 export * from './SideBarMenu/sidebar-menu';
 export * from './TextCard/text-card';
+export * from './TextInput/text-input';
 export * from './TitleCard/title-card';
 
