@@ -1,13 +1,26 @@
 import Head from 'next/head';
-import { useState } from 'react';
 import Image from 'next/image';
-import { FormLabel, P } from "../components";
+import { Form, Formik } from 'formik';
+import * as Yup from 'yup';
+import { P, TextInput } from "../components";
 import { withLayout } from "../layouts/public/Layout";
+import { ILoginUser } from '../interfaces/login-user.interface';
+
+const storageName = 'user';
+
+const submitHandler = async (user: ILoginUser): Promise<void> => {
+	const res = await fetch('https://polar-castle-18354.herokuapp.com/api/auth/login', {
+		method: "POST",
+		headers: { "Content-type": "application/json" },
+		body: JSON.stringify(user)
+	});
+	const token = await res.json();
+	// console.log(token.access_token);
+	localStorage.setItem(storageName, JSON.stringify(token));
+	return res.status == 200 ? alert('User has been logged in.') : alert('Login error.');
+};
 
 function Login(): JSX.Element {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-
 	return (
 		<>
 			<Head>
@@ -18,89 +31,96 @@ function Login(): JSX.Element {
 			<section className="login-form-container">
 				<br />
 				<P appearance="centered">
-					<h3>Sign in</h3>
+					<strong>Sign in</strong>
 				</P>
 				<br />
-				<form
-					method="POST"
-					// onSubmit={saveMessage}
-					noValidate={true}
+				<Formik
+					initialValues={{
+						login: '',
+						password: ''
+					}}
+					validationSchema={Yup.object({
+						login: Yup.string()
+							.required('Required')
+							.email('Invalid email')
+							.min(4, 'Email address must be 4-30 characters')
+							.max(30, 'Email address must be 4-30 characters'),
+						password: Yup.string()
+							.required('Required')
+							.min(6, 'Password must be 6-10 characters')
+							.max(10, 'Password must be 6-10 characters')
+					})
+					}
+					onSubmit={
+						(values, { setSubmitting, resetForm }) => {
+							setTimeout(() => {
+								submitHandler(values);
+								resetForm();
+								setSubmitting(false);
+							}, 1);
+						}
+					}
 				>
-					<div className="formgroup">
-						<FormLabel>Email *:</FormLabel>
-						<input
-							type="email"
-							name="email"
-							className="forminput"
-							size={30}
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							required
-							minLength={4}
-							maxLength={30}
-						/>
-					</div>
-					<div className="formgroup">
-						<FormLabel>Password *:</FormLabel>
-						<input
-							type="password"
-							name="password"
-							className="forminput"
-							size={20}
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-							required
-							minLength={4}
-							maxLength={20}
-						/>
-					</div>
-					<br />
-					<div className="formgroup">
-						<button className="primary-button">Sign In</button>
-					</div>
-					<P appearance="centered">
-						<a href="/" className="link-base">Forgot your password?</a>
-					</P>
-					<hr style={{ width: "75%" }} />
-					<P appearance="centered">
-						<h3>Or</h3>
-					</P>
-					<div className="formgroup">
-						<div className="sso-button-wrapper">
-							<Image
-								src="/google-icon.svg"
-								width={24}
-								height={24}
-								alt="Google"
-							/>
-							<div style={{ width: "100%" }}>
-								<button className="white-button">Continue with Google</button>
-							</div>
-
+					{props => (
+						<div className="formgroup">
+							<Form>
+								<TextInput label="Email:" name='login' type='email' />
+								<TextInput label="Password:" name='password' type='password' />
+								<p>
+									<button className="primary-button" type="submit">
+										{props.isSubmitting ? 'Loading' : 'Sign In'}
+									</button>
+								</p>
+							</Form>
 						</div>
-					</div>
-					<div className="formgroup">
-						<div className="sso-button-wrapper">
-							<Image
-								src="/facebook-icon.svg"
-								width={24}
-								height={24}
-								alt="Google"
-							/>
-							<div style={{ width: "100%" }}>
-								<button className="primary-button">Continue with Facebook</button>
-							</div>
+					)}
 
+				</Formik>
+
+				<P appearance="centered">
+					<a href="/" className="link-base">Forgot your password?</a>
+				</P>
+				<hr style={{ width: "75%" }} />
+				<P appearance="centered">
+					<strong>Or</strong>
+				</P>
+				<div className="formgroup">
+					<div className="sso-button-wrapper">
+						<Image
+							src="/google-icon.svg"
+							width={24}
+							height={24}
+							alt="Google"
+						/>
+						<div style={{ width: "100%" }}>
+							<button className="white-button">Continue with Google</button>
 						</div>
+
 					</div>
-					<P appearance="centered">
-						<a href="/register" className="link-base">Not signed up? Create an account.</a>
-					</P>
-					<P appearance="centered">
-						<span><a href="/">Personal Information Collection Statement.</a></span>
-					</P>
-					<br />
-				</form>
+				</div>
+				<div className="formgroup">
+					<div className="sso-button-wrapper">
+						<Image
+							src="/facebook-icon.svg"
+							width={24}
+							height={24}
+							alt="Google"
+						/>
+						<div style={{ width: "100%" }}>
+							<button className="primary-button">Continue with Facebook</button>
+						</div>
+
+					</div>
+				</div>
+
+				<P appearance="centered">
+					<a href="/register" className="link-base">Not signed up? Create an account.</a>
+				</P>
+				<P appearance="centered">
+					<span><a href="/">Personal Information Collection Statement.</a></span>
+				</P>
+				<br />
+
 			</section >
 		</>
 	);
