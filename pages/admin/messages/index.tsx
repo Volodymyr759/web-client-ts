@@ -1,9 +1,15 @@
+import Router from 'next/router';
+import { useEffect } from 'react';
 import { GetStaticProps } from 'next';
 import { MessageList } from '../../../components/MessageList/message-list';
-import IMessage from '../../../interfaces/message.interface';
+import { IMessage } from '../../../interfaces/message.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 
 function Messages({ messages }: IMessageProps): JSX.Element {
+	useEffect(() => {
+		localStorage.getItem('user') == null && Router.push('/login');
+	}, []);
+
 	return (
 		<>
 			<h1>Messages</h1>

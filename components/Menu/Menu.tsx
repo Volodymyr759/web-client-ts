@@ -1,8 +1,17 @@
-// import { AppContext } from '../../context/app.context';
+import Router from 'next/router';
 import Link from 'next/link';
 import styles from './Menu.module.css';
+import { useState } from 'react';
 
 export const Menu = (): JSX.Element => {
+	const userFromStorage = typeof window !== 'undefined' ? localStorage.getItem('user') : null;
+	const [user, setUser] = useState(userFromStorage);
+
+	const logout = () => {
+		localStorage.removeItem('user');
+		setUser(null);
+	};
+
 	return (
 		<ul className={styles.navbarlist}>
 			<li>
@@ -55,6 +64,8 @@ export const Menu = (): JSX.Element => {
 					<a>Success Stories</a>
 				</Link>
 			</li>
+			{!user && <li onClick={() => { Router.push('/login'); }}>LogIn/SignUp</li>}
+			{user && <li onClick={logout}>Log Out</li>}
 		</ul >
 	);
 };

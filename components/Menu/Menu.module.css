@@ -59,7 +59,7 @@
 	float: none;
 }
 
-.navbarlist li:last-child {
+.navbarlist li:nth-child(6) {
 	margin-left: 10px;
 	padding: 0 15px;
 
@@ -78,12 +78,12 @@
 	line-height: 20px;
 }
 
-.navbarlist li:last-child:hover {
+.navbarlist li:nth-child(6):hover {
 	color: white;
 	background-color: -webkit-linear-gradient(left, var(--strong-blue-color) 0.46%, var(--light-blue-color) 50%);
 }
 
-.navbarlist li:last-child > a {
+.navbarlist li:nth-child(6) > a {
 	font-size: 16px;
 	font-weight: 800;
 }

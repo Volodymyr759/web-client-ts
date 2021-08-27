@@ -1,10 +1,15 @@
-import { GetServerSideProps } from 'next';
+import Router from 'next/router';
+import { useEffect } from 'react';
 import Link from 'next/link';
-import { GetServerSidePropsContext } from 'next';
-import IMessage from '../../../interfaces/message.interface';
+import { GetServerSidePropsContext, GetServerSideProps } from 'next';
+import { IMessage } from '../../../interfaces/message.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 
 function Message({ message }: IMessageProps): JSX.Element {
+	useEffect(() => {
+		localStorage.getItem('user') == null && Router.push('/login');
+	}, []);
+
 	return (
 		<>
 			<h1>Message</h1>
