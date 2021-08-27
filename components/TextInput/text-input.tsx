@@ -6,7 +6,9 @@ export const TextInput = ({ label, name, type }: TextInputProps): JSX.Element =>
 	const [field, meta] = useField(name);
 	return (
 		<>
-			<label htmlFor={name}>{label}</label>
+			<p>
+				<label className="formlabel" htmlFor={name}>{label}</label>
+			</p>
 			<Field name={name} type={type} className={styles.forminput} />
 			{meta.touched && meta.error ? (<div className={styles.errorMessage}>{meta.error}</div>) : null}
 		</>

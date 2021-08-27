@@ -1,19 +1,21 @@
+import { Field, Form, Formik } from 'formik';
 import { useState } from 'react';
-import { Htag, FormLabel, LinkButton } from '../../components';
+import * as Yup from 'yup';
+import { FormLabel, Htag, TextInput } from '../../components';
+import { IMessage } from '../../interfaces/message.interface';
 import styles from './say-hello.module.css';
 
 export const SayHelloForm = (): JSX.Element => {
-	const [fullName, setFullName] = useState('');
-	const [company, setCompany] = useState('');
-	const [prefCommunication, setPrefCommunication] = useState('Email');
-	const [email, setEmail] = useState('');
-	const [phoneNumber, setPhoneNumber] = useState('');
-	const [messageText, setMessageText] = useState('');
+	const [radioEmailPhone, setRadioEmailPhone] = useState(true);
 
-	const saveMessage = (e: React.FormEvent<EventTarget>): void => {
-		e.preventDefault();
-
-		return;
+	const submitHandler = async (message: IMessage): Promise<void> => {
+		const res = await fetch('https://polar-castle-18354.herokuapp.com/api/messages', {
+			method: "POST",
+			headers: { "Content-type": "application/json" },
+			body: JSON.stringify(message)
+		});
+		console.log('Message: ' + message);
+		return res.status == 201 ? alert('Message has been created.') : alert('Sending error.');
 	};
 
 	return (
@@ -21,106 +23,102 @@ export const SayHelloForm = (): JSX.Element => {
 			<div className={styles.sayhello}>
 				<div>
 					<Htag tag="h2">Say Hello!</Htag>
-
-					<form
-						method="POST"
-						onSubmit={saveMessage}
-						noValidate={true}
+					<Formik
+						initialValues={{
+							fullName: '',
+							company: '',
+							prefCommunication: '',
+							email: '',
+							phoneNumber: '',
+							messageText: '',
+						}}
+						validationSchema={Yup.object({
+							fullName: Yup.string()
+								.required('Required')
+								.min(4, 'Full name must be 4-30 characters')
+								.max(30, 'Full name must be 4-30 characters'),
+							company: Yup.string()
+								.required('Required')
+								.min(3, 'Company name must be 3-50 characters')
+								.max(50, 'Company name must be 3-50 characters'),
+							prefCommunication: Yup.string()
+								.required('Required'),
+							email: Yup.string()
+								.required('Required')
+								.email('Invalid email')
+								.min(4, 'Email address must be 4-30 characters')
+								.max(30, 'Email address must be 4-30 characters'),
+							phoneNumber: Yup.string()
+								.required('Required')
+								.min(4, 'Phone number must be 4-20 characters')
+								.max(20, 'Phone number must be 4-20 characters'),
+							messageText: Yup.string()
+								.required('Required')
+								.min(10, 'Message text must be 4-20 characters')
+								.max(500, 'Message text must be 4-20 characters')
+						})
+						}
+						onSubmit={
+							(values, { setSubmitting, resetForm }) => {
+								alert('Values: ' + values);
+								submitHandler(values);
+								resetForm();
+								setSubmitting(false);
+							}
+						}
 					>
-						<div className="formgroup">
-							<FormLabel>Fullname *:</FormLabel>
-							<p>
-								<input
-									type="text"
-									name="fullName"
-									className="forminput"
-									size={40}
-									value={fullName}
-									onChange={(e) => setFullName(e.target.value)}
-									required
-									minLength={4}
-									maxLength={30}
-								/>
-							</p>
-						</div>
-						<div className="formgroup">
-							<FormLabel>Company *:</FormLabel>
-							<input
-								type="text"
-								name="company"
-								className="forminput"
-								size={40}
-								value={company}
-								onChange={(e) => setCompany(e.target.value)}
-								required
-								minLength={3}
-								maxLength={50}
-							/>
-						</div>
-						<div className="formgroup">
-							<FormLabel>Select A Preferable way of communication *:</FormLabel>
-							<FormLabel>Phone</FormLabel>
-							<input type="radio" name="Phone"
-								onChange={
-									() => { if (prefCommunication !== "Phone") setPrefCommunication("Phone"); }
-								}
-								checked={prefCommunication === "Phone"}
-							/>
-							<FormLabel>Email</FormLabel>
-							<input type="radio" name="Email"
-								onChange={
-									() => { if (prefCommunication !== "Email") setPrefCommunication("Email"); }
-								}
-								checked={prefCommunication === "Email"}
-							/>
-						</div>
-						<div className="formgroup">
-							<FormLabel>Email *:</FormLabel>
-							<input
-								type="email"
-								name="email"
-								className="forminput"
-								size={30}
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
-								required
-								minLength={4}
-								maxLength={30}
-							/>
-						</div>
-						<div className="formgroup">
-							<FormLabel>Phone Number *:</FormLabel>
-							<input
-								type="text"
-								name="phoneNumber"
-								className="forminput"
-								size={240}
-								value={phoneNumber}
-								onChange={(e) => setPhoneNumber(e.target.value)}
-								required
-								minLength={4}
-								maxLength={20}
-							/>
-						</div>
-						<div className="formgroup">
-							<FormLabel>Message *:</FormLabel>
-							<textarea
-								name="messageText"
-								cols={40}
-								rows={5}
-								className="forminput"
-								value={messageText}
-								onChange={(e) => setMessageText(e.target.value)}
-								required
-								minLength={10}
-								maxLength={500}
-							/>
-						</div>
-					</form>
-					<br /><br />
-					<LinkButton appearance="primary" linkTo="/">
-						<strong>Submit</strong>
-					</LinkButton>
+						{props => (
+							<div className="formgroup">
+								<Form>
+									<TextInput label="Full Name:" name='fullName' type='text' />
+									<TextInput label="Company:" name='company' type='text' />
+									<br />
+									<div>
+										<p>Select A Preferable way of communication:</p>
+										<div role="group" aria-labelledby="my-radio-group">
+											<label>
+												<Field
+													type="radio"
+													name="Email"
+													value="Email"
+													onClick={() => { setRadioEmailPhone(true); }}
+													checked={radioEmailPhone} />
+												Email
+											</label>
+											<label>
+												<Field
+													type="radio"
+													name="Phone"
+													value="Phone"
+													onClick={() => { setRadioEmailPhone(false); }}
+													checked={!radioEmailPhone} />
+												Phone
+											</label>
+										</div>
+									</div>
+
+									<TextInput label="Email:" name='email' type='email' />
+									<TextInput label="Phone Number:" name='phoneNumber' type='text' />
+
+									<FormLabel>Message:</FormLabel>
+									<Field
+										name="messageText" as="textarea"
+										className="forminput"
+										cols={55}
+										rows={5}
+										minLength={10}
+										maxLength={500}
+									/>
+									<p>
+										<button className="primary-button" type="submit">
+											{props.isSubmitting ? 'Loading' : 'Submit'}
+										</button>
+									</p>
+								</Form>
+							</div>
+						)}
+					</Formik>
+
 				</div>
 				<div>
 					<img src="/contact-us.jpeg" />
