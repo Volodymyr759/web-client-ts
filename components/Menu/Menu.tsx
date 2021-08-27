@@ -64,8 +64,8 @@ export const Menu = (): JSX.Element => {
 					<a>Success Stories</a>
 				</Link>
 			</li>
-			{!user && <li onClick={() => { Router.push('/login'); }}>LogIn/SignUp</li>}
-			{user && <li onClick={logout}>Log Out</li>}
+			{!user && <li onClick={() => { Router.push('/login'); }}><span>LogIn/SignUp</span></li>}
+			{user && <li onClick={logout}><span>Log Out</span></li>}
 		</ul >
 	);
 };

@@ -12,6 +12,7 @@ export * from './LinkButton/link-button';
 export * from './MessageItem/message-item';
 export * from './MessageList/message-list';
 export * from './P/P';
+export * from './Pagination/pagination';
 export * from './RightImageCard/right-image-card';
 export * from './RightSideCard/right-side-card';
 export * from './RightTextCard/right-text-card';

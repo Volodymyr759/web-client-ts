@@ -1,11 +1,23 @@
 import Router from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { GetStaticProps } from 'next';
-import { MessageList } from '../../../components/MessageList/message-list';
+import { MessageList, Pagination } from '../../../components';
 import { IMessage } from '../../../interfaces/message.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 
 function Messages({ messages }: IMessageProps): JSX.Element {
+	const [messagesState] = useState(messages);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [messagesPerPage] = useState(5);
+
+	// Get current messages
+	const indexOfLastMessage = currentPage * messagesPerPage;
+	const indexOfFirstMessage = indexOfLastMessage - messagesPerPage;
+	const currentMessages = messagesState.slice(indexOfFirstMessage, indexOfLastMessage);
+
+	// Change page
+	const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
 	useEffect(() => {
 		localStorage.getItem('user') == null && Router.push('/login');
 	}, []);
@@ -13,7 +25,9 @@ function Messages({ messages }: IMessageProps): JSX.Element {
 	return (
 		<>
 			<h1>Messages</h1>
-			<MessageList messages={messages} />
+			<MessageList messages={currentMessages} />
+
+			<Pagination itemsPerPage={messagesPerPage} totalItems={messages.length} paginate={paginate} />
 		</>
 	);
 }
