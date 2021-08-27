@@ -92,6 +92,17 @@ ul li {
 	margin: 0 30px;
 }
 
+.formlabel {
+	transition: transform 0.4s;
+	transform: scale(1.4) translateY(20px);
+	transform-origin: 0 0;
+	text-transform: uppercase;
+
+	color: #373249;
+
+	font-size: 14px;
+}
+
 .login-form-container {
 	position: relative;
 

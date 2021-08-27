@@ -1,11 +1,12 @@
 .bubble {
-	margin-bottom: 20px;
 	padding: 40px 70px;
 
 	background: #F2F5FF;
 }
 
 .bubbleheader {
+	margin: 0;
+
 	transition: inherit;
 	text-align: left;
 
@@ -14,7 +15,6 @@
 
 	font-size: 25px;
 	font-weight: 800;
-	line-height: 50px;
 	-webkit-text-fill-color: transparent;
 }
 
