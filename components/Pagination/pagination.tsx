@@ -9,18 +9,20 @@ export const Pagination = ({ itemsPerPage, totalItems, paginate }: PaginationPro
 	}
 
 	return (
-		<nav>
-			<ul className={styles.pagination}>
-				{
-					pageNumbers.map(number =>
-						<li key={number} className={styles.pageitem}>
-							<a href="!#" onClick={(e) => { e.preventDefault(); paginate(number); }} className={styles.pagelink}>
-								{number}
-							</a>
-						</li>
-					)
-				}
-			</ul>
-		</nav>
+		<div className={styles.navcontainer}>
+			<nav aria-label="Page navigation example">
+				<ul className="pagination">
+					{
+						pageNumbers.map(number =>
+							<li key={number} className="page-item">
+								<a className="page-link" href="!#" onClick={(e) => { e.preventDefault(); paginate(number); }} >
+									{number}
+								</a>
+							</li>
+						)
+					}
+				</ul>
+			</nav>
+		</div>
 	);
 };

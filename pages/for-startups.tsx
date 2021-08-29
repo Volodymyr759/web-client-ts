@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { withLayout } from "../layouts/public/Layout";
-import { BubbleBox, Htag, IconTextBox, P, SayHelloForm, TitleCard } from "../components";
+import { BubbleBox, CenterTextCard, IconTextBox, P, SayHelloForm, TitleCard } from "../components";
 
 function ForStartups(): JSX.Element {
 	return (
@@ -20,16 +20,17 @@ function ForStartups(): JSX.Element {
 				Our industry leading team will drive and support your digital projects end to end.
 			</TitleCard>
 
-			<section className="eiv-header-text">
-				<Htag tag="h2">What’s included</Htag>
-				<P>
+			<CenterTextCard
+				htagText="What’s included"
+			>
+				<p className="lead mb-4">
 					We understand that start-ups often need assistance to begin with, both financially and on an advisory level,
 					as they may lack the technical skills to navigate the digital world.
-				</P>
-				<P>
+				</p>
+				<p className="lead mb-4">
 					At Eivolo, we can bridge the gap between you and the digital world, and translate your ideas to the online space.
-				</P>
-			</section>
+				</p>
+			</CenterTextCard>
 
 			<section className="row" style={{ backgroundImage: "url(/gradient_bg.svg)" }}>
 				<div className="bubblewrapper">

@@ -1,10 +1,12 @@
+import { Htag } from '../../components';
 import { withAdminLayout } from '../../layouts/admin/AdminLayout';
 
 function Users(): JSX.Element {
 	return (
 		<>
-			<h1>Users page</h1>
-
+			<Htag tag="h3">
+				Users page
+			</Htag>
 		</>
 	);
 }

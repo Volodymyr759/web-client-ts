@@ -21,3 +21,11 @@
 	font-style: normal;
 	line-height: 36px;
 }
+
+@media (max-width: 992px) {
+	.rightimagecard {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+}

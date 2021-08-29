@@ -12,3 +12,11 @@
 
 	padding: 30px;
 }
+
+@media (max-width: 992px) {
+	.titlecard {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+}

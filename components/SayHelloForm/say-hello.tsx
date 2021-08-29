@@ -76,7 +76,7 @@ export const SayHelloForm = (): JSX.Element => {
 									<div>
 										<p>Select A Preferable way of communication:</p>
 										<div role="group" aria-labelledby="my-radio-group">
-											<label>
+											<p>
 												<Field
 													type="radio"
 													name="Email"
@@ -84,8 +84,8 @@ export const SayHelloForm = (): JSX.Element => {
 													onClick={() => { setRadioEmailPhone(true); }}
 													checked={radioEmailPhone} />
 												Email
-											</label>
-											<label>
+											</p>
+											<p>
 												<Field
 													type="radio"
 													name="Phone"
@@ -93,7 +93,7 @@ export const SayHelloForm = (): JSX.Element => {
 													onClick={() => { setRadioEmailPhone(false); }}
 													checked={!radioEmailPhone} />
 												Phone
-											</label>
+											</p>
 										</div>
 									</div>
 
