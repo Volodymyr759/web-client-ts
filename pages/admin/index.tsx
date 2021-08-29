@@ -1,5 +1,6 @@
 import Router from 'next/router';
 import { useEffect } from 'react';
+import { Htag } from '../../components';
 import { withAdminLayout } from '../../layouts/admin/AdminLayout';
 
 function Dashboard(): JSX.Element {
@@ -9,7 +10,9 @@ function Dashboard(): JSX.Element {
 
 	return (
 		<>
-			<h1>Dashboard</h1>
+			<Htag tag="h3">
+				Dashboard
+			</Htag>
 		</>
 	);
 }

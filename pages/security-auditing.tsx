@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { withLayout } from "../layouts/public/Layout";
-import { Htag, IconTextBox, LeftImageCard, P, RightImageCard, SayHelloForm, TitleCard } from "../components";
+import { CenterTextCard, Htag, IconTextBox, LeftImageCard, P, RightImageCard, SayHelloForm, TitleCard } from "../components";
 
 function SecurityAuditing(): JSX.Element {
 	return (
@@ -76,13 +76,14 @@ function SecurityAuditing(): JSX.Element {
 				</div>
 			</section>
 
-			<section className="eiv-header-text">
-				<Htag tag="h2">Our Security Audit Services</Htag>
-				<P>
+			<CenterTextCard
+				htagText="Our Security Audit Services"
+			>
+				<p className="lead mb-4">
 					We offer a comprehensive security consulting service that can assist you in making the decisions that will secure your company’s IT systems for years to come.
 					Take the first step to building your business’ cyber resilience today.
-				</P>
-			</section>
+				</p>
+			</CenterTextCard>
 
 			<LeftImageCard
 				htagText="Cybersecurity consultancy"
@@ -102,6 +103,7 @@ function SecurityAuditing(): JSX.Element {
 				htagText="Cybersecurity Auditing & Risk Assessment"
 				isButtonNeeded={false}
 				objdata="/Mobility-Security-Illustration.svg"
+				buttonLink="!#"
 			>
 				<p>
 					As part of our auditing service, we use tools and our vast set of skills to inspect and evaluate

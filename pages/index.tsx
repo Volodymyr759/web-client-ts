@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Htag, LeftImageCard, RightImageCard, SayHelloForm, TitleCard } from "../components";
+import { CenterTextCard, LeftImageCard, RightImageCard, SayHelloForm, TitleCard } from "../components";
 import { withLayout } from "../layouts/public/Layout";
 
 function Home(): JSX.Element {
@@ -20,12 +20,11 @@ function Home(): JSX.Element {
         Our industry leading team will drive and support your digital projects end to end.
       </TitleCard>
 
-      <section className="eiv-header-text">
-        <Htag tag="h2">How can we evolve your business?</Htag>
-        <p>
-          We can customise our services to meet your requirements and accommodate any of your digital needs.
-        </p>
-      </section>
+      <CenterTextCard
+        htagText="How can we evolve your business?"
+      >
+        <p className="lead mb-4">We can customise our services to meet your requirements and accommodate any of your digital needs.</p>
+      </CenterTextCard>
 
       <LeftImageCard
         htagText="Outsourcing"

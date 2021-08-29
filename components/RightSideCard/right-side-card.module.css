@@ -28,3 +28,11 @@
 	max-width: 100%;
 	height: auto;
 }
+
+@media (max-width: 992px) {
+	.rightsidecard {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+}

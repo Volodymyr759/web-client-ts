@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { withLayout } from "../layouts/public/Layout";
-import { BubbleBox, Htag, IconTextBox, LeftTextCard, RightTextCard, SayHelloForm } from "../components";
+import { BubbleBox, CenterTextCard, IconTextBox, LeftTextCard, RightTextCard, SayHelloForm } from "../components";
 
 function About(): JSX.Element {
 	return (
@@ -36,9 +36,10 @@ function About(): JSX.Element {
 				</p>
 			</RightTextCard>
 
-			<section className="eiv-header-text">
-				<Htag tag="h2">Why Work With Eivolo?</Htag>
-			</section>
+			<CenterTextCard
+				htagText="Why Work With Eivolo?"
+			>
+			</CenterTextCard>
 
 			<section className="row" style={{ backgroundImage: "url(/gradient_bg.svg)" }}>
 				<div className="bubblewrapper">

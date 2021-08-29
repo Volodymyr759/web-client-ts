@@ -1,14 +1,15 @@
 import Router from 'next/router';
 import { useEffect, useState } from 'react';
 import { GetStaticProps } from 'next';
-import { MessageList, Pagination } from '../../../components';
+import { Htag, MessageList, Pagination } from '../../../components';
 import { IMessage } from '../../../interfaces/message.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
+import { AppConstants } from '../../../infrastructure/app.constants';
 
 function Messages({ messages }: IMessageProps): JSX.Element {
 	const [messagesState] = useState(messages);
-	const [currentPage, setCurrentPage] = useState(1);
-	const [messagesPerPage] = useState(5);
+	const [currentPage, setCurrentPage] = useState(AppConstants.MESSAGES_CURRENT_PAGE_DEFAULT);
+	const [messagesPerPage] = useState(AppConstants.MESSAGES_PER_PAGE);
 
 	// Get current messages
 	const indexOfLastMessage = currentPage * messagesPerPage;
@@ -24,10 +25,12 @@ function Messages({ messages }: IMessageProps): JSX.Element {
 
 	return (
 		<>
-			<h1>Messages</h1>
+			<Htag tag="h3">
+				Messages
+			</Htag>
 			<MessageList messages={currentMessages} />
-
 			<Pagination itemsPerPage={messagesPerPage} totalItems={messages.length} paginate={paginate} />
+
 		</>
 	);
 }

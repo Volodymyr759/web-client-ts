@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { GetServerSidePropsContext, GetServerSideProps } from 'next';
 import { IMessage } from '../../../interfaces/message.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
+import { Htag } from '../../../components';
 
 function Message({ message }: IMessageProps): JSX.Element {
 	useEffect(() => {
@@ -12,7 +13,7 @@ function Message({ message }: IMessageProps): JSX.Element {
 
 	return (
 		<>
-			<h1>Message</h1>
+			<Htag tag="h3">Message</Htag>
 			<p><strong>Full name: </strong>{message.fullName}</p>
 			<p><strong>Company:</strong> {message.company}</p>
 			<p><strong>Preffered communication way:</strong> {message.prefCommunication}</p>
