@@ -89,7 +89,7 @@ function About(): JSX.Element {
 				</p>
 			</RightTextCard>
 
-			<section className="row">
+			<section className="row2">
 				<div className="bubblewrapper">
 					<BubbleBox appearance="left-top" headerText="Transparency">
 						<p>

@@ -23,38 +23,38 @@ function SuccessStories(): JSX.Element {
 			</TitleCard>
 
 			<section className="row">
-				<div className="col-md-6">
-					<div className={styles.casestudyblock}>
-						<a href="/cases/property-space">
-							<img src="/image-6-1.png" />
-							<h4>Property Space</h4>
-						</a>
-					</div>
+				{/* <div className="col-lg-6"> */}
+				<div className={styles.casestudyblock}>
+					<a href="/cases/property-space">
+						<img src="/image-6-1.png" />
+						<h4>Property Space</h4>
+					</a>
 				</div>
-				<div className="col-md-6">
-					<div className={styles.casestudyblock}>
-						<a href="/cases/inspection-manager/">
-							<img src="/Layer-1-1-2.png" />
-							<h4>Inspection Manager</h4>
-						</a>
-					</div>
+				{/* </div> */}
+				{/* <div className="col-md-6"> */}
+				<div className={styles.casestudyblock}>
+					<a href="/cases/inspection-manager/">
+						<img src="/Layer-1-1-2.png" />
+						<h4>Inspection Manager</h4>
+					</a>
 				</div>
-				<div className="col-md-6">
-					<div className={styles.casestudyblock}>
-						<a href="/cases/hybrid-mena">
-							<img src="/logo-3.png" />
-							<h4>Hibrid Media Platform</h4>
-						</a>
-					</div>
+				{/* </div> */}
+				{/* <div className="col-md-6"> */}
+				<div className={styles.casestudyblock}>
+					<a href="/cases/hybrid-mena">
+						<img src="/logo-3.png" />
+						<h4>Hibrid Media Platform</h4>
+					</a>
 				</div>
-				<div className="col-md-6">
-					<div className={styles.casestudyblock}>
-						<a href="/cases/diamond-emporium">
-							<img src="/logo-4.png" />
-							<h4>Diamond Emporium</h4>
-						</a>
-					</div>
+				{/* </div>
+				<div className="col-md-6"> */}
+				<div className={styles.casestudyblock}>
+					<a href="/cases/diamond-emporium">
+						<img src="/logo-4.png" />
+						<h4>Diamond Emporium</h4>
+					</a>
 				</div>
+				{/* </div> */}
 			</section>
 
 			<SayHelloForm />

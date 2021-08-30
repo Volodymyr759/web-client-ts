@@ -24,9 +24,9 @@ nav {
 	box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 5%);
 }
 
-ul li {
+/* ul li {
 	list-style-image: url(/ul-point.png);
-}
+} */
 
 .bubblewrapper {
 	margin-top: 0;
@@ -43,6 +43,15 @@ ul li {
 
 	width: 100%;
 	margin: 40px 0;
+}
+
+.row2 {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	justify-items: center;
+
+	width: 75%;
+	margin: 40px auto;
 }
 
 .row3 {
@@ -66,6 +75,18 @@ ul li {
 }
 
 @media (max-width: 992px) {
+	.row {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+
+	.row2 {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+
 	.row3 {
 		display: grid;
 		grid-template-columns: 1fr;
