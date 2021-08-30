@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { CenterTextCard, LeftImageCard, RightImageCard, SayHelloForm, TitleCard } from "../components";
+import { CenterTextCard, LeftImageCard, RightImageCard, SayHelloForm, Slider, TitleCard } from "../components";
 import { withLayout } from "../layouts/public/Layout";
 
 function Home(): JSX.Element {
@@ -90,9 +90,7 @@ function Home(): JSX.Element {
         <br /><br />
       </LeftImageCard>
 
-      <div style={{ border: "1px solid red" }}>
-        <h2>Slider</h2>
-      </div>
+      <Slider />
 
       <SayHelloForm />
 

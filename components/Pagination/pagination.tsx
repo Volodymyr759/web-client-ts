@@ -11,7 +11,7 @@ export const Pagination = ({ itemsPerPage, totalItems, paginate }: PaginationPro
 	return (
 		<div className={styles.navcontainer}>
 			<nav aria-label="Page navigation example">
-				<ul className="pagination">
+				<ul className={styles.pagination}>
 					{
 						pageNumbers.map(number =>
 							<li key={number} className="page-item">

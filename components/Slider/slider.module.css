@@ -1,0 +1,42 @@
+.slidercontainer {
+	width: 70%;
+	margin: auto;
+}
+
+.carouselcaption {
+	position: absolute;
+	right: 15%;
+	bottom: 1.25rem;
+	left: 15%;
+
+	padding-top: 1.25rem;
+	padding-bottom: 1.25rem;
+
+	text-align: center;
+
+	color: #373249;
+}
+
+.carouselcontrolnexticon {
+	display: inline-block;
+
+	width: 2rem;
+	height: 2rem;
+
+	background-image: url(/arrow_right.png);
+	background-repeat: no-repeat;
+	background-position: 50%;
+	background-size: 100% 100%;
+}
+
+.carouselcontrolprevicon {
+	display: inline-block;
+
+	width: 2rem;
+	height: 2rem;
+
+	background-image: url(/arrow_left.png);
+	background-repeat: no-repeat;
+	background-position: 50%;
+	background-size: 100% 100%;
+}

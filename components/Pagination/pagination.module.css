@@ -2,3 +2,16 @@
 	width: 100px;
 	margin: 30px auto;
 }
+
+.pagination {
+	display: flex;
+
+	padding-left: 0;
+
+	list-style: none;
+	list-style-image: none !important;
+}
+
+.pagination ul li {
+	list-style-image: none;
+}
