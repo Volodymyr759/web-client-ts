@@ -7,8 +7,9 @@ import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 import { AppConstants } from '../../../infrastructure/app.constants';
 
 function Messages({ messages }: IMessageProps): JSX.Element {
-	const [messagesState] = useState(messages);
+	const [messagesState, setMessagesState] = useState(messages);
 	const [currentPage, setCurrentPage] = useState(AppConstants.MESSAGES_CURRENT_PAGE_DEFAULT);
+	const [direction, setDirection] = useState('Asc');
 	const [messagesPerPage] = useState(AppConstants.MESSAGES_PER_PAGE);
 
 	// Get current messages
@@ -23,12 +24,37 @@ function Messages({ messages }: IMessageProps): JSX.Element {
 		localStorage.getItem('user') == null && Router.push('/login');
 	}, []);
 
+
+	// Sort messages
+	const sortMessagesByName = () => {
+		if (direction === 'Asc') {
+			setMessagesState(sortArray(messagesState));
+			setDirection('Desc');
+		} else {
+			const sortedMessages = sortArray(messagesState).reverse();
+			setMessagesState(sortedMessages);
+			setDirection('Asc');
+		}
+	};
+
+	function sortArray(mess: IMessage[]) {
+		return mess.sort(function (a, b) {
+			const nameA = a.fullName.toLowerCase();
+			const nameB = b.fullName.toLowerCase();
+			if (nameA < nameB)
+				return -1;
+			if (nameA > nameB)
+				return 1;
+			return 0;
+		});
+	}
+
 	return (
 		<>
 			<Htag tag="h3">
 				Messages
 			</Htag>
-			<MessageList messages={currentMessages} />
+			<MessageList messages={currentMessages} sortByName={sortMessagesByName} />
 			<Pagination itemsPerPage={messagesPerPage} totalItems={messages.length} paginate={paginate} />
 
 		</>

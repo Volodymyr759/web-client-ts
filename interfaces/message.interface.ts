@@ -1,5 +1,5 @@
 export interface IMessage {
-	// _id: string;
+	_id: string;
 	fullName: string;
 	company: string;
 	prefCommunication: string;
