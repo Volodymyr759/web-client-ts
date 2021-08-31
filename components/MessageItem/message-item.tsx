@@ -24,7 +24,17 @@ export const MessageItem = ({ message }: MessageItemProps): JSX.Element => {
 				<td>
 					<Link href="/admin/messages/[id]" as={`/admin/messages/${message._id}`}>
 						<a className={styles.edit}></a>
-					</Link> | <a href="#" className={styles.delete} onClick={() => deleteMessage(message._id)}></a></td>
+					</Link> |
+					<a href="#"
+						className={styles.delete}
+						onClick={
+							() => {
+								if (message._id) {
+									deleteMessage(message._id);
+								}
+							}
+						}
+					></a></td>
 			</tr>
 		</>
 	);
