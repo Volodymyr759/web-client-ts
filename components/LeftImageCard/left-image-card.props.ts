@@ -4,7 +4,7 @@ export interface LeftImageCardProps extends DetailedHTMLProps<HTMLAttributes<HTM
 	htagText: string;
 	isButtonNeeded?: boolean;
 	buttonText?: string;
-	buttonLink?: string;
+	buttonLink: string;
 	objdata: string;
 	children: ReactNode;
 }
