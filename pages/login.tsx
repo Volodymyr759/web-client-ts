@@ -6,7 +6,7 @@ import { P, TextInput } from "../components";
 import { withLayout } from "../layouts/public/Layout";
 import { ILoginUser } from '../interfaces/login-user.interface';
 
-const storageName = 'user';
+const storageName = 'userData';
 
 const submitHandler = async (user: ILoginUser): Promise<void> => {
 	const res = await fetch('https://polar-castle-18354.herokuapp.com/api/auth/login', {
@@ -14,9 +14,9 @@ const submitHandler = async (user: ILoginUser): Promise<void> => {
 		headers: { "Content-type": "application/json" },
 		body: JSON.stringify(user)
 	});
-	const token = await res.json();
-	// console.log(token.access_token);
-	localStorage.setItem(storageName, JSON.stringify(token));
+	const data = await res.json();
+	localStorage.setItem(storageName, JSON.stringify(data));
+
 	return res.status == 200 ? alert('User has been logged in.') : alert('Login error.');
 };
 
@@ -74,13 +74,12 @@ function Login(): JSX.Element {
 							</Form>
 						</div>
 					)}
-
 				</Formik>
 
 				<P appearance="centered">
 					<a href="/" className="link-base">Forgot your password?</a>
 				</P>
-				<hr style={{ width: "75%" }} />
+				<hr />
 				<P appearance="centered">
 					<strong>Or</strong>
 				</P>
@@ -117,10 +116,9 @@ function Login(): JSX.Element {
 					<a href="/register" className="link-base">Not signed up? Create an account.</a>
 				</P>
 				<P appearance="centered">
-					<span><a href="/">Personal Information Collection Statement.</a></span>
+					<span><a href="!#">Personal Information Collection Statement.</a></span>
 				</P>
 				<br />
-
 			</section >
 		</>
 	);
