@@ -89,6 +89,7 @@ function SecurityAuditing(): JSX.Element {
 				htagText="Cybersecurity consultancy"
 				isButtonNeeded={false}
 				objdata="/EivoloLandingPage_WhyOutsource_Illustration.svg"
+				buttonLink=""
 			>
 				<p>We provide businesses with expert advice on various security topics, including:</p>
 				<ul>
@@ -119,6 +120,7 @@ function SecurityAuditing(): JSX.Element {
 				htagText="Ethical Penetration Testing"
 				isButtonNeeded={false}
 				objdata="/Ethical-Testing-illustration.svg"
+				buttonLink=""
 			>
 				<p>
 					Our ethical penetration testing service attempts to test the defences of a given solution or software through
