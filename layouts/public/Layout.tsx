@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { LayoutProps } from './layout.props';
+import { LayoutProps } from './Layout.props';
 import styles from '../../styles/Layout.module.css';
 import { Footer, Header, Navbar } from '../../components/';
 
