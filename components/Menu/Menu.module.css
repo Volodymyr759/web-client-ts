@@ -15,8 +15,6 @@
 	display: inline;
 
 	float: left;
-
-	margin-right: 20px;
 }
 
 .navbarlist a {
@@ -49,8 +47,6 @@
 .navbarlist .navbarlist ul {
 	margin: 0;
 	padding: 0;
-
-	list-style-type: none;
 }
 
 .navbarlist li:hover ul { display: block; }
@@ -59,7 +55,7 @@
 	float: none;
 }
 
-.navbarlist li:nth-child(6) {
+.navbarlist li:nth-child(7) {
 	margin-left: 10px;
 	padding: 0 15px;
 
@@ -78,12 +74,12 @@
 	line-height: 20px;
 }
 
-.navbarlist li:nth-child(6):hover {
+.navbarlist li:hover {
 	color: white;
 	background-color: -webkit-linear-gradient(left, var(--strong-blue-color) 0.46%, var(--light-blue-color) 50%);
 }
 
-.navbarlist li:nth-child(6) > a {
+.navbarlist li:nth-child(7) > a {
 	font-size: 16px;
 	font-weight: 800;
 }
