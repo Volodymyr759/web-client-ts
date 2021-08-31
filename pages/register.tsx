@@ -104,7 +104,7 @@ function Register(): JSX.Element {
 					</div>
 				</div>
 				<P appearance="centered">
-					<span><a href="/">Personal Information Collection Statement.</a></span>
+					<span><a href="/register">Personal Information Collection Statement.</a></span>
 				</P>
 				<br />
 			</section >

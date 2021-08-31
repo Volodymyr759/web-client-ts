@@ -77,7 +77,7 @@ function Login(): JSX.Element {
 				</Formik>
 
 				<P appearance="centered">
-					<a href="/" className="link-base">Forgot your password?</a>
+					<a href="/login" className="link-base">Forgot your password?</a>
 				</P>
 				<hr />
 				<P appearance="centered">
@@ -116,7 +116,7 @@ function Login(): JSX.Element {
 					<a href="/register" className="link-base">Not signed up? Create an account.</a>
 				</P>
 				<P appearance="centered">
-					<span><a href="!#">Personal Information Collection Statement.</a></span>
+					<span><a href="/login">Personal Information Collection Statement.</a></span>
 				</P>
 				<br />
 			</section >

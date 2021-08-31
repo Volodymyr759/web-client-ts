@@ -82,7 +82,7 @@ function ForStartups(): JSX.Element {
 				</P>
 			</section>
 
-			<section className="row">
+			<section className="row2">
 				<div className="bubblewrapper">
 					<BubbleBox appearance="left-bottom" headerText="Scalable Solutions" spanText="GROWTH" />
 				</div>
@@ -96,10 +96,6 @@ function ForStartups(): JSX.Element {
 					<BubbleBox appearance="left-top" headerText="End-To-End" spanText="Production" />
 				</div>
 			</section>
-
-			<div style={{ border: "1px solid red" }}>
-				<h2>Center text Card $ 5</h2>
-			</div>
 
 			<SayHelloForm />
 		</>
