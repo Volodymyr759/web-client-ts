@@ -3,7 +3,7 @@ import styles from './header.module.css';
 
 export const Header = ({ ...props }: HeaderProps): JSX.Element => {
 	return (
-		<div style={{ backgroundColor: 'white', textAlign: 'left', width: '300px' }} {...props}>
+		<div className={styles.navbarwrapper} {...props}>
 			<a className={styles.hamburger} data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
 			<div className="collapse" id="collapseExample">
 				<div className="navbar-collapse text-center collapse show" id="mainNavbar">
