@@ -1,7 +1,9 @@
-import { Field, Form, Formik } from 'formik';
 import { useState } from 'react';
+import Router from 'next/router';
+import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { FormLabel, Htag, TextInput } from '../../components';
+import { AppConstants } from '../../infrastructure/app.constants';
 import { IMessage } from '../../interfaces/message.interface';
 import styles from './say-hello.module.css';
 
@@ -9,13 +11,29 @@ export const SayHelloForm = (): JSX.Element => {
 	const [radioEmailPhone, setRadioEmailPhone] = useState(true);
 
 	const submitHandler = async (message: IMessage): Promise<void> => {
-		const res = await fetch('https://polar-castle-18354.herokuapp.com/api/messages', {
+
+		console.log("Message: ", message);
+		const data = localStorage.getItem('userData');
+		if (!data) {
+			Router.push('/login');
+		}
+
+		const token = data && JSON.parse(data).access_token;
+
+		const res = await fetch(AppConstants.API_BASE_URL + '/api/messages', {
 			method: "POST",
-			headers: { "Content-type": "application/json" },
+			headers: {
+				"Content-Type": "application/json",
+				"Authorization": "Bearer " + token
+			},
 			body: JSON.stringify(message)
 		});
-		console.log('Message: ' + message);
-		return res.status == 201 ? alert('Message has been created.') : alert('Sending error.');
+
+		if (res.ok) {
+			alert('Message has been created.');
+		} else {
+			alert('Sending error...');
+		}
 	};
 
 	return (
@@ -27,7 +45,7 @@ export const SayHelloForm = (): JSX.Element => {
 						initialValues={{
 							fullName: '',
 							company: '',
-							prefCommunication: '',
+							prefCommunication: 'Email',
 							email: '',
 							phoneNumber: '',
 							messageText: '',
@@ -60,10 +78,12 @@ export const SayHelloForm = (): JSX.Element => {
 						}
 						onSubmit={
 							(values, { setSubmitting, resetForm }) => {
-								alert('Values: ' + values);
-								submitHandler(values);
-								resetForm();
-								setSubmitting(false);
+								setTimeout(() => {
+									alert('Values: ' + values);
+									submitHandler(values);
+									resetForm();
+									setSubmitting(false);
+								}, 3000);
 							}
 						}
 					>
