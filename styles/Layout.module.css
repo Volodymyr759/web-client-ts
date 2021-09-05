@@ -3,7 +3,8 @@
 	grid-template-columns: auto minmax(320px, 1200px) auto;
 	grid-template-rows: auto auto 1fr auto;
 
-	min-height: 100vh;
+	min-height: 150vh;
+
 	grid-template-areas:
 		". header ."
 		"navbar navbar navbar"
@@ -25,6 +26,7 @@
 	grid-area: body;
 
 	width: 100%;
+
 	max-width: 1200px;
 	margin: 0 auto;
 	padding: 0 12px;
@@ -61,7 +63,7 @@
 	.header {
 		position: absolute;
 		top: 0;
-		left: 0;
+		right: 0;
 
 		display: block;
 	}

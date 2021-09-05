@@ -2,22 +2,31 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
+import cookieCutter from 'cookie-cutter';
 import { P, TextInput } from "../components";
 import { withLayout } from "../layouts/public/Layout";
 import { ILoginUser } from '../interfaces/login-user.interface';
+import { AppConstants } from '../infrastructure/app.constants';
 
-const storageName = 'userData';
+// const storageName = 'userData';
 
 const submitHandler = async (user: ILoginUser): Promise<void> => {
-	const res = await fetch('https://polar-castle-18354.herokuapp.com/api/auth/login', {
+	// Unset auth-cookie if exists
+	cookieCutter.set('auth', '', { expires: new Date(0) });
+
+	const res = await fetch(AppConstants.API_BASE_URL + '/api/auth/login', {
 		method: "POST",
 		headers: { "Content-type": "application/json" },
 		body: JSON.stringify(user)
 	});
 	const data = await res.json();
-	localStorage.setItem(storageName, JSON.stringify(data));
 
-	return res.status == 200 ? alert('User has been logged in.') : alert('Login error.');
+	cookieCutter.set('auth', JSON.stringify(data), {
+		expires: 3600,
+		secure: true,
+	});
+	res.status == 200 ? alert('User has been logged in.') : alert('Login error.');
+	return;
 };
 
 function Login(): JSX.Element {
