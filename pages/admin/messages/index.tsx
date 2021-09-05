@@ -4,6 +4,7 @@ import { Htag, MessageList, Pagination } from '../../../components';
 import { IMessage } from '../../../interfaces/message.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 import { AppConstants } from '../../../infrastructure/app.constants';
+import cookieCutter from 'cookie-cutter';
 
 function Messages(): JSX.Element {
 	const [messagesState, setMessagesState] = useState<IMessage[]>([]);
@@ -11,7 +12,6 @@ function Messages(): JSX.Element {
 	const [direction, setDirection] = useState('Asc');
 	const [messagesPerPage] = useState(AppConstants.MESSAGES_PER_PAGE);
 
-	// Get current messages
 	let currentMessages = messagesState;
 	if (currentMessages.length > 0) {
 		const indexOfLastMessage = currentPage * messagesPerPage;
@@ -19,32 +19,76 @@ function Messages(): JSX.Element {
 		currentMessages = messagesState.slice(indexOfFirstMessage, indexOfLastMessage);
 	}
 
-	// Change page
 	const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
 	useEffect(() => {
-		const data = localStorage.getItem('userData');
-		if (!data) {
+		getMessages();
+	}, []);
+
+	async function getMessages() {
+		try {
+			if (!getUserData()) {
+				throw new Error('No auth data');
+			}
+
+			let res = await fetch(AppConstants.API_BASE_URL + '/api/messages', {
+				method: "GET",
+				headers: { "Authorization": "Bearer " + getUserData().access_token },
+			});
+
+			if (res.status == 401) {
+				throw new Error('User unauthorized');
+			}
+
+			if (res.status == 403) { // Access_token has expired
+				const cookieUpdated = await updateCookies();
+				if (cookieUpdated) {
+					// try to get messages again with new access_token
+					res = await fetch(AppConstants.API_BASE_URL + '/api/messages', {
+						method: "GET",
+						headers: { "Authorization": "Bearer " + getUserData().access_token },
+					});
+				} else {
+					throw new Error('Failed to update cookie throw refresh_token');
+				}
+			}
+			const messages = await res.json();
+			setMessagesState(messages);
+		} catch (e) {
+			console.log(e.message);
 			Router.push('/login');
 		}
+	}
 
-		const token = data && JSON.parse(data).access_token;
-		fetch(AppConstants.API_BASE_URL + '/api/messages', {
-			method: "GET",
-			headers: { "Authorization": "Bearer " + token },
-		})
-			.then(res => {
-				return res.json();
-			})
-			.then(mes => {
-				if (mes.statusCode == 401) {
-					// here is the point to refresh access_token
-					Router.push('/login');
-				} else {
-					setMessagesState(mes);
-				}
+	function getUserData() {
+		const authData = cookieCutter.get('auth');
+		if (!authData) {
+			return undefined;
+		}
+		return JSON.parse(authData);
+	}
+
+	async function updateCookies() {
+		let isCookieUpdated = false;
+		try {
+			const refreshToken = { token: getUserData().refresh_token };
+			// Unset auth-cookie if exists
+			cookieCutter.set('auth', '', { expires: new Date(0) });
+			// Try to update cookie throw refresh_token
+			const res = await fetch(AppConstants.API_BASE_URL + '/api/auth/refresh', {
+				method: "POST",
+				body: JSON.stringify(refreshToken),
 			});
-	}, []);
+			if (res.ok) {
+				const data = await res.json();
+				cookieCutter.set('auth', JSON.stringify(data));
+				isCookieUpdated = true;
+			}
+		} catch (e) {
+			isCookieUpdated = false;
+		}
+		return isCookieUpdated;
+	}
 
 	// Sort messages
 	const sortMessagesByName = () => {

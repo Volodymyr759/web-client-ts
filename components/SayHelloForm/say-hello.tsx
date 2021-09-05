@@ -11,15 +11,11 @@ export const SayHelloForm = (): JSX.Element => {
 	const [radioEmailPhone, setRadioEmailPhone] = useState(true);
 
 	const submitHandler = async (message: IMessage): Promise<void> => {
-
-		console.log("Message: ", message);
 		const data = localStorage.getItem('userData');
 		if (!data) {
 			Router.push('/login');
 		}
-
 		const token = data && JSON.parse(data).access_token;
-
 		const res = await fetch(AppConstants.API_BASE_URL + '/api/messages', {
 			method: "POST",
 			headers: {
@@ -28,9 +24,10 @@ export const SayHelloForm = (): JSX.Element => {
 			},
 			body: JSON.stringify(message)
 		});
-
 		if (res.ok) {
 			alert('Message has been created.');
+		} else if (res.status == 401) {
+			Router.push('/login');
 		} else {
 			alert('Sending error...');
 		}
@@ -78,12 +75,9 @@ export const SayHelloForm = (): JSX.Element => {
 						}
 						onSubmit={
 							(values, { setSubmitting, resetForm }) => {
-								setTimeout(() => {
-									alert('Values: ' + values);
-									submitHandler(values);
-									resetForm();
-									setSubmitting(false);
-								}, 3000);
+								submitHandler(values);
+								resetForm();
+								setSubmitting(false);
 							}
 						}
 					>
@@ -140,7 +134,7 @@ export const SayHelloForm = (): JSX.Element => {
 					</Formik>
 
 				</div>
-				<div>
+				<div style={{ margin: 'auto' }}>
 					<img src="/contact-us.jpeg" />
 				</div>
 			</div>

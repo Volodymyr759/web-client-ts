@@ -18,6 +18,10 @@
 	-webkit-text-fill-color: transparent;
 }
 
+.bubbleheader p {
+	margin-top: 1rem;
+}
+
 .bubblespan {
 	width: 100%;
 

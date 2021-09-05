@@ -6,7 +6,7 @@ export const Header = ({ ...props }: HeaderProps): JSX.Element => {
 		<div className={styles.navbarwrapper} {...props}>
 			<a className={styles.hamburger} data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
 			<div className="collapse" id="collapseExample">
-				<div className="navbar-collapse text-center collapse show" id="mainNavbar">
+				<div className="navbar-collapse text-left collapse show" id="mainNavbar" style={{ backgroundColor: 'white', padding: '0 20px' }}>
 					<ul className="navbar-nav justify-content-between">
 						<li className="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home active menu-item-31 nav-item">
 							<a href="/" className="nav-link" aria-current="page">
