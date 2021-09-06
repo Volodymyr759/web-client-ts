@@ -2,7 +2,7 @@ import cookieCutter from 'cookie-cutter';
 import { AppConstants } from "../infrastructure/app.constants";
 import { IJwtData } from "../interfaces/jwt-object.interface";
 
-export async function useHttp(jwtObjext: IJwtData | null, endPoint: string, method = "GET", body?: string | null) {
+export async function useHttp(jwtObjext: IJwtData | null, endPoint: string, method = "GET", body?: string | null): Promise<Record<string, unknown>> {
 	let accessToken = '';
 	let refreshToken = '';
 	let res;
