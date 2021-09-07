@@ -1,13 +1,14 @@
-import Router from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Htag, MessageList, Pagination } from '../../../components';
 import { IMessage } from '../../../interfaces/message.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 import { AppConstants } from '../../../infrastructure/app.constants';
-import cookieCutter from 'cookie-cutter';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { ParsedUrlQuery } from 'querystring';
+import { useHttp } from '../../../hooks/use-http.hook';
 
-function Messages(): JSX.Element {
-	const [messagesState, setMessagesState] = useState<IMessage[]>([]);
+function Messages(props: { messages: IMessage[] }): JSX.Element {
+	const [messagesState, setMessagesState] = useState<IMessage[]>(props.messages);
 	const [currentPage, setCurrentPage] = useState(AppConstants.MESSAGES_CURRENT_PAGE_DEFAULT);
 	const [direction, setDirection] = useState('Asc');
 	const [messagesPerPage] = useState(AppConstants.MESSAGES_PER_PAGE);
@@ -20,75 +21,6 @@ function Messages(): JSX.Element {
 	}
 
 	const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-
-	useEffect(() => {
-		getMessages();
-	}, []);
-
-	async function getMessages() {
-		try {
-			if (!getUserData()) {
-				throw new Error('No auth data');
-			}
-
-			let res = await fetch(AppConstants.API_BASE_URL + '/api/messages', {
-				method: "GET",
-				headers: { "Authorization": "Bearer " + getUserData().access_token },
-			});
-
-			if (res.status == 401) {
-				throw new Error('User unauthorized');
-			}
-
-			if (res.status == 403) { // Access_token has expired
-				const cookieUpdated = await updateCookies();
-				if (cookieUpdated) {
-					// try to get messages again with new access_token
-					res = await fetch(AppConstants.API_BASE_URL + '/api/messages', {
-						method: "GET",
-						headers: { "Authorization": "Bearer " + getUserData().access_token },
-					});
-				} else {
-					throw new Error('Failed to update cookie throw refresh_token');
-				}
-			}
-			const messages = await res.json();
-			setMessagesState(messages);
-		} catch (e) {
-			console.log(e.message);
-			Router.push('/login');
-		}
-	}
-
-	function getUserData() {
-		const authData = cookieCutter.get('auth');
-		if (!authData) {
-			return undefined;
-		}
-		return JSON.parse(authData);
-	}
-
-	async function updateCookies() {
-		let isCookieUpdated = false;
-		try {
-			const refreshToken = { token: getUserData().refresh_token };
-			// Unset auth-cookie if exists
-			cookieCutter.set('auth', '', { expires: new Date(0) });
-			// Try to update cookie throw refresh_token
-			const res = await fetch(AppConstants.API_BASE_URL + '/api/auth/refresh', {
-				method: "POST",
-				body: JSON.stringify(refreshToken),
-			});
-			if (res.ok) {
-				const data = await res.json();
-				cookieCutter.set('auth', JSON.stringify(data));
-				isCookieUpdated = true;
-			}
-		} catch (e) {
-			isCookieUpdated = false;
-		}
-		return isCookieUpdated;
-	}
 
 	// Sort messages
 	const sortMessagesByName = () => {
@@ -114,29 +46,31 @@ function Messages(): JSX.Element {
 		});
 	}
 
-	return (
-		<>
-			<Htag tag="h3">Messages</Htag>
-			<MessageList messages={currentMessages} sortByName={sortMessagesByName} />
-			<Pagination itemsPerPage={messagesPerPage} totalItems={messagesState.length} paginate={paginate} />
-		</>
-	);
+	return <>
+		<Htag tag="h3">Messages</Htag>
+		<MessageList messages={currentMessages} sortByName={sortMessagesByName} />
+		<Pagination itemsPerPage={messagesPerPage} totalItems={messagesState.length} paginate={paginate} />
+	</>;
 }
 
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext<ParsedUrlQuery>) => {
+	const authCookie = context.req.cookies.auth;
+	let messages;
+	try {
+		if (!authCookie) {
+			throw new Error('No auth data.');
+		}
+		messages = await useHttp(JSON.parse(authCookie), '/api/messages', "GET", null);
+		return messages && { props: { messages } };
+	} catch (e) {
+		console.log(e.message);
+		return {
+			redirect: {
+				destination: '/login',
+				permanent: false
+			}
+		};
+	}
+};
+
 export default withAdminLayout(Messages);
-
-// Server Side Rendering
-// export const getStaticProps: GetStaticProps = async () => {
-// 	const res = await fetch(process.env.PUBLIC_DOMAIN + '/api/messages');
-// 	const messages = await res.json();
-
-// 	return {
-// 		props: {
-// 			messages
-// 		}
-// 	};
-// };
-
-// interface IMessageProps extends Record<string, unknown> {
-// 	messages: IMessage[];
-// }
