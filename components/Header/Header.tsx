@@ -4,7 +4,6 @@ import styles from './header.module.css';
 import { AuthContext } from "../../context/auth-context";
 import Router from "next/router";
 
-
 export const Header = ({ ...props }: HeaderProps): JSX.Element => {
 	const { email, logOut } = useContext(AuthContext);
 	const [emailState, setEmailState] = useState(email);
