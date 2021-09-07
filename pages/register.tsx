@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { P, TextInput } from "../components";
+import { P, TextCard, TextInput } from "../components";
 import { withLayout } from "../layouts/public/Layout";
 import { ILoginUser } from '../interfaces/login-user.interface';
 
@@ -16,6 +17,12 @@ const submitHandler = async (user: ILoginUser): Promise<void> => {
 };
 
 function Register(): JSX.Element {
+	const [showModal, setShowModal] = useState(false);
+
+	const modalHandler = (show: boolean) => {
+		setShowModal(show);
+	};
+
 	return (
 		<>
 			<Head>
@@ -28,7 +35,6 @@ function Register(): JSX.Element {
 				<P appearance="centered">
 					<strong>Create Account</strong>
 				</P>
-				<br />
 				<Formik
 					initialValues={{
 						login: '',
@@ -103,8 +109,24 @@ function Register(): JSX.Element {
 
 					</div>
 				</div>
+				{showModal ?
+					<TextCard>
+						<p>
+							We will collect and use your personal information (which may include cookies we collect through your
+							use of <a href="www.eivolo.com">eivolo.com</a> and our other websites) to give you a personalised user experience.
+						</p>
+						<p>
+							We may also contact you to promote our services or those of third parties.
+							Our Privacy Policy further explains how we collect, use and disclose personal information and how to access,
+							correct or complain about the handling of personal information.
+						</p>
+						<div className="col text-center">
+							<button className="btn btn-primary" style={{ margin: 'auto' }} onClick={() => { modalHandler(false); }}>Close</button>
+						</div>
+					</TextCard>
+					: null}
 				<P appearance="centered">
-					<span><a href="/register">Personal Information Collection Statement.</a></span>
+					<span><a href="/register" onClick={(e) => { e.preventDefault(); modalHandler(true); }}>Personal Information Collection Statement.</a></span>
 				</P>
 				<br />
 			</section >
