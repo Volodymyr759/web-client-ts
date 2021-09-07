@@ -1,15 +1,15 @@
-import { createContext, PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import { createContext } from 'react';
+import Cookies from 'universal-cookie';
 import { IAuthContext } from '../interfaces/auth.interface';
 
-export const AuthContext = createContext<IAuthContext>({ token: '', user: { email: '', roles: [] } });
+const cookies = new Cookies();
+const authCookie = cookies.get('auth');
 
-export const AuthContextProvider = ({ token, user, children }: PropsWithChildren<IAuthContext>): JSX.Element => {
-	// const [jwttoken, setJwtToken] = useState<string>(token);
-
-	return (
-		<AuthContext.Provider value={{ token, user }}>
-			{children}
-		</AuthContext.Provider>
-	);
-};
-
+export const AuthContext = createContext<IAuthContext>(
+	{
+		email: authCookie ? authCookie.email : null,
+		logOut: () => {
+			cookies.remove('auth');
+		}
+	}
+);

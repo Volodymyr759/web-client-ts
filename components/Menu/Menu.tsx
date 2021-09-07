@@ -1,15 +1,17 @@
+import { useContext, useState } from 'react';
 import Router from 'next/router';
 import Link from 'next/link';
 import styles from './Menu.module.css';
-import { useState } from 'react';
+import { AuthContext } from '../../context/auth-context';
 
 export const Menu = (): JSX.Element => {
-	const userFromStorage = typeof window !== 'undefined' ? localStorage.getItem('user') : null;
-	const [user, setUser] = useState(userFromStorage);
+	const { email, logOut } = useContext(AuthContext);
+
+	const [emailState, setEmailState] = useState(email);
 
 	const logout = () => {
-		localStorage.removeItem('user');
-		setUser(null);
+		logOut();
+		setEmailState(null);
 	};
 
 	return (
@@ -64,19 +66,22 @@ export const Menu = (): JSX.Element => {
 					<a>Success Stories</a>
 				</Link>
 			</li>
-			{!user &&
+			{
+				!emailState &&
 				<li onClick={() => { Router.push('/login'); }}>
 					<Link href="/login">
 						<a>LogIn/SignUp</a>
 					</Link>
-
-				</li>}
-			{user &&
+				</li>
+			}
+			{
+				emailState &&
 				<li onClick={logout}>
 					<Link href="/">
 						<a>Log Out</a>
 					</Link>
-				</li>}
+				</li>
+			}
 		</ul >
 	);
 };
