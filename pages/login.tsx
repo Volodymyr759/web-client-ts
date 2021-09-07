@@ -2,12 +2,12 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-// import cookieCutter from 'cookie-cutter';
 import Cookies from 'universal-cookie';
-import { P, TextInput } from "../components";
+import { P, TextCard, TextInput } from "../components";
 import { withLayout } from "../layouts/public/Layout";
 import { ILoginUser } from '../interfaces/login-user.interface';
 import { useHttp } from '../hooks/use-http.hook';
+import { useState } from 'react';
 
 const submitHandler = async (user: ILoginUser): Promise<void> => {
 	const cookies = new Cookies();
@@ -27,6 +27,12 @@ const submitHandler = async (user: ILoginUser): Promise<void> => {
 };
 
 function Login(): JSX.Element {
+	const [showModal, setShowModal] = useState(false);
+
+	const modalHandler = (show: boolean) => {
+		setShowModal(show);
+	};
+
 	return (
 		<>
 			<Head>
@@ -39,7 +45,6 @@ function Login(): JSX.Element {
 				<P appearance="centered">
 					<strong>Sign in</strong>
 				</P>
-				<br />
 				<Formik
 					initialValues={{
 						login: '',
@@ -119,10 +124,37 @@ function Login(): JSX.Element {
 				</div>
 
 				<P appearance="centered">
-					<a href="/register" className="link-base">Not signed up? Create an account.</a>
+					<a
+						href="/register"
+						className="link-base"
+					>
+						Not signed up? Create an account.
+					</a>
 				</P>
+				{showModal ?
+					<TextCard>
+						<p>
+							We will collect and use your personal information (which may include cookies we collect through your
+							use of <a href="www.eivolo.com">eivolo.com</a> and our other websites) to give you a personalised user experience.
+						</p>
+						<p>
+							We may also contact you to promote our services or those of third parties.
+							Our Privacy Policy further explains how we collect, use and disclose personal information and how to access,
+							correct or complain about the handling of personal information.
+						</p>
+						<div className="col text-center">
+							<button className="btn btn-primary" style={{ margin: 'auto' }} onClick={() => { modalHandler(false); }}>Close</button>
+						</div>
+					</TextCard>
+					: null}
 				<P appearance="centered">
-					<span><a href="/login">Personal Information Collection Statement.</a></span>
+					<span>
+						<a href="/login"
+							onClick={(e) => { e.preventDefault(); modalHandler(true); }}
+						>
+							Personal Information Collection Statement.
+						</a>
+					</span>
 				</P>
 				<br />
 			</section >

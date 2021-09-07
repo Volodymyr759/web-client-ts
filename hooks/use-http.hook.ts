@@ -7,14 +7,12 @@ export async function useHttp(jwtObjext: IJwtData | null, endPoint: string, meth
 	let refreshToken = '';
 	let res;
 	try {
-		if (jwtObjext) {
-			accessToken = jwtObjext.access_token;
-			refreshToken = jwtObjext.refresh_token;
-		}
 		if (!body) {
 			body = '';
 		}
 		if (jwtObjext) {
+			accessToken = jwtObjext.access_token;
+			refreshToken = jwtObjext.refresh_token;
 			res = await fetch(AppConstants.API_BASE_URL + endPoint, {
 				method: method,
 				headers: { "Authorization": "Bearer " + accessToken },

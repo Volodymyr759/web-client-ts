@@ -2,34 +2,51 @@ import { useState } from 'react';
 import Router from 'next/router';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
+import Cookies from 'universal-cookie';
 import { FormLabel, Htag, TextInput } from '../../components';
-import { AppConstants } from '../../infrastructure/app.constants';
+// import { AppConstants } from '../../infrastructure/app.constants';
 import { IMessage } from '../../interfaces/message.interface';
 import styles from './say-hello.module.css';
+import { useHttp } from '../../hooks/use-http.hook';
 
 export const SayHelloForm = (): JSX.Element => {
 	const [radioEmailPhone, setRadioEmailPhone] = useState(true);
 
 	const submitHandler = async (message: IMessage): Promise<void> => {
-		const data = localStorage.getItem('userData');
-		if (!data) {
-			Router.push('/login');
-		}
-		const token = data && JSON.parse(data).access_token;
-		const res = await fetch(AppConstants.API_BASE_URL + '/api/messages', {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				"Authorization": "Bearer " + token
-			},
-			body: JSON.stringify(message)
-		});
-		if (res.ok) {
-			alert('Message has been created.');
-		} else if (res.status == 401) {
-			Router.push('/login');
-		} else {
+		// const data = localStorage.getItem('userData');
+		// if (!data) {
+		// 	Router.push('/login');
+		// }
+		// const token = data && JSON.parse(data).access_token;
+		// const res = await fetch(AppConstants.API_BASE_URL + '/api/messages', {
+		// 	method: "POST",
+		// 	headers: {
+		// 		"Content-Type": "application/json",
+		// 		"Authorization": "Bearer " + token
+		// 	},
+		// 	body: JSON.stringify(message)
+		// });
+		// if (res.ok) {
+		// 	alert('Message has been created.');
+		// } else if (res.status == 401) {
+		// 	Router.push('/login');
+		// } else {
+		// 	alert('Sending error...');
+		// }
+		const cookies = new Cookies();
+		const authCookie = cookies.get('auth');
+		try {
+			console.log('Cookie', authCookie);
+			if (!authCookie) {
+				Router.push('/login');
+			}
+			const data = await useHttp(JSON.parse(authCookie), '/api/messages', 'POST', JSON.stringify(message));
+			if (data) {
+				alert('Message has been sent');
+			}
+		} catch (e) {
 			alert('Sending error...');
+			console.log(e.message);
 		}
 	};
 
