@@ -2,21 +2,22 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import cookieCutter from 'cookie-cutter';
+// import cookieCutter from 'cookie-cutter';
+import Cookies from 'universal-cookie';
 import { P, TextInput } from "../components";
 import { withLayout } from "../layouts/public/Layout";
 import { ILoginUser } from '../interfaces/login-user.interface';
 import { useHttp } from '../hooks/use-http.hook';
 
 const submitHandler = async (user: ILoginUser): Promise<void> => {
-	// Unset auth-cookie if exists
-	cookieCutter.set('auth', '', { expires: new Date(0) });
-
+	const cookies = new Cookies();
+	cookies.remove('auth');
 	try {
 		const data = await useHttp(null, '/api/auth/login', 'POST', JSON.stringify(user));
-		cookieCutter.set('auth', JSON.stringify(data), {
-			expires: 3600,
-			secure: true,
+		cookies.set('auth', data, {
+			path: '/',
+			maxAge: 2592000,
+			// httpOnly: true,
 		});
 		alert('User has been logged in.');
 	} catch (e) {
