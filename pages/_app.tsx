@@ -1,7 +1,8 @@
 import { AppProps } from 'next/dist/next-server/lib/router/router';
 import Head from 'next/head';
-import { useAuth } from '../hooks/auth.hook';
-import { AuthContext } from '../context/auth-context';
+import NextNprogress from 'nextjs-progressbar';
+// import { useAuth } from '../hooks/auth.hook';
+// import { AuthContext } from '../context/auth-context';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
@@ -17,6 +18,13 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <link href="/css/all.css" type="text/css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
       </Head>
+      <NextNprogress
+        color="yellow"
+        startPosition={0.3}
+        stopDelayMs={200}
+        height={2}
+        showOnShallow={true}
+      />
       <Component {...pageProps} />
     </>);
 }

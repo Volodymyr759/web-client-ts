@@ -3,7 +3,7 @@ import { Htag, MessageList, Pagination } from '../../../components';
 import { IMessage } from '../../../interfaces/message.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 import { AppConstants } from '../../../infrastructure/app.constants';
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'; //GetServerSidePropsContext
 import { ParsedUrlQuery } from 'querystring';
 import { useHttp } from '../../../hooks/use-http.hook';
 
@@ -55,13 +55,18 @@ function Messages(props: { messages: IMessage[] }): JSX.Element {
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext<ParsedUrlQuery>) => {
 	const authCookie = context.req.cookies.auth;
-	let messages;
 	try {
 		if (!authCookie) {
 			throw new Error('No auth data.');
 		}
-		messages = await useHttp(JSON.parse(authCookie), '/api/messages', "GET", null);
-		return messages && { props: { messages } };
+		const messages = await useHttp('/api/messages', "GET", JSON.parse(authCookie).access_token, '');
+		if (messages.splice) {
+			return {
+				props: { messages }
+			};
+		} else {
+			throw new Error('User unauthorized');
+		}
 	} catch (e) {
 		console.log(e.message);
 		return {
