@@ -6,14 +6,19 @@ import Cookies from 'universal-cookie';
 import { P, TextCard, TextInput } from "../components";
 import { withLayout } from "../layouts/public/Layout";
 import { ILoginUser } from '../interfaces/login-user.interface';
-import { useHttp } from '../hooks/use-http.hook';
 import { useState } from 'react';
+import { AppConstants } from '../infrastructure/app.constants';
 
 const submitHandler = async (user: ILoginUser): Promise<void> => {
 	const cookies = new Cookies();
 	cookies.remove('auth');
 	try {
-		const data = await useHttp(null, '/api/auth/login', 'POST', JSON.stringify(user));
+		const res = await fetch(AppConstants.API_BASE_URL + '/api/auth/login', {
+			method: 'POST',
+			headers: { "Content-type": "application/json" },
+			body: JSON.stringify(user)
+		});
+		const data = await res.json();
 		cookies.set('auth', data, {
 			path: '/',
 			maxAge: 2592000,
@@ -27,19 +32,16 @@ const submitHandler = async (user: ILoginUser): Promise<void> => {
 };
 
 function Login(): JSX.Element {
-	const [showModal, setShowModal] = useState(false);
-
-	const modalHandler = (show: boolean) => {
-		setShowModal(show);
+	const [showInfo, setShowInfo] = useState(false);
+	const infoTextHandler = (show: boolean) => {
+		setShowInfo(show);
 	};
-
 	return (
 		<>
 			<Head>
 				<title>Login</title>
 				<meta name="keywords" content="Login" />
 			</Head>
-
 			<section className="login-form-container">
 				<br />
 				<P appearance="centered">
@@ -131,26 +133,23 @@ function Login(): JSX.Element {
 						Not signed up? Create an account.
 					</a>
 				</P>
-				{showModal ?
+				{showInfo ?
 					<TextCard>
-						<p>
-							We will collect and use your personal information (which may include cookies we collect through your
-							use of <a href="www.eivolo.com">eivolo.com</a> and our other websites) to give you a personalised user experience.
-						</p>
-						<p>
-							We may also contact you to promote our services or those of third parties.
-							Our Privacy Policy further explains how we collect, use and disclose personal information and how to access,
-							correct or complain about the handling of personal information.
-						</p>
-						<div className="col text-center">
-							<button className="btn btn-primary" style={{ margin: 'auto' }} onClick={() => { modalHandler(false); }}>Close</button>
+						We will collect and use your personal information (which may include cookies we collect through your
+						use of <a href="www.eivolo.com">eivolo.com</a> and our other websites) to give you a personalised user experience.
+						<br />
+						We may also contact you to promote our services or those of third parties.
+						Our Privacy Policy further explains how we collect, use and disclose personal information and how to access,
+						correct or complain about the handling of personal information.
+						<div className="col text-center" style={{ marginTop: '30px' }}>
+							<button className="btn btn-primary" style={{ margin: 'auto' }} onClick={() => { infoTextHandler(false); }}>Close</button>
 						</div>
 					</TextCard>
 					: null}
 				<P appearance="centered">
 					<span>
 						<a href="/login"
-							onClick={(e) => { e.preventDefault(); modalHandler(true); }}
+							onClick={(e) => { e.preventDefault(); infoTextHandler(true); }}
 						>
 							Personal Information Collection Statement.
 						</a>

@@ -1,52 +1,31 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Router from 'next/router';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import Cookies from 'universal-cookie';
+// import Cookies from 'universal-cookie';
 import { FormLabel, Htag, TextInput } from '../../components';
 // import { AppConstants } from '../../infrastructure/app.constants';
 import { IMessage } from '../../interfaces/message.interface';
 import styles from './say-hello.module.css';
 import { useHttp } from '../../hooks/use-http.hook';
+import { AuthContext } from '../../context/auth-context';
 
 export const SayHelloForm = (): JSX.Element => {
 	const [radioEmailPhone, setRadioEmailPhone] = useState(true);
+	const { access_token } = useContext(AuthContext);
 
 	const submitHandler = async (message: IMessage): Promise<void> => {
-		// const data = localStorage.getItem('userData');
-		// if (!data) {
-		// 	Router.push('/login');
-		// }
-		// const token = data && JSON.parse(data).access_token;
-		// const res = await fetch(AppConstants.API_BASE_URL + '/api/messages', {
-		// 	method: "POST",
-		// 	headers: {
-		// 		"Content-Type": "application/json",
-		// 		"Authorization": "Bearer " + token
-		// 	},
-		// 	body: JSON.stringify(message)
-		// });
-		// if (res.ok) {
-		// 	alert('Message has been created.');
-		// } else if (res.status == 401) {
-		// 	Router.push('/login');
-		// } else {
-		// 	alert('Sending error...');
-		// }
-		const cookies = new Cookies();
-		const authCookie = cookies.get('auth');
 		try {
-			console.log('Cookie', authCookie);
-			if (!authCookie) {
-				Router.push('/login');
-			}
-			const data = await useHttp(JSON.parse(authCookie), '/api/messages', 'POST', JSON.stringify(message));
-			if (data) {
+			const data = await useHttp('/api/messages', 'POST', access_token, JSON.stringify(message));
+			console.log("data: ", data);
+			if (!data) {
+				throw new Error('Sending error...');
+			} else {
 				alert('Message has been sent');
 			}
 		} catch (e) {
-			alert('Sending error...');
 			console.log(e.message);
+			Router.push('/login');
 		}
 	};
 
@@ -149,7 +128,6 @@ export const SayHelloForm = (): JSX.Element => {
 							</div>
 						)}
 					</Formik>
-
 				</div>
 				<div style={{ margin: 'auto' }}>
 					<img src="/contact-us.jpeg" />

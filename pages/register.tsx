@@ -111,16 +111,13 @@ function Register(): JSX.Element {
 				</div>
 				{showModal ?
 					<TextCard>
-						<p>
-							We will collect and use your personal information (which may include cookies we collect through your
-							use of <a href="www.eivolo.com">eivolo.com</a> and our other websites) to give you a personalised user experience.
-						</p>
-						<p>
-							We may also contact you to promote our services or those of third parties.
-							Our Privacy Policy further explains how we collect, use and disclose personal information and how to access,
-							correct or complain about the handling of personal information.
-						</p>
-						<div className="col text-center">
+						We will collect and use your personal information (which may include cookies we collect through your
+						use of <a href="www.eivolo.com">eivolo.com</a> and our other websites) to give you a personalised user experience.
+						<br />
+						We may also contact you to promote our services or those of third parties.
+						Our Privacy Policy further explains how we collect, use and disclose personal information and how to access,
+						correct or complain about the handling of personal information.
+						<div className="col text-center" style={{ marginTop: '30px' }}>
 							<button className="btn btn-primary" style={{ margin: 'auto' }} onClick={() => { modalHandler(false); }}>Close</button>
 						</div>
 					</TextCard>
