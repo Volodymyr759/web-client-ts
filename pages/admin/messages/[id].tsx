@@ -3,7 +3,7 @@ import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { IMessage } from '../../../interfaces/message.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
-import { FormLabel, Htag, TextInput } from '../../../components';
+import { Htag, TextInputAdmin } from '../../../components';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { useHttp } from '../../../hooks/use-http.hook';
@@ -76,63 +76,64 @@ function Message(props: { message: IMessage }): JSX.Element {
 				}
 			>
 				{props => (
-					<div className="formgroup">
-						<Form>
-							<TextInput label="Full Name:" name='fullName' type='text' />
-							<TextInput label="Company:" name='company' type='text' />
-							<br />
-							<div>
-								<p>Select A Preferable way of communication:</p>
-								<div role="group" aria-labelledby="my-radio-group">
-									<p>
-										<Field
-											type="radio"
-											name="Email"
-											value="Email"
-											onClick={() => { setRadioEmailPhone(true); }}
-											checked={radioEmailPhone} />
-										Email
-									</p>
-									<p>
-										<Field
-											type="radio"
-											name="Phone"
-											value="Phone"
-											onClick={() => { setRadioEmailPhone(!radioEmailPhone); }}
-											checked={!radioEmailPhone} />
-										Phone
-									</p>
-								</div>
+					<Form className="row">
+						<TextInputAdmin label="Full Name:" name='fullName' type='text' />
+						<TextInputAdmin label="Company:" name='company' type='text' />
+						<div className="w-100 p-3">
+							<p>Preffered communication way:</p>
+							<div className="form-check">
+								<Field
+									className="form-check-input"
+									type="radio"
+									name="Email"
+									value="Email"
+									onClick={() => { setRadioEmailPhone(true); }}
+									checked={radioEmailPhone} />
+								<label className="form-check-label" htmlFor="Email">
+									Email
+								</label>
 							</div>
+							<div className="form-check">
+								<Field
+									className="form-check-input"
+									type="radio"
+									name="Phone"
+									value="Phone"
+									onClick={() => { setRadioEmailPhone(!radioEmailPhone); }}
+									checked={!radioEmailPhone} />
+								<label className="form-check-label" htmlFor="Phone">
+									Phone
+								</label>
+							</div>
+						</div>
+						<br />
+						<TextInputAdmin label="Email:" name='email' type='email' />
+						<TextInputAdmin label="Phone Number:" name='phoneNumber' type='text' />
 
-							<TextInput label="Email:" name='email' type='email' />
-							<TextInput label="Phone Number:" name='phoneNumber' type='text' />
-
-							<FormLabel>Message:</FormLabel>
+						<div className="w-100 p-3">
+							<label htmlFor="messageText" className="form-label">Message:</label>
 							<Field
 								name="messageText" as="textarea"
-								className="forminput"
+								className="form-control"
 								cols={55}
 								rows={5}
 								minLength={10}
 								maxLength={500}
 							/>
-							<p>
-								<div className="col text-center" style={{ marginTop: '30px' }}>
-									<button className="btn btn-primary" type="submit">
-										{props.isSubmitting ? 'Loading' : 'Save'}
-									</button>
-								</div>
-							</p>
-						</Form>
-					</div>
+						</div>
+						<br />
+						<div className="col-12">
+							<Link href="/admin/messages">
+								<a className="btn btn-secondary">Go Back</a>
+							</Link>
+							<span> </span>
+							<button type="submit" className="btn btn-primary">
+								{props.isSubmitting ? 'Loading' : 'Save'}
+							</button>
+						</div>
+					</Form>
 				)}
 			</Formik>
-			<p>
-				<Link href="/admin/messages">
-					<a><strong>Back To All Messages</strong></a>
-				</Link>
-			</p>
 		</>
 	);
 }
