@@ -12,6 +12,7 @@ export const AuthContext = createContext<IAuthContext>(
 		token_type: authCookie ? authCookie.token_type : '',
 		refresh_token: authCookie ? authCookie.refresh_token : '',
 		email: authCookie ? authCookie.email : null,
+		roles: authCookie ? authCookie.roles : null,
 		logOut: () => {
 			cookies.remove('auth');
 		}
