@@ -6,7 +6,4 @@ export interface IMessage {
 	email: string;
 	phoneNumber: string;
 	messageText: string;
-	// __v?: number;
-	// createdAt?: Date;
-	// updatedAt?: Date;
 }

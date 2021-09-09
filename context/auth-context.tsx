@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 import Cookies from 'universal-cookie';
-import { IAuthContext } from '../interfaces/auth.interface';
+import { IAuthContext } from '../interfaces/auth-context.interface';
 
 const cookies = new Cookies();
 const authCookie = cookies.get('auth');

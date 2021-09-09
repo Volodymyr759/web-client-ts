@@ -1,8 +1,3 @@
-export interface IUser {
-	email: string;
-	roles: string[];
-}
-
 export interface IAuthContext {
 	access_token: string;
 	expires_in: number;

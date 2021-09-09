@@ -24,4 +24,5 @@ export * from './TextCard/text-card';
 export * from './TextInput/text-input';
 export * from './TextInputAdmin/text-input-admin';
 export * from './TitleCard/title-card';
+export * from './UserList/user-list';
 
