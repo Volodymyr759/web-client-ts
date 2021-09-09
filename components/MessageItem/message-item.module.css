@@ -10,7 +10,7 @@
 .delete::before {
 	content: "\f2ed";
 
-	color: red;
+	color: gray;
 
 	font-family: "Font Awesome 5 Free";
 	font-weight: 900;

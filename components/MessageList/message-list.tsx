@@ -5,16 +5,16 @@ import { MessageItem } from '../MessageItem/message-item';
 export const MessageList = ({ messages, sortByName }: MessageListProps): JSX.Element => {
 	return (
 		<div>
-			<table>
+			<table className="table">
 				<thead>
 					<tr>
-						<th><span>Name </span><a className={styles.sorting} onClick={sortByName}></a></th>
-						<th>Company</th>
-						<th>Pref. Comm.</th>
-						<th>Email</th>
-						<th>Phone</th>
-						<th>Text</th>
-						<th>Options</th>
+						<th scope="col"><span>Name </span><a className={styles.sorting} onClick={sortByName}></a></th>
+						<th scope="col">Company</th>
+						<th scope="col">Pref. Comm.</th>
+						<th scope="col">Email</th>
+						<th scope="col">Phone</th>
+						<th scope="col">Text</th>
+						<th scope="col">Options</th>
 					</tr>
 				</thead>
 				<tbody>

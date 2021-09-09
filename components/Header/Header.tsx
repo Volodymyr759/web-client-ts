@@ -39,31 +39,31 @@ export const Header = ({ ...props }: HeaderProps): JSX.Element => {
 								<a href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className="dropdown-toggle nav-link" id="menu-item-dropdown-26">
 									<span>Services</span>
 								</a>
-								<ul className="dropdown-menu" aria-labelledby="menu-item-dropdown-26">
+								<ul className="dropdown-menu" style={{ padding: '0 20px' }}>
 									<li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-142 nav-item">
 										<Link href="/outsourcing" >
-											<a className="dropdown-item">
+											<a className="nav-link">
 												<span>Outsourcing</span>
 											</a>
 										</Link>
 									</li>
 									<li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-141 nav-item">
 										<Link href="/web-development/" >
-											<a className="dropdown-item">
+											<a className="nav-link">
 												<span>Web Development</span>
 											</a>
 										</Link>
 									</li>
 									<li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-140 nav-item">
 										<Link href="/mobile-development/" >
-											<a className="dropdown-item">
+											<a className="nav-link">
 												<span>Mobile Development</span>
 											</a>
 										</Link>
 									</li>
 									<li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-139 nav-item">
 										<Link href="/security-auditing" >
-											<a className="dropdown-item">
+											<a className="nav-link">
 												<span>Security Auditing</span>
 											</a>
 										</Link>

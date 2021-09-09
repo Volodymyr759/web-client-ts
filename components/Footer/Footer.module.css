@@ -43,3 +43,10 @@
 	font-style: normal;
 	line-height: inherit;
 }
+
+@media (max-width: 992px) {
+	.footer {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+}
