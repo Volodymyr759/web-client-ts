@@ -1,39 +1,44 @@
-import Router from 'next/router';
 import { useContext, useEffect } from 'react';
+import Link from 'next/link';
+import Router from 'next/router';
 import { Htag } from '../../components';
 import { AuthContext } from '../../context/auth-context';
+import { Roles } from '../../infrastructure/roles.enum';
 import { withAdminLayout } from '../../layouts/admin/AdminLayout';
 
 function Dashboard(): JSX.Element {
-	const { email } = useContext(AuthContext);
+	const { roles } = useContext(AuthContext);
 	useEffect(() => {
-		if (!email) {
+		if (!roles.includes(Roles.Admin)) {
 			Router.push('/login');
 		}
 	}, []);
 
 	return (
 		<>
-			<Htag tag="h3">
-				<div className="card">
-					<div className="card-header">
-						Users
-					</div>
+			<Htag tag="h3">Dashboard</Htag>
+			<div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
+				<div className="card" style={{ width: '18rem' }}>
 					<div className="card-body">
-						<h5 className="card-title">List of registered users</h5>
-						<a href="/admin/users" className="btn btn-primary">Show All</a>
+						<h5 className="card-title">Users</h5>
+						<h6 className="card-subtitle mb-2 text-muted">List of registered users</h6>
+						<p className="card-text">Displays list of users with edit/delete options</p>
+						<Link href="/admin/users" >
+							<a className="card-link">Show users</a>
+						</Link>
 					</div>
 				</div>
-				<div className="card">
-					<div className="card-header">
-						Messages
-					</div>
+				<div className="card" style={{ width: '18rem' }}>
 					<div className="card-body">
-						<h5 className="card-title">List of recieved messages</h5>
-						<a href="/admin/messages" className="btn btn-primary">Show All</a>
+						<h5 className="card-title">Messages</h5>
+						<h6 className="card-subtitle mb-2 text-muted">List of recieved messages</h6>
+						<p className="card-text">Displays list of users messages</p>
+						<Link href="/admin/messages" >
+							<a className="card-link">Show messages</a>
+						</Link>
 					</div>
 				</div>
-			</Htag>
+			</div>
 		</>
 	);
 }
