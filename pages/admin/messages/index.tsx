@@ -9,9 +9,9 @@ import { useHttp } from '../../../hooks/use-http.hook';
 
 function Messages(props: { messages: IMessage[] }): JSX.Element {
 	const [messagesState, setMessagesState] = useState<IMessage[]>(props.messages);
-	const [currentPage, setCurrentPage] = useState(AppConstants.MESSAGES_CURRENT_PAGE_DEFAULT);
+	const [currentPage, setCurrentPage] = useState(AppConstants.ITEMS_CURRENT_PAGE_DEFAULT);
 	const [direction, setDirection] = useState('Asc');
-	const [messagesPerPage] = useState(AppConstants.MESSAGES_PER_PAGE);
+	const [messagesPerPage] = useState(AppConstants.ITEMS_PER_PAGE);
 
 	let currentMessages = messagesState;
 	if (currentMessages.length > 0) {

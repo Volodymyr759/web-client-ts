@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
+import { useContext, useState } from 'react';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import Router from 'next/router';
+import { ParsedUrlQuery } from 'querystring';
 import { IMessage } from '../../../interfaces/message.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 import { Htag, TextInputAdmin } from '../../../components';
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { ParsedUrlQuery } from 'querystring';
 import { useHttp } from '../../../hooks/use-http.hook';
-import { useContext, useState } from 'react';
 import { AuthContext } from '../../../context/auth-context';
-import Router from 'next/router';
 
 function Message(props: { message: IMessage }): JSX.Element {
 	const [messageState] = useState(props.message);
