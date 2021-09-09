@@ -4,6 +4,9 @@
 }
 
 .hamburger::before {
+	position: absolute;
+	right: 0;
+
 	padding: 4px 12px;
 
 	content: "\f0c9";

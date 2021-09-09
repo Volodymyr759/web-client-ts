@@ -15,10 +15,11 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="/css/all.css" type="text/css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+        <meta name="viewport" content="width=device-width, initial-scale=0.5" />
       </Head>
       <NextNprogress
         color="#6610F2"
-        startPosition={0.3}
+        startPosition={0.2}
         stopDelayMs={200}
         height={2}
         showOnShallow={true}
