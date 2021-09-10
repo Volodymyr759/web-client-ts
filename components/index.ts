@@ -1,5 +1,6 @@
 export * from './BubbleBox/bubble-box';
 export * from './CenterTextCard/center-text-card';
+export * from './DatePicker/DatePicker';
 export * from './Footer/Footer';
 export * from './FormLabel/form-label';
 export * from './Header/Header';

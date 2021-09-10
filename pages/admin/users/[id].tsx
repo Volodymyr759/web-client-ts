@@ -10,6 +10,7 @@ import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 import { Htag, TextInputAdmin } from '../../../components';
 import { useHttp } from '../../../hooks/use-http.hook';
 import { AuthContext } from '../../../context/auth-context';
+import { Roles } from '../../../infrastructure/roles.enum';
 
 function User(props: { user: IUser }): JSX.Element {
 	const [userState] = useState(props.user);
@@ -32,14 +33,11 @@ function User(props: { user: IUser }): JSX.Element {
 	return (
 		<>
 			<Htag tag="h3">User</Htag>
-			to do - format Date 'Registered/createdAt' with 'npm install date-fns' and set value to input-field
-			<br />
-			and add to b/e endPoint PUT /api/auth/[id]
 			<Formik
 				initialValues={{
 					email: props.user.email,
-					createdAt: props.user.createdAt,
-					roles: props.user.roles,
+					createdAt: new Date(props.user.createdAt),
+					roles: props.user.roles.includes(0) ? [Roles.User] : [Roles.Admin],
 				}}
 				validationSchema={Yup.object({
 					email: Yup.string()
@@ -47,9 +45,7 @@ function User(props: { user: IUser }): JSX.Element {
 						.email('Invalid email')
 						.min(4, 'Email address must be 4-30 characters')
 						.max(30, 'Email address must be 4-30 characters'),
-					createdAt: Yup.string()
-						.required('Required'),
-					roles: Yup.string()
+					roles: Yup.number()
 						.required('Required')
 				})
 				}
@@ -63,7 +59,9 @@ function User(props: { user: IUser }): JSX.Element {
 				{props => (
 					<Form className="row">
 						<TextInputAdmin label="Email:" name='email' type='email' />
-						<TextInputAdmin label="Registered:" name='createdAt' type='datetime-local' />
+						{/* <br />
+						<DatePicker name="createdAt" label="Registered:" /> */}
+						<br />
 						<TextInputAdmin label="Roles:" name='roles' type='text' />
 						<br />
 						<p> </p>
