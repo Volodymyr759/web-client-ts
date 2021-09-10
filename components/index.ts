@@ -1,6 +1,6 @@
 export * from './BubbleBox/bubble-box';
 export * from './CenterTextCard/center-text-card';
-export * from './DatePicker/DatePicker';
+export * from './DatePicker/date-picker';
 export * from './Footer/Footer';
 export * from './FormLabel/form-label';
 export * from './Header/Header';
@@ -15,6 +15,7 @@ export * from './MessageItem/message-item';
 export * from './MessageList/message-list';
 export * from './P/P';
 export * from './Pagination/pagination';
+export * from './RadioButtons/radio-button';
 export * from './RightImageCard/right-image-card';
 export * from './RightSideCard/right-side-card';
 export * from './RightTextCard/right-text-card';

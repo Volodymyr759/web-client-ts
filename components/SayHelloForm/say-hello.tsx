@@ -1,28 +1,30 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import Router from 'next/router';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormLabel, Htag, TextInput } from '../../components';
+import { FormLabel, Htag, RadioButtons, TextInput } from '../../components';
 import { IMessage } from '../../interfaces/message.interface';
 import styles from './say-hello.module.css';
 import { useHttp } from '../../hooks/use-http.hook';
 import { AuthContext } from '../../context/auth-context';
 
 export const SayHelloForm = (): JSX.Element => {
-	const [radioEmailPhone, setRadioEmailPhone] = useState(true);
 	const { access_token } = useContext(AuthContext);
+
+	const prefCommunicationOptions = [
+		{ key: 'email', value: 'Email' },
+		{ key: 'phone', value: 'Phone' },
+	];
 
 	const submitHandler = async (message: IMessage): Promise<void> => {
 		try {
 			const data = await useHttp('/api/messages', 'POST', access_token, JSON.stringify(message));
-			console.log("data: ", data);
 			if (!data) {
 				throw new Error('Sending error...');
 			} else {
 				alert('Message has been sent');
 			}
 		} catch (e) {
-			console.log(e.message);
 			Router.push('/login');
 		}
 	};
@@ -81,29 +83,11 @@ export const SayHelloForm = (): JSX.Element => {
 									<TextInput label="Full Name:" name='fullName' type='text' />
 									<TextInput label="Company:" name='company' type='text' />
 									<br />
-									<div>
-										<p>Select A Preferable way of communication:</p>
-										<div role="group" aria-labelledby="my-radio-group">
-											<p>
-												<Field
-													type="radio"
-													name="Email"
-													value="Email"
-													onClick={() => { setRadioEmailPhone(true); }}
-													checked={radioEmailPhone} />
-												Email
-											</p>
-											<p>
-												<Field
-													type="radio"
-													name="Phone"
-													value="Phone"
-													onClick={() => { setRadioEmailPhone(false); }}
-													checked={!radioEmailPhone} />
-												Phone
-											</p>
-										</div>
-									</div>
+									<RadioButtons
+										name="prefCommunication"
+										label="Select A Preferable way of communication:"
+										options={prefCommunicationOptions}
+									/>
 
 									<TextInput label="Email:" name='email' type='email' />
 									<TextInput label="Phone Number:" name='phoneNumber' type='text' />

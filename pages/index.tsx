@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { CenterTextCard, LeftImageCard, RightImageCard, SayHelloForm, Slider, TitleCard } from "../components";
+import { CenterTextCard, LeftImageCard, RightImageCard, Slider, TitleCard } from "../components";
 import { withLayout } from "../layouts/public/Layout";
 
 function Home(): JSX.Element {
@@ -91,9 +91,6 @@ function Home(): JSX.Element {
       </LeftImageCard>
 
       <Slider />
-
-      <SayHelloForm />
-
     </>
   );
 }
