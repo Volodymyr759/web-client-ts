@@ -32,7 +32,7 @@ function User(props: { user: IUser }): JSX.Element {
 
 	return (
 		<>
-			<Htag tag="h3">User</Htag>
+			<Htag tag="h3">User: {props.user.email}</Htag>
 			<Formik
 				initialValues={{
 					email: props.user.email,
