@@ -1,12 +1,13 @@
 import { useContext } from 'react';
 import Router from 'next/router';
-import { Field, Form, Formik } from 'formik';
+import { ErrorMessage, Field, FieldAttributes, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormLabel, Htag, RadioButtons, TextInput } from '../../components';
+import { Htag } from '../../components';
 import { IMessage } from '../../interfaces/message.interface';
 import styles from './say-hello.module.css';
 import { useHttp } from '../../hooks/use-http.hook';
 import { AuthContext } from '../../context/auth-context';
+import React from 'react';
 
 export const SayHelloForm = (): JSX.Element => {
 	const { access_token } = useContext(AuthContext);
@@ -76,34 +77,79 @@ export const SayHelloForm = (): JSX.Element => {
 								setSubmitting(false);
 							}
 						}
+						validateOnMount
 					>
 						{props => (
 							<div className="formgroup">
 								<Form>
-									<TextInput label="Full Name:" name='fullName' type='text' />
-									<TextInput label="Company:" name='company' type='text' />
+									<p><label className="form-label">Full Name:</label></p>
+									<Field name="fullName" className="form-input" type="text" />
+									<ErrorMessage name="fullName" render={msg => <div className="form-error-message">{msg}</div>} />
+
+									<p><label className="form-label">Company:</label></p>
+									<Field name="company" className="form-input" type="text" />
+									<ErrorMessage name="company" render={msg => <div className="form-error-message">{msg}</div>} />
 									<br />
-									<RadioButtons
-										name="prefCommunication"
-										label="Select A Preferable way of communication:"
-										options={prefCommunicationOptions}
-									/>
+									<div className="col-12">
+										<p> <label className="form-label">Select A Preferable way of communication:</label> </p>
+										<Field name="prefCommunication" className="form-input">
+											{
+												// eslint-disable-next-line @typescript-eslint/no-explicit-any
+												({ field }: FieldAttributes<any>) => {
+													return prefCommunicationOptions.map(option => {
+														return (
+															<React.Fragment key={option.key}>
+																<input
+																	type="radio"
+																	id={option.value}
+																	{...field}
+																	value={option.value}
+																	checked={field.value === option.value}
+																/>
+																<span> </span>
+																<label htmlFor={option.value}>{option.key}</label>
+																<span> </span>
+															</React.Fragment>
+														);
+													});
+												}
+											}
+										</Field>
+									</div>
 
-									<TextInput label="Email:" name='email' type='email' />
-									<TextInput label="Phone Number:" name='phoneNumber' type='text' />
+									<p><label className="form-label">Email:</label></p>
+									<Field name="email" className="form-input" type="email" />
+									<ErrorMessage name="email" render={msg => <div className="form-error-message">{msg}</div>} />
 
-									<FormLabel>Message:</FormLabel>
+									<p><label className="form-label">Phone Number:</label></p>
+									<Field name="phoneNumber" className="form-input" type="text" />
+									<ErrorMessage name="phoneNumber" render={msg => <div className="form-error-message">{msg}</div>} />
+
+									<p><label className="form-label">Message:</label></p>
 									<Field
-										name="messageText" as="textarea"
-										className="forminput"
+										as="textarea"
+										name="messageText"
+										className="form-input"
 										cols={55}
 										rows={5}
 										minLength={10}
 										maxLength={500}
 									/>
+									<ErrorMessage
+										name="messageText"
+										render={msg => <div className="form-error-message">{msg}</div>}
+									/>
 									<p>
-										<button className="primary-button" type="submit">
-											{props.isSubmitting ? 'Loading' : 'Submit'}
+										<button className="primary-button" type="submit" disabled={!props.isValid || props.isSubmitting}>
+											{
+												props.isSubmitting ?
+													<>
+														<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+														<span> Loading...</span>
+													</>
+													:
+													<span>Submit</span>
+											}
 										</button>
 									</p>
 								</Form>
