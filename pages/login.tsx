@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { Form, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import Cookies from 'universal-cookie';
-import { P, TextCard, TextInput } from "../components";
+import { P, TextCard } from "../components";
 import { withLayout } from "../layouts/public/Layout";
 import { ILoginUser } from '../interfaces/login-user.interface';
 import { useState } from 'react';
@@ -24,7 +24,6 @@ const submitHandler = async (user: ILoginUser): Promise<void> => {
 			maxAge: 2592000,
 			// httpOnly: true,
 		});
-		alert('User has been logged in.');
 	} catch (e) {
 		console.log(e.message);
 		alert('Login error.');
@@ -73,15 +72,29 @@ function Login(): JSX.Element {
 							}, 1);
 						}
 					}
+					validateOnMount
 				>
 					{props => (
 						<div className="formgroup">
 							<Form>
-								<TextInput label="Email:" name='login' type='email' />
-								<TextInput label="Password:" name='password' type='password' />
+								<p><label className="form-label">Email:</label></p>
+								<Field name="login" className="form-input" type="email" />
+								<ErrorMessage name="login" render={msg => <div className="form-error-message">{msg}</div>} />
+
+								<p><label className="form-label">Password:</label></p>
+								<Field name="password" className="form-input" type="password" />
+								<ErrorMessage name="password" render={msg => <div className="form-error-message">{msg}</div>} />
 								<p>
-									<button className="primary-button" type="submit">
-										{props.isSubmitting ? 'Loading' : 'Sign In'}
+									<button className="primary-button" type="submit" disabled={!props.isValid || props.isSubmitting}>
+										{
+											props.isSubmitting ?
+												<>
+													<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+													<span> Loading...</span>
+												</>
+												:
+												<span>Sign In</span>
+										}
 									</button>
 								</p>
 							</Form>

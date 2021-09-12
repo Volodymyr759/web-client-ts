@@ -1,20 +1,25 @@
-import Link from 'next/link';
-import { Field, Form, Formik } from 'formik';
-import * as Yup from 'yup';
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import Router from 'next/router';
+import Link from 'next/link';
 import { ParsedUrlQuery } from 'querystring';
+import { ErrorMessage, Field, FieldAttributes, Form, Formik } from 'formik';
+import * as Yup from 'yup';
 import { IMessage } from '../../../interfaces/message.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
-import { Htag, TextInputAdmin } from '../../../components';
+import { Htag } from '../../../components';
 import { useHttp } from '../../../hooks/use-http.hook';
 import { AuthContext } from '../../../context/auth-context';
 
+
 function Message(props: { message: IMessage }): JSX.Element {
 	const [messageState] = useState(props.message);
-	const [radioEmailPhone, setRadioEmailPhone] = useState(true);
 	const { access_token } = useContext(AuthContext);
+
+	const prefCommunicationOptions = [
+		{ key: 'Email', value: 'Email' },
+		{ key: 'Phone', value: 'Phone' },
+	];
 
 	const submitHandler = async (message: IMessage): Promise<void> => {
 		try {
@@ -29,7 +34,6 @@ function Message(props: { message: IMessage }): JSX.Element {
 			Router.push('/login');
 		}
 	};
-
 	return (
 		<>
 			<Htag tag="h3">Message</Htag>
@@ -74,51 +78,75 @@ function Message(props: { message: IMessage }): JSX.Element {
 						setSubmitting(false);
 					}
 				}
+				validateOnMount
 			>
 				{props => (
 					<Form className="row">
-						<TextInputAdmin label="Full Name:" name='fullName' type='text' />
-						<TextInputAdmin label="Company:" name='company' type='text' />
-						<div className="w-100 p-3">
-							<p>Preffered communication way:</p>
-							<div className="form-check">
-								<Field
-									className="form-check-input"
-									type="radio"
-									name="Email"
-									value="Email"
-									onClick={() => { setRadioEmailPhone(true); }}
-									checked={radioEmailPhone} />
-								<label className="form-check-label" htmlFor="Email">
-									Email
-								</label>
-							</div>
-							<div className="form-check">
-								<Field
-									className="form-check-input"
-									type="radio"
-									name="Phone"
-									value="Phone"
-									onClick={() => { setRadioEmailPhone(!radioEmailPhone); }}
-									checked={!radioEmailPhone} />
-								<label className="form-check-label" htmlFor="Phone">
-									Phone
-								</label>
-							</div>
+						<div className="col-12">
+							<p><label className="form-label">Full Name:</label></p>
+							<Field name="fullName" className="form-control" type="text" />
+							<ErrorMessage name="fullName" render={msg => <div className="form-error-message">{msg}</div>} />
 						</div>
-						<br />
-						<TextInputAdmin label="Email:" name='email' type='email' />
-						<TextInputAdmin label="Phone Number:" name='phoneNumber' type='text' />
+
+						<div className="col-12">
+							<p><label className="form-label">Company:</label></p>
+							<Field name="company" className="form-control" type="text" />
+							<ErrorMessage name="company" render={msg => <div className="form-error-message">{msg}</div>} />
+						</div>
 
 						<div className="w-100 p-3">
-							<label htmlFor="messageText" className="form-label">Message:</label>
+							<p><label className="form-label">Preffered communication way:</label></p>
+							<Field name="prefCommunication" className="form-input">
+								{ // eslint-disable-next-line @typescript-eslint/no-explicit-any
+									({ field }: FieldAttributes<any>) => {
+										return prefCommunicationOptions.map(option => {
+											return (
+												<React.Fragment key={option.key}>
+													<div className="form-check">
+														<input
+															className="form-check-input"
+															type="radio"
+															id={option.value}
+															{...field}
+															value={option.value}
+															checked={field.value === option.value}
+														/>
+														<label className="form-check-label" htmlFor={option.value}>{option.key}</label>
+													</div>
+												</React.Fragment>
+											);
+										});
+									}
+								}
+							</Field>
+						</div>
+						<br />
+						<div className="col-12">
+							<p><label className="form-label">Email:</label></p>
+							<Field name="email" className="form-control" type="email" />
+							<ErrorMessage name="email" render={msg => <div className="form-error-message">{msg}</div>} />
+						</div>
+
+						<div className="col-12">
+							<p><label className="form-label">Phone Number:</label></p>
+							<Field name="phoneNumber" className="form-control" type="text" />
+							<ErrorMessage name="phoneNumber" render={msg => <div className="form-error-message">{msg}</div>} />
+						</div>
+
+						<div className="w-100 p-3">
+							<p><label htmlFor="messageText" className="form-label">Message:</label></p>
 							<Field
-								name="messageText" as="textarea"
+								as="textarea"
+								name="messageText"
 								className="form-control"
 								cols={55}
 								rows={5}
 								minLength={10}
 								maxLength={500}
+							/>
+							<ErrorMessage
+								name="messageText"
+								render={msg => <div className="form-error-message">{msg}</div>}
 							/>
 						</div>
 						<br />
@@ -127,8 +155,16 @@ function Message(props: { message: IMessage }): JSX.Element {
 								<a className="btn btn-secondary">Go Back</a>
 							</Link>
 							<span> </span>
-							<button type="submit" className="btn btn-primary">
-								{props.isSubmitting ? 'Loading' : 'Save'}
+							<button type="submit" className="btn btn-primary" disabled={!props.isValid || props.isSubmitting}>
+								{
+									props.isSubmitting ?
+										<>
+											<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+											<span> Loading...</span>
+										</>
+										:
+										<span>Save</span>
+								}
 							</button>
 						</div>
 					</Form>

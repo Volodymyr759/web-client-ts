@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
       </Head>
       <NextNprogress
         color="#6610F2"
-        startPosition={0.2}
+        startPosition={0.4}
         stopDelayMs={200}
         height={2}
         showOnShallow={true}

@@ -1,13 +1,13 @@
-import Link from 'next/link';
-import { Form, Formik } from 'formik';
-import * as Yup from 'yup';
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import Link from 'next/link';
 import Router from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
+import { ErrorMessage, Field, FieldAttributes, Form, Formik } from 'formik';
+import * as Yup from 'yup';
 import { IUser } from '../../../interfaces/user.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
-import { Htag, TextInputAdmin } from '../../../components';
+import { Htag } from '../../../components';
 import { useHttp } from '../../../hooks/use-http.hook';
 import { AuthContext } from '../../../context/auth-context';
 import { Roles } from '../../../infrastructure/roles.enum';
@@ -16,6 +16,10 @@ function User(props: { user: IUser }): JSX.Element {
 	const [userState] = useState(props.user);
 	const { access_token } = useContext(AuthContext);
 
+	const rolesOptions = [
+		{ key: 'User', value: '0' },
+		{ key: 'Admin', value: '1' },
+	];
 	const submitHandler = async (user: IUser): Promise<void> => {
 		try {
 			const data = await useHttp('/api/auth/' + userState._id, 'PUT', access_token, JSON.stringify(user));
@@ -25,11 +29,9 @@ function User(props: { user: IUser }): JSX.Element {
 				alert('User has been updated');
 			}
 		} catch (e) {
-			console.log(e.user);
 			Router.push('/login');
 		}
 	};
-
 	return (
 		<>
 			<Htag tag="h3">User: {props.user.email}</Htag>
@@ -47,6 +49,7 @@ function User(props: { user: IUser }): JSX.Element {
 						.max(30, 'Email address must be 4-30 characters'),
 					roles: Yup.number()
 						.required('Required')
+						.oneOf([0, 1], 'Choose one of options')
 				})
 				}
 				onSubmit={
@@ -55,14 +58,42 @@ function User(props: { user: IUser }): JSX.Element {
 						setSubmitting(false);
 					}
 				}
+				validateOnMount
 			>
 				{props => (
 					<Form className="row">
-						<TextInputAdmin label="Email:" name='email' type='email' />
-						{/* <br />
-						<DatePicker name="createdAt" label="Registered:" /> */}
+						<div className="col-12">
+							<p><label className="form-label">Email:</label></p>
+							<Field name="email" className="form-control" type="email" />
+							<ErrorMessage name="email" render={msg => <div className="form-error-message">{msg}</div>} />
+						</div>
 						<br />
-						<TextInputAdmin label="Roles:" name='roles' type='text' />
+						<div className="col-12">
+							<p><label className="form-label">Roles:</label></p>
+							<Field name="roles" className="form-input">
+								{   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+									({ field }: FieldAttributes<any>) => {
+										return rolesOptions.map(option => {
+											return (
+												<React.Fragment key={option.key}>
+													<input
+														type="checkbox"
+														id={option.value}
+														{...field}
+														value={option.value}
+														checked={field.value.includes(parseInt(option.value))}
+													/>
+													<span> </span>
+													<label htmlFor={option.value}>{option.key}</label>
+													<span> </span>
+												</React.Fragment>
+											);
+										});
+									}
+								}
+							</Field>
+							<ErrorMessage name="roles" render={msg => <div className="form-error-message">{msg}</div>} />
+						</div>
 						<br />
 						<p> </p>
 						<br />
@@ -71,8 +102,16 @@ function User(props: { user: IUser }): JSX.Element {
 								<a className="btn btn-secondary">Go Back</a>
 							</Link>
 							<span> </span>
-							<button type="submit" className="btn btn-primary">
-								{props.isSubmitting ? 'Loading' : 'Save'}
+							<button type="submit" className="btn btn-primary" disabled={!props.isValid || props.isSubmitting}>
+								{
+									props.isSubmitting ?
+										<>
+											<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+											<span> Loading...</span>
+										</>
+										:
+										<span>Save</span>
+								}
 							</button>
 						</div>
 					</Form>

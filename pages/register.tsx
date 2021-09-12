@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import { Form, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { P, TextCard, TextInput } from "../components";
+import { P, TextCard } from "../components";
 import { withLayout } from "../layouts/public/Layout";
 import { ILoginUser } from '../interfaces/login-user.interface';
 
@@ -18,18 +18,15 @@ const submitHandler = async (user: ILoginUser): Promise<void> => {
 
 function Register(): JSX.Element {
 	const [showModal, setShowModal] = useState(false);
-
 	const modalHandler = (show: boolean) => {
 		setShowModal(show);
 	};
-
 	return (
 		<>
 			<Head>
 				<title>Register</title>
 				<meta name="keywords" content="Register Page" />
 			</Head>
-
 			<section className="login-form-container">
 				<br />
 				<P appearance="centered">
@@ -61,23 +58,36 @@ function Register(): JSX.Element {
 							}, 1);
 						}
 					}
+					validateOnMount
 				>
 					{props => (
 						<div className="formgroup">
 							<Form>
-								<TextInput label="Email:" name='login' type='email' />
-								<TextInput label="Password:" name='password' type='password' />
+								<p><label className="form-label">Email:</label></p>
+								<Field name="login" className="form-input" type="email" />
+								<ErrorMessage name="login" render={msg => <div className="form-error-message">{msg}</div>} />
+
+								<p><label className="form-label">Password:</label></p>
+								<Field name="password" className="form-input" type="password" />
+								<ErrorMessage name="password" render={msg => <div className="form-error-message">{msg}</div>} />
+
 								<p>
-									<button className="primary-button" type="submit">
-										{props.isSubmitting ? 'Loading' : 'Create Account'}
+									<button className="primary-button" type="submit" disabled={!props.isValid || props.isSubmitting}>
+										{
+											props.isSubmitting ?
+												<>
+													<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+													<span> Loading...</span>
+												</>
+												:
+												<span>Create Account</span>
+										}
 									</button>
 								</p>
 							</Form>
 						</div>
 					)}
-
 				</Formik>
-
 				<P appearance="centered">
 					<strong>Or</strong>
 				</P>

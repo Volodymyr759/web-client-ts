@@ -1,6 +1,5 @@
 export * from './BubbleBox/bubble-box';
 export * from './CenterTextCard/center-text-card';
-export * from './DatePicker/date-picker';
 export * from './Footer/Footer';
 export * from './FormLabel/form-label';
 export * from './Header/Header';
@@ -15,7 +14,6 @@ export * from './MessageItem/message-item';
 export * from './MessageList/message-list';
 export * from './P/P';
 export * from './Pagination/pagination';
-export * from './RadioButtons/radio-button';
 export * from './RightImageCard/right-image-card';
 export * from './RightSideCard/right-side-card';
 export * from './RightTextCard/right-text-card';
@@ -23,8 +21,6 @@ export * from './SayHelloForm/say-hello';
 export * from './SideBarMenu/sidebar-menu';
 export * from './Slider/slider';
 export * from './TextCard/text-card';
-export * from './TextInput/text-input';
-export * from './TextInputAdmin/text-input-admin';
 export * from './TitleCard/title-card';
 export * from './UserList/user-list';
 
