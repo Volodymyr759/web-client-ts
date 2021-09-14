@@ -92,24 +92,23 @@ export const Header = ({ ...props }: HeaderProps): JSX.Element => {
 								</Link>
 							</li>
 							{
-								!emailState &&
-								<li className="cta-button menu-item menu-item-type-post_type menu-item-object-page menu-item-144 nav-item" onClick={() => { Router.push('/login'); }}>
-									<Link href="/login" >
-										<a className="nav-link">
-											<span>LogIn/SignUp</span>
-										</a>
-									</Link>
-								</li>
-							}
-							{
-								emailState &&
-								<li className="cta-button menu-item menu-item-type-post_type menu-item-object-page menu-item-144 nav-item" onClick={logout}>
-									<Link href="/" >
-										<a className="nav-link">
-											<span>Log Out</span>
-										</a>
-									</Link>
-								</li>
+								emailState ?
+									<li className="cta-button menu-item menu-item-type-post_type menu-item-object-page nav-item" onClick={logout}>
+										<Link href="/" >
+											<a className="nav-link">
+												<span>Log Out</span>
+											</a>
+										</Link>
+									</li>
+
+									:
+									<li className="cta-button menu-item menu-item-type-post_type menu-item-object-page nav-item" onClick={() => { Router.push('/login'); }}>
+										<Link href="/login" >
+											<a className="nav-link">
+												<span>LogIn/SignUp</span>
+											</a>
+										</Link>
+									</li>
 							}
 						</ul>
 					</div>

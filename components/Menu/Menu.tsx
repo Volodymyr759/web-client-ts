@@ -67,20 +67,18 @@ export const Menu = (): JSX.Element => {
 				</Link>
 			</li>
 			{
-				!emailState &&
-				<li onClick={() => { Router.push('/login'); }}>
-					<Link href="/login">
-						<a>LogIn/SignUp</a>
-					</Link>
-				</li>
-			}
-			{
-				emailState &&
-				<li onClick={logout}>
-					<Link href="/">
-						<a>Log Out</a>
-					</Link>
-				</li>
+				emailState ?
+					<li onClick={logout}>
+						<Link href="/">
+							<a>Log Out</a>
+						</Link>
+					</li>
+					:
+					<li onClick={() => { Router.push('/login'); }}>
+						<Link href="/login">
+							<a>LogIn/SignUp</a>
+						</Link>
+					</li>
 			}
 		</ul >
 	);
