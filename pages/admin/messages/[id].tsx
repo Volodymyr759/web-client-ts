@@ -11,7 +11,6 @@ import { Htag } from '../../../components';
 import { useHttp } from '../../../hooks/use-http.hook';
 import { AuthContext } from '../../../context/auth-context';
 
-
 function Message(props: { message: IMessage }): JSX.Element {
 	const [messageState] = useState(props.message);
 	const { access_token } = useContext(AuthContext);

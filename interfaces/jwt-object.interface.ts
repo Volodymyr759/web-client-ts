@@ -5,4 +5,5 @@ export interface IJwtData {
 	token_type: string;
 	refresh_token: string;
 	email: string;
+	roles: number[];
 }

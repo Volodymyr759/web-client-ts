@@ -25,7 +25,7 @@ export async function useHttp(
 		}
 		const data = await res.json();
 		return data;
-	} catch (e) {
-		throw new Error(e.message);
+	} catch {
+		throw new Error('Unathorized');
 	}
 }
