@@ -2,19 +2,20 @@ import { useEffect, useState } from 'react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import Router from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
-import Cookies from 'universal-cookie';
 import { Htag, Pagination, UserList } from '../../../components';
 import { useHttp } from '../../../hooks/use-http.hook';
 import { AppConstants } from '../../../infrastructure/app.constants';
 import { IUser } from '../../../interfaces/user.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
+import { useRefreshToken } from '../../../hooks/use-refresh-token.hook';
+import { IJwtData } from '../../../interfaces/jwt-object.interface';
 
 function Users(props: { users: IUser[] }): JSX.Element {
 	const [usersState, setUsersState] = useState(props.users);
 	const [direction, setDirection] = useState('Asc');
 	const [currentPage, setCurrentPage] = useState(AppConstants.ITEMS_CURRENT_PAGE_DEFAULT);
 	const [usersPerPage] = useState(AppConstants.ITEMS_PER_PAGE);
-	const [jwtObject, setJwtObject] = useState(null);
+	const [jwtObject, setJwtObject] = useState<IJwtData | null>(null);
 	const [isRetry, setIsRetry] = useState(false);
 
 	let currentUsers = usersState;
@@ -24,44 +25,17 @@ function Users(props: { users: IUser[] }): JSX.Element {
 		currentUsers = usersState.slice(indexOfFirstUser, indexOfLastUser);
 	}
 
-	const cookies = new Cookies();
-	let authCookie = cookies.get('auth');
-
 	useEffect(() => {
-		if (usersState.length == 0) updateCookie();
+		const refreshCookie = async () => {
+			const jwt = await useRefreshToken();
+			setJwtObject(jwt);
+		};
+		if (usersState.length == 0) refreshCookie();
 	}, []);
 
-	function updateCookie() {
-		fetch(AppConstants.API_BASE_URL + '/api/auth/refresh', {
-			method: 'POST',
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ token: authCookie.refresh_token })
-		})
-			.then(res => res.json())
-			.then((jwt) => setJwtObject(jwt));
-	}
-
 	if (jwtObject && props.users.length == 0 && !isRetry) {
-		console.log('jwtObject', jwtObject);
 		setIsRetry(true);
-		try {
-			cookies.set('auth', jwtObject, {
-				path: '/',
-				maxAge: AppConstants.JWT_EXPIRATION_TIME,
-			});
-			authCookie = cookies.get('auth');
-			fetch(AppConstants.API_BASE_URL + "/api/auth", { // Get list of users again
-				method: "GET",
-				headers: { "Authorization": "Bearer " + authCookie.access_token },
-			})
-				.then(res => res.json())
-				.then((result) => { setUsersState(result); }, (error) => { console.log(error); }
-				);
-		} catch (e) {
-			console.log('Error: ', e.message);
-			cookies.remove('auth');
-			Router.push('/login');
-		}
+		Router.reload();
 	}
 
 	const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
@@ -109,25 +83,6 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 				props: { users }
 			};
 		} else {
-			// const refreshToken = { token: JSON.parse(authCookie).refresh_token };
-			// const res = await fetch(AppConstants.API_BASE_URL + '/api/auth/refresh', {
-			// 	method: 'POST',
-			// 	headers: { "Content-Type": "application/json" },
-			// 	body: JSON.stringify(refreshToken)
-			// }
-			// );
-			// const getRefreshedJwtObject = await res.json();
-			// console.log('RefreshedJwtObject', getRefreshedJwtObject);
-			// // try to get list of users again
-			// const users = await useHttp('/api/auth', "GET", getRefreshedJwtObject.access_token, '');
-			// if (users) {
-			// 	return {
-			// 		props: { users }
-			// 	};
-			// } else {
-			// 	throw new Error('User unauthorized');
-			// }
-
 			return {
 				props: { users: [] }
 			};
