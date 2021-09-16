@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { UserItemProps } from './user-item.props';
 import styles from './user-item.module.css';
 import { format } from 'date-fns';
+import { Roles } from '../../infrastructure/roles.enum';
 
 export const UserItem = ({ user }: UserItemProps): JSX.Element => {
 	const deleteUser = async (id: string) => {
@@ -18,7 +19,7 @@ export const UserItem = ({ user }: UserItemProps): JSX.Element => {
 					{user.email}
 				</td>
 				<td>{format(new Date(user.createdAt), 'dd-MM-yyyy')}</td>
-				<td>{user.roles}</td>
+				<td>{user.roles.map(role => Roles[role] + ', ')}</td>
 				<td>
 					<Link href="/admin/users/[id]" as={`/admin/users/${user._id}`}>
 						<a className={styles.edit}></a>

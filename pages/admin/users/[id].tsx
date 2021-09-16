@@ -11,14 +11,15 @@ import { Htag } from '../../../components';
 import { useHttp } from '../../../hooks/use-http.hook';
 import { AuthContext } from '../../../context/auth-context';
 import { Roles } from '../../../infrastructure/roles.enum';
+import { AppConstants } from '../../../infrastructure/app.constants';
 
 function User(props: { user: IUser }): JSX.Element {
 	const [userState] = useState(props.user);
 	const { access_token } = useContext(AuthContext);
 
 	const rolesOptions = [
-		{ key: 'User', value: '0' },
-		{ key: 'Admin', value: '1' },
+		{ key: Roles[Roles.User], value: Roles.User },
+		{ key: Roles[Roles.Admin], value: Roles.Admin },
 	];
 	const submitHandler = async (user: IUser): Promise<void> => {
 		try {
@@ -54,7 +55,7 @@ function User(props: { user: IUser }): JSX.Element {
 				}
 				onSubmit={
 					(values, { setSubmitting }) => {
-						submitHandler(values); // To do convert string from input-field to Role.Admin / Role.User
+						submitHandler(values);
 						setSubmitting(false);
 					}
 				}
@@ -81,10 +82,10 @@ function User(props: { user: IUser }): JSX.Element {
 														id={option.value}
 														{...field}
 														value={option.value}
-														checked={field.value.includes(parseInt(option.value))}
+														checked={field.value.includes(parseInt(option.value.toString()))}
 													/>
 													<span> </span>
-													<label htmlFor={option.value}>{option.key}</label>
+													<label htmlFor={option.value.toString()}>{option.key}</label>
 													<span> </span>
 												</React.Fragment>
 											);
@@ -127,16 +128,41 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 		if (!authCookie) {
 			throw new Error('No auth data.');
 		}
-		const user = await useHttp('/api/auth/' + context.query.id, "GET", JSON.parse(authCookie).access_token, '');
-		if (user.email) {
-			return {
-				props: { user }
-			};
-		} else {
-			throw new Error('User unauthorized');
+		let user;
+		let res = await fetch(AppConstants.API_BASE_URL + '/api/auth/' + context.query.id, {
+			method: "GET",
+			headers: { "Authorization": "Bearer " + JSON.parse(authCookie).access_token }
+		});
+		console.log('Response status: ', res.status);
+		if (res.status == 401) { // access_token has expired
+			res = await fetch(AppConstants.API_BASE_URL + '/api/auth/refresh', {
+				method: 'POST',
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ token: JSON.parse(authCookie).refresh_token }),
+			});
+			if (res.ok) { // try to get user again
+				const jwtObject = await res.json();
+				res = await fetch(AppConstants.API_BASE_URL + '/api/auth/' + context.query.id, {
+					method: "GET",
+					headers: { "Authorization": "Bearer " + jwtObject.access_token }
+				});
+				user = await res.json();
+				return { props: { user } };
+			} else { // refresh_token has expired
+				throw new Error('Failed to get data.');
+			}
+		}
+		if (res.status == 403) {
+			throw new Error('User is not Admin.');
+		}
+		if (res.ok) {
+			user = res.json();
+			return { props: { user } };
+		} else { // Unexpected errors
+			throw new Error('Unexpected error.');
 		}
 	} catch (e) {
-		console.log(e.user);
+		console.log(e);
 		return {
 			redirect: {
 				destination: '/login',

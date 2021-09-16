@@ -3,12 +3,11 @@ import { Htag, MessageList, Pagination } from '../../../components';
 import { IMessage } from '../../../interfaces/message.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 import { AppConstants } from '../../../infrastructure/app.constants';
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'; //GetServerSidePropsContext
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import { useHttp } from '../../../hooks/use-http.hook';
 
 function Messages(props: { messages: IMessage[] }): JSX.Element {
-	const [messagesState, setMessagesState] = useState<IMessage[]>(props.messages);
+	const [messagesState, setMessagesState] = useState(props.messages);
 	const [currentPage, setCurrentPage] = useState(AppConstants.ITEMS_CURRENT_PAGE_DEFAULT);
 	const [direction, setDirection] = useState('Asc');
 	const [messagesPerPage] = useState(AppConstants.ITEMS_PER_PAGE);
@@ -19,10 +18,8 @@ function Messages(props: { messages: IMessage[] }): JSX.Element {
 		const indexOfFirstMessage = indexOfLastMessage - messagesPerPage;
 		currentMessages = messagesState.slice(indexOfFirstMessage, indexOfLastMessage);
 	}
-
 	const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-	// Sort messages
 	const sortMessagesByName = () => {
 		const sortedMessages = sortArrayByName(messagesState);
 		if (direction === 'Asc') {
@@ -59,16 +56,40 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 		if (!authCookie) {
 			throw new Error('No auth data.');
 		}
-		const messages = await useHttp('/api/messages', "GET", JSON.parse(authCookie).access_token, '');
-		if (messages.splice) {
-			return {
-				props: { messages }
-			};
-		} else {
-			throw new Error('User unauthorized');
+		let messages;
+		let res = await fetch(AppConstants.API_BASE_URL + '/api/messages', {
+			method: "GET",
+			headers: { "Authorization": "Bearer " + JSON.parse(authCookie).access_token }
+		});
+		if (res.status == 401) { // access_token has expired
+			res = await fetch(AppConstants.API_BASE_URL + '/api/auth/refresh', {
+				method: 'POST',
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ token: JSON.parse(authCookie).refresh_token }),
+			});
+			if (res.ok) { // try to get messages again
+				const jwtObject = await res.json();
+				res = await fetch(AppConstants.API_BASE_URL + '/api/messages', {
+					method: "GET",
+					headers: { "Authorization": "Bearer " + jwtObject.access_token }
+				});
+				messages = await res.json();
+				return { props: { messages } };
+			} else { // refresh_token has expired
+				throw new Error('Failed to get data.');
+			}
+		}
+		if (res.status == 403) {
+			throw new Error('User is not Admin.');
+		}
+		if (res.ok) {
+			messages = res.json();
+			return { props: { messages } };
+		} else { // Unexpected errors
+			throw new Error('Unexpected error.');
 		}
 	} catch (e) {
-		console.log(e.message);
+		console.log(e);
 		return {
 			redirect: {
 				destination: '/login',
