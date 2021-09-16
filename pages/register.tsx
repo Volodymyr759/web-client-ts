@@ -6,9 +6,10 @@ import * as Yup from 'yup';
 import { P, TextCard } from "../components";
 import { withLayout } from "../layouts/public/Layout";
 import { ILoginUser } from '../interfaces/login-user.interface';
+import { AppConstants } from '../infrastructure/app.constants';
 
 const submitHandler = async (user: ILoginUser): Promise<void> => {
-	const res = await fetch('https://polar-castle-18354.herokuapp.com/api/auth/register', {
+	const res = await fetch(AppConstants.API_BASE_URL + '/api/auth/register', {
 		method: "POST",
 		headers: { "Content-type": "application/json" },
 		body: JSON.stringify(user)

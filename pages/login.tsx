@@ -25,7 +25,7 @@ const submitHandler = async (user: ILoginUser): Promise<void> => {
 			// httpOnly: true,
 		});
 	} catch (e) {
-		console.log(e.message);
+		console.log(e);
 		alert('Login error.');
 	}
 };
@@ -35,6 +35,7 @@ function Login(): JSX.Element {
 	const infoTextHandler = (show: boolean) => {
 		setShowInfo(show);
 	};
+
 	return (
 		<>
 			<Head>
@@ -43,9 +44,7 @@ function Login(): JSX.Element {
 			</Head>
 			<section className="login-form-container">
 				<br />
-				<P appearance="centered">
-					<strong>Sign in</strong>
-				</P>
+				<P appearance="centered"><strong>Sign in</strong></P>
 				<Formik
 					initialValues={{
 						login: '',
@@ -84,6 +83,7 @@ function Login(): JSX.Element {
 								<p><label className="form-label">Password:</label></p>
 								<Field name="password" className="form-input" type="password" />
 								<ErrorMessage name="password" render={msg => <div className="form-error-message">{msg}</div>} />
+								<br /><br />
 								<p>
 									<button className="primary-button" type="submit" disabled={!props.isValid || props.isSubmitting}>
 										{
@@ -103,7 +103,7 @@ function Login(): JSX.Element {
 				</Formik>
 
 				<P appearance="centered">
-					<a href="/login" className="link-base">Forgot your password?</a>
+					<a href="/forgot-password" className="link-base">Forgot your password?</a>
 				</P>
 				<hr />
 				<P appearance="centered">
@@ -146,19 +146,22 @@ function Login(): JSX.Element {
 						Not signed up? Create an account.
 					</a>
 				</P>
-				{showInfo ?
-					<TextCard>
-						We will collect and use your personal information (which may include cookies we collect through your
-						use of <a href="www.eivolo.com">eivolo.com</a> and our other websites) to give you a personalised user experience.
-						<br />
-						We may also contact you to promote our services or those of third parties.
-						Our Privacy Policy further explains how we collect, use and disclose personal information and how to access,
-						correct or complain about the handling of personal information.
-						<div className="col text-center" style={{ marginTop: '30px' }}>
-							<button className="btn btn-primary" style={{ margin: 'auto' }} onClick={() => { infoTextHandler(false); }}>Close</button>
-						</div>
-					</TextCard>
-					: null}
+				{
+					showInfo ?
+						<TextCard>
+							We will collect and use your personal information (which may include cookies we collect through your
+							use of <a href="www.eivolo.com">eivolo.com</a> and our other websites) to give you a personalised user experience.
+							<br />
+							We may also contact you to promote our services or those of third parties.
+							Our Privacy Policy further explains how we collect, use and disclose personal information and how to access,
+							correct or complain about the handling of personal information.
+							<div className="col text-center" style={{ marginTop: '30px' }}>
+								<button className="btn btn-primary" style={{ margin: 'auto' }} onClick={() => { infoTextHandler(false); }}>Close</button>
+							</div>
+						</TextCard>
+						:
+						null
+				}
 				<P appearance="centered">
 					<span>
 						<a href="/login"
