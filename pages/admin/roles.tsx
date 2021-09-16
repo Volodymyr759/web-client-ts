@@ -1,16 +1,16 @@
 import { useContext, useEffect } from 'react';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import { Htag } from '../../components';
 import { AuthContext } from '../../context/auth-context';
 import { Roles } from '../../infrastructure/roles.enum';
 import { withAdminLayout } from '../../layouts/admin/AdminLayout';
 
 function UserRoles(): JSX.Element {
+	const router = useRouter();
 	const { roles } = useContext(AuthContext);
+
 	useEffect(() => {
-		if (!roles.includes(Roles.Admin)) {
-			Router.push('/login');
-		}
+		if (!roles || !roles.includes(Roles.Admin)) router.push('/login');
 	}, []);
 
 	return (

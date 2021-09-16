@@ -85,7 +85,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 			throw new Error('User is not Admin.');
 		}
 		if (res.ok) {
-			users = res.json();
+			users = await res.json();
 			return { props: { users } };
 		} else { // Unexpected errors
 			throw new Error('Unexpected error.');
