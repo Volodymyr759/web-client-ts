@@ -1,17 +1,18 @@
 import { useContext, useState } from 'react';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styles from './Menu.module.css';
 import { AuthContext } from '../../context/auth-context';
 
 export const Menu = (): JSX.Element => {
 	const { email, logOut } = useContext(AuthContext);
-
 	const [emailState, setEmailState] = useState(email);
+	const router = useRouter();
 
 	const logout = () => {
 		logOut();
 		setEmailState(null);
+		router.reload();
 	};
 
 	return (
@@ -74,7 +75,7 @@ export const Menu = (): JSX.Element => {
 						</Link>
 					</li>
 					:
-					<li onClick={() => { Router.push('/login'); }}>
+					<li onClick={() => { router.push('/login'); }}>
 						<Link href="/login">
 							<a>LogIn/SignUp</a>
 						</Link>
