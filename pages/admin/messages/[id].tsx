@@ -10,6 +10,7 @@ import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 import { Htag } from '../../../components';
 import { useHttp } from '../../../hooks/use-http.hook';
 import { AuthContext } from '../../../context/auth-context';
+import { AppConstants } from '../../../infrastructure/app.constants';
 
 function Message(props: { message: IMessage }): JSX.Element {
 	const [messageState] = useState(props.message);
@@ -29,7 +30,7 @@ function Message(props: { message: IMessage }): JSX.Element {
 				alert('Message has been updated');
 			}
 		} catch (e) {
-			console.log(e.message);
+			console.log(e);
 			Router.push('/login');
 		}
 	};
@@ -179,16 +180,40 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 		if (!authCookie) {
 			throw new Error('No auth data.');
 		}
-		const message = await useHttp('/api/messages/' + context.query.id, "GET", JSON.parse(authCookie).access_token, '');
-		if (message._id) {
-			return {
-				props: { message }
-			};
-		} else {
-			throw new Error('User unauthorized');
+		let message;
+		let res = await fetch(AppConstants.API_BASE_URL + '/api/messages/' + context.query.id, {
+			method: "GET",
+			headers: { "Authorization": "Bearer " + JSON.parse(authCookie).access_token }
+		});
+		if (res.status == 401) { // access_token has expired
+			res = await fetch(AppConstants.API_BASE_URL + '/api/auth/refresh', {
+				method: 'POST',
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ token: JSON.parse(authCookie).refresh_token }),
+			});
+			if (res.ok) { // try to get message again
+				const jwtObject = await res.json();
+				res = await fetch(AppConstants.API_BASE_URL + '/api/messages/' + context.query.id, {
+					method: "GET",
+					headers: { "Authorization": "Bearer " + jwtObject.access_token }
+				});
+				message = await res.json();
+				return { props: { message } };
+			} else { // refresh_token has expired
+				throw new Error('Failed to get data.');
+			}
+		}
+		if (res.status == 403) {
+			throw new Error('User is not Admin.');
+		}
+		if (res.ok) {
+			message = res.json();
+			return { props: { message } };
+		} else { // Unexpected errors
+			throw new Error('Unexpected error.');
 		}
 	} catch (e) {
-		console.log(e.message);
+		console.log(e);
 		return {
 			redirect: {
 				destination: '/login',

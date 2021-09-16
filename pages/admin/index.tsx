@@ -8,6 +8,7 @@ import { withAdminLayout } from '../../layouts/admin/AdminLayout';
 
 function Dashboard(): JSX.Element {
 	const { roles } = useContext(AuthContext);
+
 	useEffect(() => {
 		if (!roles.includes(Roles.Admin)) {
 			Router.push('/login');
