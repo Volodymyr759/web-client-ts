@@ -3,10 +3,11 @@ import { UserItemProps } from './user-item.props';
 import styles from './user-item.module.css';
 import { format } from 'date-fns';
 import { Roles } from '../../infrastructure/roles.enum';
+import { AppConstants } from '../../infrastructure/app.constants';
 
 export const UserItem = ({ user }: UserItemProps): JSX.Element => {
 	const deleteUser = async (id: string) => {
-		await fetch('https://polar-castle-18354.herokuapp.com/api/auth/' + id, {
+		await fetch(AppConstants.API_BASE_URL + '/api/auth/' + id, {
 			method: "DELETE"
 		});
 		alert(`User with id: ${id} deleted`);
