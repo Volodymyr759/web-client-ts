@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styles from './Menu.module.css';
-import { AuthContext } from '../../context/auth-context';
+import { AuthContext } from '../../infrastructure/context/auth-context';
 
 export const Menu = (): JSX.Element => {
 	const { email, logOut } = useContext(AuthContext);

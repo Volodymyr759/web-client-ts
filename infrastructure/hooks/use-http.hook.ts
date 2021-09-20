@@ -1,4 +1,4 @@
-import { AppConstants } from "../infrastructure/app.constants";
+import { AppConstants } from "../app.constants";
 
 export async function useHttp(
 	endPoint: string,

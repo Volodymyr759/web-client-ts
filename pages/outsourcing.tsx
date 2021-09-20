@@ -15,7 +15,7 @@ function Outsourcing(): JSX.Element {
 				htagText="Outsourcing"
 				buttonText="Talk To Us >"
 				buttonLink="/contact-us"
-				objdata="/EivoloLandingPage_WhyOutsource_Illustration.svg"
+				objdata="/images/EivoloLandingPage_WhyOutsource_Illustration.svg"
 			>
 				<p>
 					Need help translating your ideas into functional, scalable solutions?
@@ -24,7 +24,7 @@ function Outsourcing(): JSX.Element {
 				</p>
 			</RightImageCard>
 
-			<section className="row" style={{ backgroundImage: "url(/gradient_bg.svg)" }}>
+			<section className="row" style={{ backgroundImage: "url(/images/gradient_bg.svg)" }}>
 				<div className="bubblewrapper">
 					<Htag tag="h2">Outsourcing Benefits</Htag>
 				</div>
@@ -64,7 +64,7 @@ function Outsourcing(): JSX.Element {
 				</div>
 			</section>
 
-			<RightSideCard htagText="Technologies" imgsrc="/Technologies-Logotypes.png">
+			<RightSideCard htagText="Technologies" imgsrc="/images/Technologies-Logotypes.png">
 				<p>
 					Eivolo works with a variety of different technologies, offering our clients a wide range of flexibility.
 					A frequent mistake that businesses make is choosing unsuitable technologies that do not allow results to

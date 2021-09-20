@@ -13,7 +13,7 @@ function ContactUs(): JSX.Element {
 
 			<RightSideCard
 				htagText="Get In Touch"
-				imgsrc="/EivoloLandingPage_GetinTouch_Illustration.svg"
+				imgsrc="/images/EivoloLandingPage_GetinTouch_Illustration.svg"
 			>
 				<p>
 					We can’t wait to hear about your latest project.

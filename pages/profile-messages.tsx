@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Htag } from '../components';
-import { AuthContext } from '../context/auth-context';
+import { AuthContext } from '../infrastructure/context/auth-context';
 import { withLayout } from "../layouts/public/Layout";
 
 function ProfileMessages(): JSX.Element {

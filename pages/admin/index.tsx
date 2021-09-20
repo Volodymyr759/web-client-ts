@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Htag } from '../../components';
-import { AuthContext } from '../../context/auth-context';
+import { AuthContext } from '../../infrastructure/context/auth-context';
 import { Roles } from '../../infrastructure/roles.enum';
 import { withAdminLayout } from '../../layouts/admin/AdminLayout';
 

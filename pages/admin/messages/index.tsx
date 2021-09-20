@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Htag, MessageList, Pagination } from '../../../components';
-import { IMessage } from '../../../interfaces/message.interface';
+import { IMessage } from '../../../infrastructure/interfaces/message.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 import { AppConstants } from '../../../infrastructure/app.constants';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';

@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Htag } from '../components';
-import { AuthContext } from '../context/auth-context';
+import { AuthContext } from '../infrastructure/context/auth-context';
 import { withLayout } from "../layouts/public/Layout";
-import { IChangeEmail } from '../interfaces/change-email.interface';
-import { useHttp } from '../hooks/use-http.hook';
+import { IChangeEmail } from '../infrastructure/interfaces/change-email.interface';
+import { useHttp } from '../infrastructure/hooks/use-http.hook';
 
 function ChangeEmail(): JSX.Element {
 	const router = useRouter();

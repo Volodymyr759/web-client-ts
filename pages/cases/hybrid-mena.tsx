@@ -12,7 +12,7 @@ function HybridMena(): JSX.Element {
 
 			<section className="row3">
 				<div className="img-container">
-					<img src="/logo-3.png" alt="Hybrid Mena Platform Logo" />
+					<img src="/images/logo-3.png" alt="Hybrid Mena Platform Logo" />
 				</div>
 				<TextCard
 					htagText="Hibrid Media Platform (Dubai, UAE)"

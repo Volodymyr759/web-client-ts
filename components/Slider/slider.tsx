@@ -11,21 +11,21 @@ export const Slider = (): JSX.Element => {
 				</div>
 				<div className="carousel-inner">
 					<div className="carousel-item active">
-						<img src="/logo-1.png" className="d-block w-100" alt="..." />
+						<img src="/images/logo-1.png" className="d-block w-100" alt="..." />
 						<div className={styles.carouselcaption + " d-none" + " d-md-block"}>
 							<h5 color="black">Property Space</h5>
 							<p color="black">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe sint expedita officiis consequuntur optio architecto voluptatem possimus in perspiciatis eius?</p>
 						</div>
 					</div>
 					<div className="carousel-item">
-						<img src="/logo-2.png" className="d-block w-100" alt="..." />
+						<img src="/images/logo-2.png" className="d-block w-100" alt="..." />
 						<div className={styles.carouselcaption + " d-none" + " d-md-block"}>
 							<h5>Inspection Manager</h5>
 							<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe sint expedita officiis consequuntur optio architecto voluptatem possimus in perspiciatis eius?</p>
 						</div>
 					</div>
 					<div className="carousel-item">
-						<img src="/logo-4.png" className="d-block w-100" alt="..." />
+						<img src="/images/logo-4.png" className="d-block w-100" alt="..." />
 						<div className={styles.carouselcaption + " d-none" + " d-md-block"}>
 							<h5>Diamond Emporium</h5>
 							<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe sint expedita officiis consequuntur optio architecto voluptatem possimus in perspiciatis eius?</p>

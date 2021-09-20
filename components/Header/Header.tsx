@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Link from 'next/link';
 import { HeaderProps } from "./Header.props";
 import styles from './header.module.css';
-import { AuthContext } from "../../context/auth-context";
+import { AuthContext } from "../../infrastructure/context/auth-context";
 
 export const Header = ({ ...props }: HeaderProps): JSX.Element => {
 	const { email, logOut } = useContext(AuthContext);
@@ -19,7 +19,6 @@ export const Header = ({ ...props }: HeaderProps): JSX.Element => {
 		console.log('emailState', emailState);
 
 		setEmailState(null);
-		// setTimeout(() => router.reload(), 2000);
 		router.reload();
 	};
 

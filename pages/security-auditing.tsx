@@ -15,13 +15,13 @@ function SecurityAuditing(): JSX.Element {
 				htagSize="h2"
 				buttonText="Reach Out >"
 				buttonLink="/contact-us"
-				objdata="/EivoloLandingPage_SecurityAuditServices_Illustration.svg"
+				objdata="/images/EivoloLandingPage_SecurityAuditServices_Illustration.svg"
 			>
 				Fortify your IT systems against malicious attackers.
 				It’s important to strengthen your company’s cyber resilience and ensure your IT systems are fortified against potential harm.
 			</TitleCard>
 
-			<section className="row" style={{ backgroundImage: "url(/gradient_bg.svg)" }}>
+			<section className="row" style={{ backgroundImage: "url(/images/gradient_bg.svg)" }}>
 				<div className="bubblewrapper">
 					<Htag tag="h2">Security Resilience With Eivolo</Htag>
 				</div>
@@ -57,7 +57,7 @@ function SecurityAuditing(): JSX.Element {
 				<div className="bubblewrapper">
 					<div className="img-container">
 						<img
-							src="http://localhost:3000/OBJECTS-300x300.png"
+							src="/images/OBJECTS-300x300.png"
 						/>
 					</div>
 					<P appearance="large">
@@ -67,7 +67,7 @@ function SecurityAuditing(): JSX.Element {
 				<div className="bubblewrapper">
 					<div className="img-container">
 						<img
-							src="http://localhost:3000/illustration-300x250.png"
+							src="/images/illustration-300x250.png"
 						/>
 					</div>
 					<P appearance="large">
@@ -88,7 +88,7 @@ function SecurityAuditing(): JSX.Element {
 			<LeftImageCard
 				htagText="Cybersecurity consultancy"
 				isButtonNeeded={false}
-				objdata="/EivoloLandingPage_WhyOutsource_Illustration.svg"
+				objdata="/images/EivoloLandingPage_WhyOutsource_Illustration.svg"
 				buttonLink=""
 			>
 				<p>We provide businesses with expert advice on various security topics, including:</p>
@@ -103,7 +103,7 @@ function SecurityAuditing(): JSX.Element {
 			<RightImageCard
 				htagText="Cybersecurity Auditing & Risk Assessment"
 				isButtonNeeded={false}
-				objdata="/Mobility-Security-Illustration.svg"
+				objdata="/images/Mobility-Security-Illustration.svg"
 				buttonLink="!#"
 			>
 				<p>
@@ -119,7 +119,7 @@ function SecurityAuditing(): JSX.Element {
 			<LeftImageCard
 				htagText="Ethical Penetration Testing"
 				isButtonNeeded={false}
-				objdata="/Ethical-Testing-illustration.svg"
+				objdata="/images/Ethical-Testing-illustration.svg"
 				buttonLink=""
 			>
 				<p>

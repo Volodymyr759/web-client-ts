@@ -5,11 +5,11 @@ import Router from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 import { ErrorMessage, Field, FieldAttributes, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { IUser } from '../../../interfaces/user.interface';
+import { IUser } from '../../../infrastructure/interfaces/user.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 import { Htag } from '../../../components';
-import { useHttp } from '../../../hooks/use-http.hook';
-import { AuthContext } from '../../../context/auth-context';
+import { useHttp } from '../../../infrastructure/hooks/use-http.hook';
+import { AuthContext } from '../../../infrastructure/context/auth-context';
 import { Roles } from '../../../infrastructure/roles.enum';
 import { AppConstants } from '../../../infrastructure/app.constants';
 

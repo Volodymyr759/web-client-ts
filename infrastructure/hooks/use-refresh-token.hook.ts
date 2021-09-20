@@ -1,5 +1,5 @@
 import Cookies from "universal-cookie";
-import { AppConstants } from "../infrastructure/app.constants";
+import { AppConstants } from "../app.constants";
 import { IJwtData } from "../interfaces/jwt-object.interface";
 
 export async function useRefreshToken(): Promise<IJwtData> {

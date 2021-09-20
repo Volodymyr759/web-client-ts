@@ -12,7 +12,7 @@ function DiamondEmporium(): JSX.Element {
 
 			<section className="row3">
 				<div className="img-container">
-					<img src="/logo-4.png" alt="Diamond Emporium Logo" />
+					<img src="/images/logo-4.png" alt="Diamond Emporium Logo" />
 				</div>
 				<TextCard
 					htagText="Diamond Emporium (Sydney, Australia)"
