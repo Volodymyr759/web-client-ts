@@ -5,5 +5,6 @@ export interface IAuthContext {
 	refresh_token: string;
 	email: string | null;
 	roles: number[];
+	userId: string;
 	logOut: () => void;
 }
