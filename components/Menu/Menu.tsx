@@ -67,20 +67,48 @@ export const Menu = (): JSX.Element => {
 					<a>Success Stories</a>
 				</Link>
 			</li>
-			{
-				emailState ?
-					<li onClick={logout}>
-						<Link href="/">
-							<a>Log Out</a>
-						</Link>
-					</li>
-					:
-					<li onClick={() => { router.push('/login'); }}>
+			<li>
+				{
+					emailState ?
+						<>
+							<Link href="/">
+								<a>Profile</a>
+							</Link>
+							<ul className={styles.profiledropdownMenu}>
+								<li>
+									<Link href="/profile">
+										<a>Profile Settings</a>
+									</Link>
+								</li>
+								<li>
+									<Link href="/profile-messages">
+										<a>My Messages</a>
+									</Link>
+								</li>
+								<li>
+									<Link href="/change-email">
+										<a>Change Email</a>
+									</Link>
+								</li>
+								<li>
+									<Link href="/change-password">
+										<a>Change Password</a>
+									</Link>
+								</li>
+								<li><hr /></li>
+								<li onClick={logout}>
+									<Link href="/">
+										<a>Log Out</a>
+									</Link>
+								</li>
+							</ul>
+						</>
+						:
 						<Link href="/login">
 							<a>LogIn/SignUp</a>
 						</Link>
-					</li>
-			}
+				}
+			</li>
 		</ul >
 	);
 };
