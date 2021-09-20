@@ -18,6 +18,9 @@ const submitHandler = async (user: ILoginUser): Promise<void> => {
 			headers: { "Content-type": "application/json" },
 			body: JSON.stringify(user)
 		});
+		if (!res.ok) {
+			throw new Error('User not found');
+		}
 		const data = await res.json();
 		cookies.set('auth', data, {
 			path: '/',
@@ -25,7 +28,6 @@ const submitHandler = async (user: ILoginUser): Promise<void> => {
 			// httpOnly: true,
 		});
 	} catch (e) {
-		console.log(e);
 		alert('Login error.');
 	}
 };
