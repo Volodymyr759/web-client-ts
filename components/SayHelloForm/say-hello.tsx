@@ -3,10 +3,10 @@ import Router from 'next/router';
 import { ErrorMessage, Field, FieldAttributes, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Htag } from '../../components';
-import { IMessage } from '../../interfaces/message.interface';
+import { IMessage } from '../../infrastructure/interfaces/message.interface';
 import styles from './say-hello.module.css';
-import { useHttp } from '../../hooks/use-http.hook';
-import { AuthContext } from '../../context/auth-context';
+import { useHttp } from '../../infrastructure/hooks/use-http.hook';
+import { AuthContext } from '../../infrastructure/context/auth-context';
 import React from 'react';
 
 export const SayHelloForm = (): JSX.Element => {
@@ -158,7 +158,7 @@ export const SayHelloForm = (): JSX.Element => {
 					</Formik>
 				</div>
 				<div style={{ margin: 'auto' }}>
-					<img src="/contact-us.jpeg" />
+					<img src="/images/contact-us.jpeg" />
 				</div>
 			</div>
 		</>

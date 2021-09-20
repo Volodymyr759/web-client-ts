@@ -9,7 +9,7 @@ export const Footer = ({ className, ...props }: FooterProps): JSX.Element => {
 	return (
 		<footer className={cn(className, styles.footer)} {...props}>
 			<div>
-				<img src="https://eivolo.com/wp-content/themes/eivolo/assets/images/logo-white.png" alt="" />
+				<img src="/images/logo-white.png" alt="" />
 				<span>©{format(new Date(), 'yyyy')} Eivolo. All Rights Reserved.</span>
 			</div>
 			<div>

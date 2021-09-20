@@ -6,7 +6,7 @@
 	position: relative;
 	left: 0;
 
-	content: url(/cpu-1.png) !important;
+	content: url(/images/cpu-1.png) !important;
 
 	line-height: normal;
 }
@@ -22,7 +22,7 @@
 	position: relative;
 	left: 0;
 
-	content: url(/rocket-1.png) !important;
+	content: url(/images/rocket-1.png) !important;
 
 	line-height: normal;
 }

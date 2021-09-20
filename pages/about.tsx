@@ -12,7 +12,7 @@ function About(): JSX.Element {
 
 			<LeftTextCard
 				htagText="Why Eivolo?"
-				objdata="/EivoloLandingPage_AboutUsPage_Illustration.svg"
+				objdata="/images/EivoloLandingPage_AboutUsPage_Illustration.svg"
 			>
 				<p>
 					We founded Eivolo from a desire to deliver what we felt was lacking in the industry;
@@ -24,7 +24,7 @@ function About(): JSX.Element {
 
 			<RightTextCard
 				htagText="History"
-				objdata="/EivoloLandingPage_AboutUsHistory_Illustration.svg"
+				objdata="/images/EivoloLandingPage_AboutUsHistory_Illustration.svg"
 			>
 				<p>
 					In such a highly specialised field, our clients found that there was often a gap in
@@ -80,7 +80,7 @@ function About(): JSX.Element {
 
 			<RightTextCard
 				htagText="Our Values"
-				objdata="/EivoloLandingPage_AboutUsOurValues_Illustration.svg"
+				objdata="/images/EivoloLandingPage_AboutUsOurValues_Illustration.svg"
 			>
 				<p>
 					At Eivolo, our values underpin everything we do. We believe our high moral standards and dedication

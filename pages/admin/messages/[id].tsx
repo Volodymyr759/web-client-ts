@@ -5,11 +5,11 @@ import Link from 'next/link';
 import { ParsedUrlQuery } from 'querystring';
 import { ErrorMessage, Field, FieldAttributes, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { IMessage } from '../../../interfaces/message.interface';
+import { IMessage } from '../../../infrastructure/interfaces/message.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 import { Htag } from '../../../components';
-import { useHttp } from '../../../hooks/use-http.hook';
-import { AuthContext } from '../../../context/auth-context';
+import { useHttp } from '../../../infrastructure/hooks/use-http.hook';
+import { AuthContext } from '../../../infrastructure/context/auth-context';
 import { AppConstants } from '../../../infrastructure/app.constants';
 
 function Message(props: { message: IMessage }): JSX.Element {

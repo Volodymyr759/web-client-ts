@@ -15,7 +15,7 @@ function Home(): JSX.Element {
         htagSize="h1"
         buttonText="Learn More"
         buttonLink="/success-stories"
-        objdata="/EivoloLandingPage_DigitalSolutions_Illustration.svg"
+        objdata="/images/EivoloLandingPage_DigitalSolutions_Illustration.svg"
       >
         Our industry leading team will drive and support your digital projects end to end.
       </TitleCard>
@@ -30,7 +30,7 @@ function Home(): JSX.Element {
         htagText="Outsourcing"
         buttonText="Learn More >"
         buttonLink="/outsourcing"
-        objdata="/EivoloLandingPage_WhyOutsource_Illustration.svg"
+        objdata="/images/EivoloLandingPage_WhyOutsource_Illustration.svg"
       >
         <p>
           We understand how difficult it can be to source experienced local talent,
@@ -42,7 +42,7 @@ function Home(): JSX.Element {
         htagText="Web Design and Development"
         buttonText="Learn More >"
         buttonLink="/web-development"
-        objdata="/EivoloLandingPage_WebDesignandDevelopment_Illustration.svg"
+        objdata="/images/EivoloLandingPage_WebDesignandDevelopment_Illustration.svg"
       >
         <p>
           In an increasingly digital world, simple websites are no longer immersive or intuitive enough
@@ -55,7 +55,7 @@ function Home(): JSX.Element {
         htagText="App Design & Development"
         buttonText="Learn More >"
         buttonLink="/mobile-development"
-        objdata="/EivoloLandingPage_AppDesignandDevelopment_Illustration.svg"
+        objdata="/images/EivoloLandingPage_AppDesignandDevelopment_Illustration.svg"
       >
         <p>
           Mobile apps deliver absolute customer loyalty within an engaging, immersive format.
@@ -68,7 +68,7 @@ function Home(): JSX.Element {
         htagText="Security Audit Services"
         buttonText="Learn More >"
         buttonLink="/security-auditing"
-        objdata="/EivoloLandingPage_SecurityAuditServices_Illustration.svg"
+        objdata="/images/EivoloLandingPage_SecurityAuditServices_Illustration.svg"
       >
         <p>
           Cybersecurity is a growing concern in both private and public sectors,
@@ -80,7 +80,7 @@ function Home(): JSX.Element {
         htagText="For Startup"
         buttonText="Get In Touch >"
         buttonLink="/for-startups"
-        objdata="/EivoloLandingPage_ForStartups_Illustration.svg"
+        objdata="/images/EivoloLandingPage_ForStartups_Illustration.svg"
       >
         <p>
           In a fast-paced world that is rich with new ideas, we welcome new innovators to share their ideas with us.

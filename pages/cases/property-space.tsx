@@ -12,7 +12,7 @@ function PropertySpace(): JSX.Element {
 
 			<section className="row3">
 				<div className="img-container">
-					<img src="/logo-1.png" alt="Property Space Logo" />
+					<img src="/images/logo-1.png" alt="Property Space Logo" />
 				</div>
 				<TextCard
 					htagText="Property Space (Sydney, Australia)"
@@ -88,7 +88,7 @@ function PropertySpace(): JSX.Element {
 					</p>
 				</TextCard>
 				<div className="img-container">
-					<img src="/image-6-1.png" />
+					<img src="/images/image-6-1.png" />
 				</div>
 			</section>
 

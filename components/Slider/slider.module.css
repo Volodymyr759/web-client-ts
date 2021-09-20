@@ -23,7 +23,7 @@
 	width: 2rem;
 	height: 2rem;
 
-	background-image: url(/arrow_right.png);
+	background-image: url(/images/arrow_right.png);
 	background-repeat: no-repeat;
 	background-position: 50%;
 	background-size: 100% 100%;
@@ -35,7 +35,7 @@
 	width: 2rem;
 	height: 2rem;
 
-	background-image: url(/arrow_left.png);
+	background-image: url(/images/arrow_left.png);
 	background-repeat: no-repeat;
 	background-position: 50%;
 	background-size: 100% 100%;

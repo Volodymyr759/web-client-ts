@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import Cookies from 'universal-cookie';
 import { P, TextCard } from "../components";
 import { withLayout } from "../layouts/public/Layout";
-import { ILoginUser } from '../interfaces/login-user.interface';
+import { ILoginUser } from '../infrastructure/interfaces/login-user.interface';
 import { useState } from 'react';
 import { AppConstants } from '../infrastructure/app.constants';
 

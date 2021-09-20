@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { MessageItemProps } from './message-item.props';
 import styles from './message-item.module.css';
+import { AppConstants } from '../../infrastructure/app.constants';
 
 export const MessageItem = ({ message }: MessageItemProps): JSX.Element => {
 	const deleteMessage = async (id: string) => {
-		await fetch('https://polar-castle-18354.herokuapp.com/api/messages/' + id, {
+		await fetch(AppConstants.API_BASE_URL + '/api/messages/' + id, {
 			method: "DELETE"
 		});
 		alert(`Message with id: ${id} deleted, update this page - to do`);

@@ -5,7 +5,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { P, TextCard } from "../components";
 import { withLayout } from "../layouts/public/Layout";
-import { ILoginUser } from '../interfaces/login-user.interface';
+import { ILoginUser } from '../infrastructure/interfaces/login-user.interface';
 import { AppConstants } from '../infrastructure/app.constants';
 
 const submitHandler = async (user: ILoginUser): Promise<void> => {

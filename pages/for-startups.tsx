@@ -15,7 +15,7 @@ function ForStartups(): JSX.Element {
 				htagSize="h1"
 				buttonText="Talk To Us"
 				buttonLink="/contact-us"
-				objdata="/EivoloLandingPage_ForStartups_Illustration.svg"
+				objdata="/images/EivoloLandingPage_ForStartups_Illustration.svg"
 			>
 				Our industry leading team will drive and support your digital projects end to end.
 			</TitleCard>
@@ -32,7 +32,7 @@ function ForStartups(): JSX.Element {
 				</p>
 			</CenterTextCard>
 
-			<section className="row" style={{ backgroundImage: "url(/gradient_bg.svg)" }}>
+			<section className="row" style={{ backgroundImage: "url(/images/gradient_bg.svg)" }}>
 				<div className="bubblewrapper">
 					<IconTextBox appearance="rocket" headerText="Discovery Sessions">
 						<ul>

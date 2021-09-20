@@ -15,20 +15,6 @@ export const SidebarMenu = (): JSX.Element => {
 					</Link>
 				</li>
 				<li className={styles.sidebaritem}>
-					{/* <span className={styles.sidebarlink}>Users</span>
-					<ul className={styles.submenu}>
-						<li className={styles.submenuitem}>
-							<Link href="/admin/users">
-								<a> Users List </a>
-							</Link>
-						</li>
-						<li className={styles.submenuitem}>
-							<Link href="/admin/roles">
-								<a>Roles</a>
-							</Link>
-						</li>
-					</ul> */}
-
 					<a
 						className={styles.sidebarlink}
 						data-bs-toggle="collapse"

@@ -11,7 +11,7 @@ export const Navbar = ({ className, ...props }: NavbarProps): JSX.Element => {
 			<Link href="/">
 				<a>
 					<Image
-						src="/logo_eivolo.png"
+						src="/images/logo_eivolo.png"
 						alt="Eivolo Logo"
 						width={185}
 						height={84}

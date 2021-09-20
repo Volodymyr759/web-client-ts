@@ -3,7 +3,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { Htag, Pagination, UserList } from '../../../components';
 import { AppConstants } from '../../../infrastructure/app.constants';
-import { IUser } from '../../../interfaces/user.interface';
+import { IUser } from '../../../infrastructure/interfaces/user.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 
 function Users(props: { users: IUser[] }): JSX.Element {

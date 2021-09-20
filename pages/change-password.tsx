@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Htag } from '../components';
-import { AuthContext } from '../context/auth-context';
+import { AuthContext } from '../infrastructure/context/auth-context';
 import { withLayout } from "../layouts/public/Layout";
-import { useHttp } from '../hooks/use-http.hook';
-import { IChangePassword } from '../interfaces/change-password.interface';
+import { useHttp } from '../infrastructure/hooks/use-http.hook';
+import { IChangePassword } from '../infrastructure/interfaces/change-password.interface';
 
 function ChangePassword(): JSX.Element {
 	const router = useRouter();

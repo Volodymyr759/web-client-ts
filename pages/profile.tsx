@@ -2,12 +2,12 @@ import { useContext, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Htag } from '../components';
-import { AuthContext } from '../context/auth-context';
+import { AuthContext } from '../infrastructure/context/auth-context';
 import { withLayout } from "../layouts/public/Layout";
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { AppConstants } from '../infrastructure/app.constants';
-import { IUser } from '../interfaces/user.interface';
+import { IUser } from '../infrastructure/interfaces/user.interface';
 
 function Profile(props: { profile: IUser }): JSX.Element {
 	const router = useRouter();

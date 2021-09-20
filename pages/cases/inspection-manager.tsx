@@ -12,7 +12,7 @@ function InspectionManager(): JSX.Element {
 
 			<section className="row3">
 				<div className="img-container">
-					<img src="/logo-2.png" alt="Inspection Manager Logo" />
+					<img src="/images/logo-2.png" alt="Inspection Manager Logo" />
 				</div>
 				<TextCard
 					htagText="Inspection Manager (Sydney, Australia)"
@@ -83,7 +83,7 @@ function InspectionManager(): JSX.Element {
 					</p>
 				</TextCard>
 				<div className="img-container">
-					<img src="/Layer-1-1-2.png" />
+					<img src="/images/Layer-1-1-2.png" />
 				</div>
 			</section>
 

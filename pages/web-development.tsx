@@ -15,13 +15,13 @@ function WebDevelopment(): JSX.Element {
 				htagSize="h2"
 				buttonText="Talk To Us >"
 				buttonLink="/contact-us"
-				objdata="/EivoloLandingPage_WebDesignandDevelopment_Illustration.svg"
+				objdata="/images/EivoloLandingPage_WebDesignandDevelopment_Illustration.svg"
 			>
 				Fast, intuitive web design & development. In an increasingly digital world, basic websites are no longer
 				immersive or intuitive enough to meet changing consumer expectations.
 			</TitleCard>
 
-			<section className="row" style={{ backgroundImage: "url(/gradient_bg.svg)" }}>
+			<section className="row" style={{ backgroundImage: "url(/images/gradient_bg.svg)" }}>
 				<div className="bubblewrapper">
 					<Htag tag="h2">Web Design And Development With Eivolo</Htag>
 				</div>
@@ -52,7 +52,7 @@ function WebDevelopment(): JSX.Element {
 				</div>
 			</section>
 
-			<RightSideCard htagText="Technologies" imgsrc="/Technologies-Logotypes.png">
+			<RightSideCard htagText="Technologies" imgsrc="/images/Technologies-Logotypes.png">
 				<p>
 					Eivolo works with a variety of different technologies, offering our clients a wide range of flexibility.
 					A frequent mistake that businesses make is choosing unsuitable technologies that do not allow results to manifest
