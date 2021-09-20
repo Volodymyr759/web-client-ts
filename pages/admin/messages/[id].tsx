@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { ParsedUrlQuery } from 'querystring';
 import { ErrorMessage, Field, FieldAttributes, Form, Formik } from 'formik';
@@ -15,7 +15,7 @@ import { AppConstants } from '../../../infrastructure/app.constants';
 function Message(props: { message: IMessage }): JSX.Element {
 	const [messageState] = useState(props.message);
 	const { access_token } = useContext(AuthContext);
-
+	const router = useRouter();
 	const prefCommunicationOptions = [
 		{ key: 'Email', value: 'Email' },
 		{ key: 'Phone', value: 'Phone' },
@@ -31,7 +31,7 @@ function Message(props: { message: IMessage }): JSX.Element {
 			}
 		} catch (e) {
 			console.log(e);
-			Router.push('/login');
+			router.push('/login');
 		}
 	};
 	return (

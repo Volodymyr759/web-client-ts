@@ -42,7 +42,6 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 			throw new Error('No auth data.');
 		}
 		let profile;
-		console.log('UserId', context.query.userId);
 		let res = await fetch(AppConstants.API_BASE_URL + '/api/auth/' + JSON.parse(authCookie).userId, {
 			method: "GET",
 			headers: { "Authorization": "Bearer " + JSON.parse(authCookie).access_token }
