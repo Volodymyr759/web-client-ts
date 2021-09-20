@@ -40,6 +40,7 @@ function User(props: { user: IUser }): JSX.Element {
 				initialValues={{
 					email: props.user.email,
 					createdAt: new Date(props.user.createdAt),
+					updatedAt: new Date(props.user.updatedAt),
 					roles: props.user.roles.includes(0) ? [Roles.User] : [Roles.Admin],
 				}}
 				validationSchema={Yup.object({
