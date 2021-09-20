@@ -52,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ token: JSON.parse(authCookie).refresh_token }),
 			});
-			if (res.ok) { // try to get message again
+			if (res.ok) { // try to get profile again
 				const jwtObject = await res.json();
 				res = await fetch(AppConstants.API_BASE_URL + '/api/auth/' + JSON.parse(authCookie).userId, {
 					method: "GET",
