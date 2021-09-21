@@ -12,6 +12,7 @@ import { useHttp } from '../../../infrastructure/hooks/use-http.hook';
 import { AuthContext } from '../../../infrastructure/context/auth-context';
 import { Roles } from '../../../infrastructure/roles.enum';
 import { AppConstants } from '../../../infrastructure/app.constants';
+import { useRefreshToken } from '../../../infrastructure/hooks/use-refresh-token.hook';
 
 function User(props: { user: IUser }): JSX.Element {
 	const [userState] = useState(props.user);
@@ -134,15 +135,9 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 			method: "GET",
 			headers: { "Authorization": "Bearer " + JSON.parse(authCookie).access_token }
 		});
-		console.log('Response status: ', res.status);
 		if (res.status == 401) { // access_token has expired
-			res = await fetch(AppConstants.API_BASE_URL + '/api/auth/refresh', {
-				method: 'POST',
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ token: JSON.parse(authCookie).refresh_token }),
-			});
-			if (res.ok) { // try to get user again
-				const jwtObject = await res.json();
+			const jwtObject = await useRefreshToken(JSON.parse(authCookie).refresh_token);
+			if (jwtObject) { // try to get user again
 				res = await fetch(AppConstants.API_BASE_URL + '/api/auth/' + context.query.id, {
 					method: "GET",
 					headers: { "Authorization": "Bearer " + jwtObject.access_token }

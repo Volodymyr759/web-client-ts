@@ -5,6 +5,7 @@ import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 import { AppConstants } from '../../../infrastructure/app.constants';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { ParsedUrlQuery } from 'querystring';
+import { useRefreshToken } from '../../../infrastructure/hooks/use-refresh-token.hook';
 
 function Messages(props: { messages: IMessage[] }): JSX.Element {
 	const [messagesState, setMessagesState] = useState(props.messages);
@@ -93,13 +94,8 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 			headers: { "Authorization": "Bearer " + JSON.parse(authCookie).access_token }
 		});
 		if (res.status == 401) { // access_token has expired
-			res = await fetch(AppConstants.API_BASE_URL + '/api/auth/refresh', {
-				method: 'POST',
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ token: JSON.parse(authCookie).refresh_token }),
-			});
-			if (res.ok) { // try to get messages again
-				const jwtObject = await res.json();
+			const jwtObject = await useRefreshToken(JSON.parse(authCookie).refresh_token);
+			if (jwtObject) {// try to get messages again
 				res = await fetch(AppConstants.API_BASE_URL + '/api/messages', {
 					method: "GET",
 					headers: { "Authorization": "Bearer " + jwtObject.access_token }

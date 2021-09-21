@@ -11,6 +11,7 @@ import { Htag } from '../../../components';
 import { useHttp } from '../../../infrastructure/hooks/use-http.hook';
 import { AuthContext } from '../../../infrastructure/context/auth-context';
 import { AppConstants } from '../../../infrastructure/app.constants';
+import { useRefreshToken } from '../../../infrastructure/hooks/use-refresh-token.hook';
 
 function Message(props: { message: IMessage }): JSX.Element {
 	const [messageState] = useState(props.message);
@@ -186,13 +187,8 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 			headers: { "Authorization": "Bearer " + JSON.parse(authCookie).access_token }
 		});
 		if (res.status == 401) { // access_token has expired
-			res = await fetch(AppConstants.API_BASE_URL + '/api/auth/refresh', {
-				method: 'POST',
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ token: JSON.parse(authCookie).refresh_token }),
-			});
-			if (res.ok) { // try to get message again
-				const jwtObject = await res.json();
+			const jwtObject = await useRefreshToken(JSON.parse(authCookie).refresh_token);
+			if (jwtObject) { // try to get message again
 				res = await fetch(AppConstants.API_BASE_URL + '/api/messages/' + context.query.id, {
 					method: "GET",
 					headers: { "Authorization": "Bearer " + jwtObject.access_token }
