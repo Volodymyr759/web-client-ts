@@ -5,6 +5,7 @@ import { Htag, Pagination, UserList } from '../../../components';
 import { AppConstants } from '../../../infrastructure/app.constants';
 import { IUser } from '../../../infrastructure/interfaces/user.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
+import { useRefreshToken } from '../../../infrastructure/hooks/use-refresh-token.hook';
 
 function Users(props: { users: IUser[] }): JSX.Element {
 	const [usersState, setUsersState] = useState(props.users);
@@ -64,13 +65,8 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 			headers: { "Authorization": "Bearer " + JSON.parse(authCookie).access_token }
 		});
 		if (res.status == 401) { // access_token has expired
-			res = await fetch(AppConstants.API_BASE_URL + '/api/auth/refresh', {
-				method: 'POST',
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ token: JSON.parse(authCookie).refresh_token }),
-			});
-			if (res.ok) { // try to get users again
-				const jwtObject = await res.json();
+			const jwtObject = await useRefreshToken(JSON.parse(authCookie).refresh_token);
+			if (jwtObject) { // try to get users again
 				res = await fetch(AppConstants.API_BASE_URL + '/api/auth', {
 					method: "GET",
 					headers: { "Authorization": "Bearer " + jwtObject.access_token }
