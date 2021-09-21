@@ -95,7 +95,7 @@ function Register(): JSX.Element {
 				<div className="formgroup">
 					<div className="sso-button-wrapper">
 						<Image
-							src="/google-icon.svg"
+							src="/images/google-icon.svg"
 							width={24}
 							height={24}
 							alt="Google"
@@ -109,10 +109,10 @@ function Register(): JSX.Element {
 				<div className="formgroup">
 					<div className="sso-button-wrapper">
 						<Image
-							src="/facebook-icon.svg"
+							src="/images/facebook-icon.svg"
 							width={24}
 							height={24}
-							alt="Google"
+							alt="Facebook"
 						/>
 						<div style={{ width: "100%" }}>
 							<button className="primary-button">Continue with Facebook</button>
