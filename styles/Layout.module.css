@@ -13,6 +13,8 @@
 	grid-template-columns: 200px auto;
 	grid-template-rows: 1fr;
 	gap: 10px;
+
+	min-height: 75vh;
 }
 
 @media (max-width: 1200px) {

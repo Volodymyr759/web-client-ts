@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Htag, MessageList, Pagination } from '../../../components';
 import { IMessage } from '../../../infrastructure/interfaces/message.interface';
 import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
@@ -11,6 +11,8 @@ function Messages(props: { messages: IMessage[] }): JSX.Element {
 	const [currentPage, setCurrentPage] = useState(AppConstants.ITEMS_CURRENT_PAGE_DEFAULT);
 	const [direction, setDirection] = useState('Asc');
 	const [messagesPerPage] = useState(AppConstants.ITEMS_PER_PAGE);
+	const [search, setSearch] = useState('');
+	const [searchResults, setSearchResults] = useState<IMessage[]>([]);
 
 	let currentMessages = messagesState;
 	if (currentMessages.length > 0) {
@@ -18,6 +20,16 @@ function Messages(props: { messages: IMessage[] }): JSX.Element {
 		const indexOfFirstMessage = indexOfLastMessage - messagesPerPage;
 		currentMessages = messagesState.slice(indexOfFirstMessage, indexOfLastMessage);
 	}
+
+	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+		setSearch(event.target.value);
+	};
+
+	useEffect(() => {
+		const results = messagesState.filter(message => message.fullName.toLowerCase().includes(search));
+		setSearchResults(results);
+	}, [search]);
+
 	const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
 	const sortMessagesByName = () => {
@@ -44,9 +56,28 @@ function Messages(props: { messages: IMessage[] }): JSX.Element {
 	}
 
 	return <>
-		<Htag tag="h3">Messages</Htag>
-		<MessageList messages={currentMessages} sortByName={sortMessagesByName} />
-		<Pagination itemsPerPage={messagesPerPage} totalItems={messagesState.length} paginate={paginate} />
+		<div className="row">
+			<Htag tag="h3">Messages</Htag>
+			<div style={{ marginTop: '32px' }}>
+				<input
+					className="form-input"
+					type="text"
+					placeholder="Search by name..."
+					value={search}
+					onChange={handleChange}
+				/>
+			</div>
+		</div>
+		{
+			searchResults.length < messagesState.length ?
+				<MessageList messages={searchResults} sortByName={sortMessagesByName} />
+				:
+				<>
+					<MessageList messages={currentMessages} sortByName={sortMessagesByName} />
+					<Pagination itemsPerPage={messagesPerPage} totalItems={messagesState.length} paginate={paginate} />
+				</>
+		}
+
 	</>;
 }
 
