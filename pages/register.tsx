@@ -7,6 +7,7 @@ import { P, TextCard } from "../components";
 import { withLayout } from "../layouts/public/Layout";
 import { ILoginUser } from '../infrastructure/interfaces/login-user.interface';
 import { AppConstants } from '../infrastructure/app.constants';
+import { IEmailObject } from '../infrastructure/interfaces/email-object.interface';
 
 const submitHandler = async (user: ILoginUser): Promise<void> => {
 	// Save user to db
@@ -17,13 +18,19 @@ const submitHandler = async (user: ILoginUser): Promise<void> => {
 	});
 	res.status == 201 ? alert('User has been registered.') : alert('Registration error.');
 	// Sending email-confirmation to user
-	fetch('/api/mailer', {
+	const email: IEmailObject = {
+		to: user.login,
+		subject: 'Registration on eivolo.com is confirmed',
+		text: '',
+		html: `<div>You are successfully registered to eivolo.com with login: ${user.login}, password: ${user.password}</div>`
+	};
+	await fetch('/api/mailer', {
 		method: 'POST',
 		headers: {
 			'Accept': 'application/json, text/plain, */*',
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(user)
+		body: JSON.stringify({ emailObject: email })
 	}).then((res) => {
 		console.log('Response received');
 		if (res.status === 200) console.log('Response succeeded!');
