@@ -1,31 +1,28 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { createTransport } from 'nodemailer';
+import { IEmailObject } from '../../infrastructure/interfaces/email-object.interface';
 
 export default function (req: NextApiRequest, res: NextApiResponse): void {
 	const transporter = createTransport({
-		port: 2525,
-		host: 'mail.smtp2go.com',
+		port: process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT) : 2525,
+		host: process.env.SMTP_HOST,
 		auth: {
-			user: 'cyberchisel.com',
-			pass: 'y2Q5GXHkxYZQ',
+			user: process.env.SMTP_USER,
+			pass: process.env.SMTP_PASSWORD,
 		},
 		secure: false,
 	});
-
-	const mailData = {
-		from: 'noreplay@old.housl.propertyspace.com',
-		to: 'logisticmaster.2000@gmail.com',
-		subject: `Message From ${req.body.login}`,
-		text: 'You are successfully registered to eivolo.com',
-		html: `<div>You are successfully registered to eivolo.com with login: ${req.body.login} < /div>`
-	};
-
-	transporter.sendMail(mailData, function (err, info) {
-		if (err)
-			console.log(err);
-		else
-			console.log(info);
-	});
-
-	res.status(200);
+	const email: IEmailObject = req.body.emailObject;
+	try {
+		const mailData = {
+			from: process.env.SMTP_BASE_ADDRESS,
+			...email
+		};
+		transporter.sendMail(mailData, function (err, info) {
+			err ? console.log(err) : console.log(info);
+		});
+		res.status(200);
+	} catch (e) {
+		res.status(500);
+	}
 }

@@ -7,12 +7,17 @@ import { withLayout } from "../layouts/public/Layout";
 import { AppConstants } from '../infrastructure/app.constants';
 
 const submitHandler = async (email: IForgotPasswordDto): Promise<void> => {
+	// Check if user exists in db
 	const res = await fetch(AppConstants.API_BASE_URL + '/api/auth/register', {
 		method: "POST",
 		headers: { "Content-type": "application/json" },
 		body: JSON.stringify(email)
 	});
 	return res.status == 201 ? alert('User has been registered.') : alert('Registration error.');
+	// Generate new password
+
+	// Send email with new password
+
 };
 
 function ForgotPassword(): JSX.Element {
