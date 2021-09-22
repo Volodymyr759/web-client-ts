@@ -9,12 +9,26 @@ import { ILoginUser } from '../infrastructure/interfaces/login-user.interface';
 import { AppConstants } from '../infrastructure/app.constants';
 
 const submitHandler = async (user: ILoginUser): Promise<void> => {
+	// Save user to db
 	const res = await fetch(AppConstants.API_BASE_URL + '/api/auth/register', {
 		method: "POST",
 		headers: { "Content-type": "application/json" },
 		body: JSON.stringify(user)
 	});
-	return res.status == 201 ? alert('User has been registered.') : alert('Registration error.');
+	res.status == 201 ? alert('User has been registered.') : alert('Registration error.');
+	// Sending email-confirmation to user
+	fetch('/api/mailer', {
+		method: 'POST',
+		headers: {
+			'Accept': 'application/json, text/plain, */*',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(user)
+	}).then((res) => {
+		console.log('Response received');
+		if (res.status === 200) console.log('Response succeeded!');
+	});
+	return;
 };
 
 function Register(): JSX.Element {
