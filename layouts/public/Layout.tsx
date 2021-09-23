@@ -8,7 +8,9 @@ const Layout = ({ children }: LayoutProps): JSX.Element => (
 		<Header className={styles.header} />
 		<Navbar className={styles.navbar} />
 		<div className={styles.body}>
-			{children}
+			<div className="container" style={{ minHeight: '75vh' }}>
+				{children}
+			</div>
 		</div>
 		<Footer className={styles.footer} />
 	</>
