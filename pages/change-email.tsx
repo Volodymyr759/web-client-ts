@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
@@ -7,6 +8,8 @@ import { AuthContext } from '../infrastructure/context/auth-context';
 import { withLayout } from "../layouts/public/Layout";
 import { IChangeEmail } from '../infrastructure/interfaces/change-email.interface';
 import { useHttp } from '../infrastructure/hooks/use-http.hook';
+import { createNotification } from '../infrastructure/notification';
+import { NotificationType } from '../infrastructure/enums/notification-types.enum';
 
 function ChangeEmail(): JSX.Element {
 	const router = useRouter();
@@ -19,17 +22,25 @@ function ChangeEmail(): JSX.Element {
 	const submitHandler = async (changeEmail: IChangeEmail): Promise<void> => {
 		try {
 			const data = await useHttp('/api/auth/change-email', 'POST', access_token, JSON.stringify(changeEmail));
-			if (!data) {
+			if (data.Error) {
+				createNotification('Error of changing email.', NotificationType.Error);
 				throw new Error('Error of updating...');
+			} else {
+				createNotification('Email has been changed.');
+				createNotification('Please Log In to continue.', NotificationType.Info);
 			}
+			router.push('/login');
 		} catch (e) {
 			console.log(e);
-			router.push('/login');
 		}
 	};
 
 	return (
 		<>
+			<Head>
+				<title>Eivolo – Change user's email</title>
+				<meta name="keywords" content="Change email" />
+			</Head>
 			<Htag tag="h3">Change your email</Htag>
 			<Formik
 				initialValues={{
@@ -58,8 +69,6 @@ function ChangeEmail(): JSX.Element {
 					(values, { setSubmitting }) => {
 						submitHandler(values);
 						setSubmitting(false);
-						alert('Email has been changed. Please re-Sign-in with new email.');
-						setTimeout(() => { router.push('/login'), 3000; });
 					}
 				}
 				validateOnMount

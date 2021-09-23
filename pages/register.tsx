@@ -5,44 +5,62 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { P, TextCard } from "../components";
 import { withLayout } from "../layouts/public/Layout";
+import { createNotification } from '../infrastructure/notification';
 import { ILoginUser } from '../infrastructure/interfaces/login-user.interface';
 import { AppConstants } from '../infrastructure/app.constants';
 import { IEmailObject } from '../infrastructure/interfaces/email-object.interface';
-
-const submitHandler = async (user: ILoginUser): Promise<void> => {
-	// Save user to db
-	const res = await fetch(AppConstants.API_BASE_URL + '/api/auth/register', {
-		method: "POST",
-		headers: { "Content-type": "application/json" },
-		body: JSON.stringify(user)
-	});
-	res.status == 201 ? alert('User has been registered.') : alert('Registration error.');
-	// Sending email-confirmation to user
-	const email: IEmailObject = {
-		to: user.login,
-		subject: 'Registration on eivolo.com is confirmed',
-		text: '',
-		html: `<div>You are successfully registered to eivolo.com with login: ${user.login}, password: ${user.password}</div>`
-	};
-	await fetch('/api/mailer', {
-		method: 'POST',
-		headers: {
-			'Accept': 'application/json, text/plain, */*',
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({ emailObject: email })
-	}).then((res) => {
-		console.log('Response received');
-		if (res.status === 200) console.log('Response succeeded!');
-	});
-	return;
-};
+import { NotificationType } from '../infrastructure/enums/notification-types.enum';
+import { useRouter } from 'next/router';
 
 function Register(): JSX.Element {
 	const [showModal, setShowModal] = useState(false);
 	const modalHandler = (show: boolean) => {
 		setShowModal(show);
 	};
+	const router = useRouter();
+
+	const submitHandler = async (user: ILoginUser): Promise<void> => {
+		try {
+			// Save user to db
+			const res = await fetch(AppConstants.API_BASE_URL + '/api/auth/register', {
+				method: "POST",
+				headers: { "Content-type": "application/json" },
+				body: JSON.stringify(user)
+			});
+			if (res.status == 201) {
+				createNotification('User has been registered.');
+				// Sending email-confirmation to user
+				const email: IEmailObject = {
+					to: user.login,
+					subject: 'Registration on eivolo.com is confirmed',
+					text: '',
+					html: `<div>You are successfully registered to eivolo.com with login: ${user.login}, password: ${user.password}</div>`
+				};
+				fetch('/api/mailer', {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json, text/plain, */*',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ emailObject: email })
+				}).then((res) => {
+					if (!res.ok) {
+						createNotification('Error of sending email.', NotificationType.Error);
+						throw new Error('Error of sending email.');
+					}
+				});
+			} else {
+				createNotification('Registration error.', NotificationType.Error);
+				throw new Error('Error of creating the User.');
+			}
+			createNotification('Email confirmation has sent.');
+			createNotification('Please Log In to continue.', NotificationType.Info);
+			router.push('/login');
+		} catch (e) {
+			console.log(e);
+		}
+	};
+
 	return (
 		<>
 			<Head>
