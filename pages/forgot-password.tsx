@@ -5,25 +5,58 @@ import * as Yup from 'yup';
 import { P, TextCard } from "../components";
 import { withLayout } from "../layouts/public/Layout";
 import { AppConstants } from '../infrastructure/app.constants';
-
-const submitHandler = async (email: IForgotPasswordDto): Promise<void> => {
-	// Check if user exists in db
-	const res = await fetch(AppConstants.API_BASE_URL + '/api/auth/register', {
-		method: "POST",
-		headers: { "Content-type": "application/json" },
-		body: JSON.stringify(email)
-	});
-	return res.status == 201 ? alert('User has been registered.') : alert('Registration error.');
-	// Generate new password
-
-	// Send email with new password
-
-};
+import { createNotification } from '../infrastructure/notification';
+import { NotificationType } from '../infrastructure/enums/notification-types.enum';
+import { IEmailObject } from '../infrastructure/interfaces/email-object.interface';
+import { useRouter } from 'next/router';
 
 function ForgotPassword(): JSX.Element {
 	const [showInfo, setShowInfo] = useState(false);
-	const infoTextHandler = (show: boolean) => {
-		setShowInfo(show);
+	const infoTextHandler = (show: boolean) => { setShowInfo(show); };
+	const router = useRouter();
+
+	const submitHandler = async (forgotPasswordDto: IForgotPasswordDto): Promise<void> => {
+		try {
+			// Check if user exists in db
+			const res = await fetch(AppConstants.API_BASE_URL + '/api/auth/forgot-password', {
+				method: "POST",
+				headers: { "Content-type": "application/json" },
+				body: JSON.stringify(forgotPasswordDto)
+			});
+			if (res.status == 201) {
+				// Send email with new password
+				createNotification('New password has been created.');
+				const newPassword = await res.json();
+				console.log("Password", newPassword.password);
+				const email: IEmailObject = {
+					to: forgotPasswordDto.email,
+					subject: 'New password has been created.',
+					text: '',
+					html: `<div>New password has been successfully created: ${newPassword.password}</div>`
+				};
+				fetch('/api/mailer', {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json, text/plain, */*',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ emailObject: email })
+				}).then((res) => {
+					if (!res.ok) {
+						createNotification('Error of sending email.', NotificationType.Error);
+						throw new Error('Error of sending email.');
+					}
+				});
+			} else {
+				createNotification('Error of creating new password.', NotificationType.Error);
+				throw new Error('Error of creating new password.');
+			}
+			createNotification('New password has been sent to your email.');
+			createNotification('Please Log In with new password to continue.', NotificationType.Info);
+			router.push('/login');
+		} catch (e) {
+			console.log(e);
+		}
 	};
 
 	return (
@@ -52,11 +85,9 @@ function ForgotPassword(): JSX.Element {
 					}
 					onSubmit={
 						(values, { setSubmitting, resetForm }) => {
-							setTimeout(() => {
-								submitHandler(values);
-								resetForm();
-								setSubmitting(false);
-							}, 1);
+							submitHandler(values);
+							resetForm();
+							setSubmitting(false);
 						}
 					}
 					validateOnMount
@@ -65,8 +96,8 @@ function ForgotPassword(): JSX.Element {
 						<div className="formgroup" style={{ marginBottom: "5px" }}>
 							<Form>
 								<p><label className="form-label">Email:</label></p>
-								<Field name="login" className="form-input" type="email" />
-								<ErrorMessage name="login" render={msg => <div className="form-error-message">{msg}</div>} />
+								<Field name="email" className="form-input" type="email" />
+								<ErrorMessage name="email" render={msg => <div className="form-error-message">{msg}</div>} />
 								<br /><br />
 								<p>
 									<button className="primary-button" type="submit" disabled={!props.isValid || props.isSubmitting}>
