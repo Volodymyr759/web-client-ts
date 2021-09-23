@@ -10,6 +10,7 @@ import { ILoginUser } from '../infrastructure/interfaces/login-user.interface';
 import { useState } from 'react';
 import { AppConstants } from '../infrastructure/app.constants';
 import { useRouter } from 'next/router';
+import { NotificationType } from '../infrastructure/enums/notification-types.enum';
 
 function Login(): JSX.Element {
 	const [showInfo, setShowInfo] = useState(false);
@@ -35,9 +36,9 @@ function Login(): JSX.Element {
 				// httpOnly: true,
 			});
 			createNotification('User has successfully logged in.');
-			router.reload();
+			router.push('/');
 		} catch (e) {
-			createNotification('Login error.', 'error');
+			createNotification('Login error.', NotificationType.Error);
 		}
 	};
 

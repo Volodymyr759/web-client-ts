@@ -7,6 +7,8 @@ import { AuthContext } from '../infrastructure/context/auth-context';
 import { withLayout } from "../layouts/public/Layout";
 import { useHttp } from '../infrastructure/hooks/use-http.hook';
 import { IChangePassword } from '../infrastructure/interfaces/change-password.interface';
+import { createNotification } from '../infrastructure/notification';
+import { NotificationType } from '../infrastructure/enums/notification-types.enum';
 
 function ChangePassword(): JSX.Element {
 	const router = useRouter();
@@ -19,12 +21,16 @@ function ChangePassword(): JSX.Element {
 	const submitHandler = async (changePassword: IChangePassword): Promise<void> => {
 		try {
 			const data = await useHttp('/api/auth/change-password', 'POST', access_token, JSON.stringify(changePassword));
-			if (!data) {
+			if (data.Error) {
+				createNotification('Error of changing password.', NotificationType.Error);
 				throw new Error('Error of updating...');
+			} else {
+				createNotification('Password has been changed.');
+				createNotification('Please Log In to continue.', NotificationType.Info);
 			}
+			router.push('/login');
 		} catch (e) {
 			console.log(e);
-			router.push('/login');
 		}
 	};
 
@@ -57,8 +63,6 @@ function ChangePassword(): JSX.Element {
 					(values, { setSubmitting }) => {
 						submitHandler(values);
 						setSubmitting(false);
-						alert('Password has been changed. Please re-Sign-in with new password.');
-						setTimeout(() => { router.push('/login'), 3000; });
 					}
 				}
 				validateOnMount
