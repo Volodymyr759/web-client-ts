@@ -99,11 +99,10 @@ export const Header = ({ ...props }: HeaderProps): JSX.Element => {
 									</a>
 								</Link>
 							</li>
-							<li className="cta-button menu-item menu-item-type-post_type menu-item-object-page nav-item" onClick={logout}>
+							<li className="cta-button menu-item menu-item-type-post_type menu-item-object-page nav-item">
 								{
 									emailState ?
 										<>
-											{console.log(emailState)}
 											<a href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className="dropdown-toggle nav-link">
 												<span>Profile</span>
 											</a>
@@ -137,11 +136,11 @@ export const Header = ({ ...props }: HeaderProps): JSX.Element => {
 													</Link>
 												</li>
 												<li><hr /></li>
-												{/* <li onClick={logout}>
+												<li onClick={logout}>
 													<Link href="/">
 														<a className="nav-link">Log Out</a>
 													</Link>
-												</li> */}
+												</li>
 											</ul>
 										</>
 										:
