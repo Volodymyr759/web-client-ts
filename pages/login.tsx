@@ -3,39 +3,42 @@ import Image from 'next/image';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import Cookies from 'universal-cookie';
+import { createNotification } from '../infrastructure/notification';
 import { P, TextCard } from "../components";
 import { withLayout } from "../layouts/public/Layout";
 import { ILoginUser } from '../infrastructure/interfaces/login-user.interface';
 import { useState } from 'react';
 import { AppConstants } from '../infrastructure/app.constants';
-
-const submitHandler = async (user: ILoginUser): Promise<void> => {
-	const cookies = new Cookies();
-	cookies.remove('auth');
-	try {
-		const res = await fetch(AppConstants.API_BASE_URL + '/api/auth/login', {
-			method: 'POST',
-			headers: { "Content-type": "application/json" },
-			body: JSON.stringify(user)
-		});
-		if (!res.ok) {
-			throw new Error('User not found');
-		}
-		const data = await res.json();
-		cookies.set('auth', data, {
-			path: '/',
-			maxAge: 2592000,
-			// httpOnly: true,
-		});
-	} catch (e) {
-		alert('Login error.');
-	}
-};
+import { useRouter } from 'next/router';
 
 function Login(): JSX.Element {
 	const [showInfo, setShowInfo] = useState(false);
-	const infoTextHandler = (show: boolean) => {
-		setShowInfo(show);
+	const infoTextHandler = (show: boolean) => { setShowInfo(show); };
+	const router = useRouter();
+
+	const submitHandler = async (user: ILoginUser): Promise<void> => {
+		const cookies = new Cookies();
+		cookies.remove('auth');
+		try {
+			const res = await fetch(AppConstants.API_BASE_URL + '/api/auth/login', {
+				method: 'POST',
+				headers: { "Content-type": "application/json" },
+				body: JSON.stringify(user)
+			});
+			if (!res.ok) {
+				throw new Error('User not found');
+			}
+			const data = await res.json();
+			cookies.set('auth', data, {
+				path: '/',
+				maxAge: 2592000,
+				// httpOnly: true,
+			});
+			createNotification('User has successfully logged in.');
+			router.reload();
+		} catch (e) {
+			createNotification('Login error.', 'error');
+		}
 	};
 
 	return (
@@ -66,11 +69,9 @@ function Login(): JSX.Element {
 					}
 					onSubmit={
 						(values, { setSubmitting, resetForm }) => {
-							setTimeout(() => {
-								submitHandler(values);
-								resetForm();
-								setSubmitting(false);
-							}, 1);
+							submitHandler(values);
+							resetForm();
+							setSubmitting(false);
 						}
 					}
 					validateOnMount
