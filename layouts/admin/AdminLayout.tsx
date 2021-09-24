@@ -7,16 +7,16 @@ const AdminLayout = ({ children }: AdminLayoutProps): JSX.Element => (
 	<>
 		<Header className={styles.header} />
 		<Navbar className={styles.navbar} />
-		<div className={styles.body}>
-			<div className={styles.admincontainer}>
-				<div>
-					<SidebarMenu />
-				</div>
-				<div>
-					{children}
-				</div>
+		{/* <div className={styles.body}> */}
+		<div className={styles.admincontainer}>
+			<div>
+				<SidebarMenu />
+			</div>
+			<div>
+				{children}
 			</div>
 		</div>
+		{/* </div> */}
 		<Footer className={styles.footer} />
 	</>
 );
