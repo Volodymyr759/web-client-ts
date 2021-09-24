@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from 'next/link';
 import { HeaderProps } from "./Header.props";
@@ -10,15 +10,17 @@ export const Header = ({ ...props }: HeaderProps): JSX.Element => {
 	const [emailState, setEmailState] = useState(email);
 	const router = useRouter();
 
+	useEffect(() => {
+		setEmailState(email);
+	}, [emailState]);
+
 	const logout = () => {
 		if (!email) {
 			router.push('/login');
 			return;
 		}
 		logOut();
-		console.log('emailState', emailState);
-
-		setEmailState(null);
+		setEmailState('');
 		router.reload();
 	};
 

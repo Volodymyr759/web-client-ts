@@ -3,7 +3,7 @@ export interface IAuthContext {
 	expires_in: number;
 	token_type: string;
 	refresh_token: string;
-	email: string | null;
+	email: string;
 	roles: number[];
 	userId: string;
 	logOut: () => void;

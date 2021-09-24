@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styles from './Menu.module.css';
@@ -9,9 +9,13 @@ export const Menu = (): JSX.Element => {
 	const [emailState, setEmailState] = useState(email);
 	const router = useRouter();
 
+	useEffect(() => {
+		setEmailState(email);
+	}, [emailState]);
+
 	const logout = () => {
 		logOut();
-		setEmailState(null);
+		setEmailState('');
 		router.reload();
 	};
 
