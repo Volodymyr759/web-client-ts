@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Htag } from '../components';
@@ -11,11 +11,13 @@ import { IUser } from '../infrastructure/interfaces/user.interface';
 
 function Profile(props: { profile: IUser }): JSX.Element {
 	const router = useRouter();
-	const { roles } = useContext(AuthContext);
+	const { access_token } = useContext(AuthContext);
+	const [accessToken, setAccessToken] = useState(access_token);
 
 	useEffect(() => {
-		if (!roles) router.push('/login');
-	}, []);
+		if (!access_token) router.push('/login');
+		setAccessToken(access_token);
+	}, [accessToken]);
 
 	return (
 		<>
