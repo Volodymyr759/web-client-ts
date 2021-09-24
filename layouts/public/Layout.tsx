@@ -22,7 +22,7 @@ const Layout = ({ children }: LayoutProps): JSX.Element => {
 		}}>
 			<Header className={styles.header} />
 			<Navbar className={styles.navbar} />
-			<div className="container">
+			<div className="container" style={{ minHeight: '100vh' }}>
 				{children}
 			</div>
 			<Footer className={styles.footer} />

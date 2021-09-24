@@ -75,7 +75,7 @@ export const Menu = (): JSX.Element => {
 				{
 					emailState ?
 						<>
-							<Link href="/">
+							<Link href="/profile">
 								<a>Profile</a>
 							</Link>
 							<ul className={styles.profiledropdownMenu}>
