@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
@@ -12,11 +12,13 @@ import { NotificationType } from '../infrastructure/enums/notification-types.enu
 
 function ChangePassword(): JSX.Element {
 	const router = useRouter();
-	const { access_token, roles } = useContext(AuthContext);
+	const { access_token } = useContext(AuthContext);
+	const [accessToken, setAccessToken] = useState(access_token);
 
 	useEffect(() => {
-		if (!roles) router.push('/login');
-	}, []);
+		if (!access_token) router.push('/login');
+		setAccessToken(access_token);
+	}, [accessToken]);
 
 	const submitHandler = async (changePassword: IChangePassword): Promise<void> => {
 		try {
