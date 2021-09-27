@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { UserItemProps } from './user-item.props';
-import styles from './user-item.module.css';
 import { format } from 'date-fns';
 import { Roles } from '../../infrastructure/roles.enum';
 import { AppConstants } from '../../infrastructure/app.constants';
@@ -23,21 +22,17 @@ export const UserItem = ({ user }: UserItemProps): JSX.Element => {
 				<td>{user.roles.map(role => Roles[role] + ', ')}</td>
 				<td>
 					<Link href="/admin/users/[id]" as={`/admin/users/${user._id}`}>
-						<a className={styles.edit}></a>
+						<a>
+							<i className="fa fa-pencil"></i>
+						</a>
 					</Link>
 					<span> </span>
 					|
 					<span> </span>
 					<Link href="#">
-						<a
-							className={styles.delete}
-							onClick={
-								() => {
-									if (user._id) {
-										deleteUser(user._id);
-									}
-								}
-							} />
+						<a onClick={() => { if (user._id) { deleteUser(user._id); } }}>
+							<i className="fa fa-trash-o"></i>
+						</a>
 					</Link>
 				</td>
 			</tr>

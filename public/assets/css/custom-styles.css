@@ -18,7 +18,8 @@ body {
 }
 
 #page-wrapper {
-	min-height: 600px;
+	/* min-height: 600px; */
+	min-height: 100vh;
 	padding: 15px 15px;
 
 	background: #ECECEC;
@@ -26,7 +27,7 @@ body {
 
 #page-inner {
 	width: 100%;
-	min-height: 1200px;
+	/* min-height: 1200px; */
 	margin: 10px 20px 10px 0;
 	padding: 15px 30px;
 }
@@ -708,6 +709,8 @@ ul.nav.nav-second-level.collapse.in { background: #121821; }
 }
 
 .navbar-side {
+	height: 100vh;
+
 	border: none;
 	background: #1F2837;
 }
@@ -722,7 +725,10 @@ ul.nav.nav-second-level.collapse.in { background: #121821; }
 .dropdown-user li {
 	margin: 8px 0;
 }
-.navbar-default { border: 0 solid #1F2837; }
+
+.navbar-default {
+	border: 0 solid #1F2837;
+}
 
 .navbar-header {
 	background: transparent;
@@ -841,7 +847,7 @@ ul.dropdown-menu.dropdown-messages li a div {
 
 @media (min-width: 768px) {
 	#page-wrapper {
-		min-height: 1200px;
+		/* min-height: 1200px; */
 		margin: 0 0 0 260px;
 		padding: 0;
 	}

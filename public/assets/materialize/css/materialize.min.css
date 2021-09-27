@@ -1741,8 +1741,8 @@ nav {
 	width: 100%;
 
 	color: #FFF;
-	background-color: #EE6E73;/* height:56px; *//* line-height:56px; */
 }
+
 nav.nav-extended { height: auto; }
 nav.nav-extended .nav-wrapper { height: auto; }
 nav a { color: #FFF; }
@@ -3651,13 +3651,13 @@ form p {
 }
 form p:last-child { margin-bottom: 0; }
 
-[type="checkbox"]:not(:checked),
+/* [type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
 	position: absolute;
 	left: -9999px;
 
 	opacity: 0;
-}
+} */
 
 [type="checkbox"] + label {
 	position: relative;
