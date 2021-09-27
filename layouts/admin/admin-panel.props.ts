@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
 
-export interface AdminLayoutProps {
+export interface AdminPanelProps {
 	children: ReactNode;
 }

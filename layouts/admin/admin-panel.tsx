@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from "react";
 import Cookies from 'universal-cookie';
-import { AdminLayoutProps } from "./admin-layout.props";
+import { AdminPanelProps } from "./admin-panel.props";
 import { AuthContext } from "../../infrastructure/context/auth-context";
 import Head from "next/head";
 
-const AdminPanel = ({ children }: AdminLayoutProps): JSX.Element => {
+const AdminPanel = ({ children }: AdminPanelProps): JSX.Element => {
 	const cookies = new Cookies();
 	const authCookie = cookies.get('auth');
 
@@ -23,7 +23,8 @@ const AdminPanel = ({ children }: AdminLayoutProps): JSX.Element => {
 				<Head>
 					<meta charSet="utf-8" />
 					<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-					<title>Target Material Design Bootstrap Admin Template</title>
+					<title>Eivolo - admin area</title>
+					<link rel="icon" href="/images/favicon.ico" />
 					<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 					<link rel="stylesheet" href="/assets/materialize/css/materialize.min.css" media="screen,projection" />
 					<link href="/assets/css/bootstrap.css" rel="stylesheet" />
@@ -43,9 +44,9 @@ const AdminPanel = ({ children }: AdminLayoutProps): JSX.Element => {
 								<span className="icon-bar"></span>
 								<span className="icon-bar"></span>
 							</button>
-							<a className="navbar-brand waves-effect waves-dark" href="index.html"><i
-								className="large material-icons">track_changes</i> <strong>eivolo</strong></a>
-
+							<a className="navbar-brand waves-effect waves-dark" href="/"><i
+								className="large material-icons">track_changes</i> <strong>eivolo</strong>
+							</a>
 							<div id="sideNav"><i className="material-icons dp48">toc</i></div>
 						</div>
 						<ul className="nav navbar-top-links navbar-right">
@@ -66,7 +67,7 @@ const AdminPanel = ({ children }: AdminLayoutProps): JSX.Element => {
 							</li>
 							<li>
 								<a className="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1">
-									<i className="fa fa-user fa-fw"></i> <b>John Doe</b> <i className="material-icons right">arrow_drop_down</i>
+									<i className="fa fa-user fa-fw"></i> <b>{authCookie?.email}</b> <i className="material-icons right">arrow_drop_down</i>
 								</a>
 							</li>
 						</ul>

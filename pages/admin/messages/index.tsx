@@ -1,11 +1,11 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { Htag, MessageList, Pagination } from '../../../components';
+import { MessageList, Pagination } from '../../../components';
 import { IMessage } from '../../../infrastructure/interfaces/message.interface';
-import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 import { AppConstants } from '../../../infrastructure/app.constants';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import { useRefreshToken } from '../../../infrastructure/hooks/use-refresh-token.hook';
+import { withAdminPanel } from '../../../layouts/admin/admin-panel';
 
 function Messages(props: { messages: IMessage[] }): JSX.Element {
 	const [messagesState, setMessagesState] = useState(props.messages);
@@ -56,30 +56,41 @@ function Messages(props: { messages: IMessage[] }): JSX.Element {
 		});
 	}
 
-	return <>
-		<div className="row">
-			<Htag tag="h3">Messages</Htag>
-			<div style={{ marginTop: '32px' }}>
-				<input
-					className="form-input"
-					type="text"
-					placeholder="Search by name..."
-					value={search}
-					onChange={handleChange}
-				/>
+	return (
+		<div id="page-wrapper">
+			<div className="header">
+				<h1 className="page-header">
+					Messages
+				</h1>
+				<ol className="breadcrumb">
+					<li><a href="/admin">Home</a></li>
+					<li><a href="/admin/messages">Messages </a></li>
+					<li className="active">Data</li>
+				</ol>
+			</div>
+
+			<div id="page-inner">
+				<div style={{ width: '33%', float: 'right' }}>
+					<input
+						className="form-input"
+						type="text"
+						placeholder="Search by name..."
+						value={search}
+						onChange={handleChange}
+					/>
+				</div>
+				{
+					searchResults.length < messagesState.length ?
+						<MessageList messages={searchResults} sortByName={sortMessagesByName} />
+						:
+						<>
+							<MessageList messages={currentMessages} sortByName={sortMessagesByName} />
+							<Pagination itemsPerPage={messagesPerPage} totalItems={messagesState.length} paginate={paginate} />
+						</>
+				}
 			</div>
 		</div>
-		{
-			searchResults.length < messagesState.length ?
-				<MessageList messages={searchResults} sortByName={sortMessagesByName} />
-				:
-				<>
-					<MessageList messages={currentMessages} sortByName={sortMessagesByName} />
-					<Pagination itemsPerPage={messagesPerPage} totalItems={messagesState.length} paginate={paginate} />
-				</>
-		}
-
-	</>;
+	);
 }
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext<ParsedUrlQuery>) => {
@@ -126,4 +137,4 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 	}
 };
 
-export default withAdminLayout(Messages);
+export default withAdminPanel(Messages);

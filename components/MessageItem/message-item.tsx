@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { MessageItemProps } from './message-item.props';
-import styles from './message-item.module.css';
 import { AppConstants } from '../../infrastructure/app.constants';
 
 export const MessageItem = ({ message }: MessageItemProps): JSX.Element => {
@@ -24,21 +23,15 @@ export const MessageItem = ({ message }: MessageItemProps): JSX.Element => {
 				<td>{message.messageText.substring(0, 10) + '...'}</td>
 				<td>
 					<Link href="/admin/messages/[id]" as={`/admin/messages/${message._id}`}>
-						<a className={styles.edit}></a>
+						<a><i className="fa fa-pencil"></i></a>
 					</Link>
 					<span> </span>
 					|
 					<span> </span>
 					<Link href="#">
-						<a
-							className={styles.delete}
-							onClick={
-								() => {
-									if (message._id) {
-										deleteMessage(message._id);
-									}
-								}
-							} />
+						<a onClick={() => { if (message._id) { deleteMessage(message._id); } }}>
+							<i className="fa fa-trash-o"></i>
+						</a>
 					</Link>
 				</td>
 			</tr>

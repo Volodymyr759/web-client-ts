@@ -6,13 +6,12 @@ import { ParsedUrlQuery } from 'querystring';
 import { ErrorMessage, Field, FieldAttributes, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { IUser } from '../../../infrastructure/interfaces/user.interface';
-import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
-import { Htag } from '../../../components';
 import { useHttp } from '../../../infrastructure/hooks/use-http.hook';
 import { AuthContext } from '../../../infrastructure/context/auth-context';
 import { Roles } from '../../../infrastructure/roles.enum';
 import { AppConstants } from '../../../infrastructure/app.constants';
 import { useRefreshToken } from '../../../infrastructure/hooks/use-refresh-token.hook';
+import { withAdminPanel } from '../../../layouts/admin/admin-panel';
 
 function User(props: { user: IUser }): JSX.Element {
 	const [userState] = useState(props.user);
@@ -35,92 +34,105 @@ function User(props: { user: IUser }): JSX.Element {
 		}
 	};
 	return (
-		<>
-			<Htag tag="h3">User: {props.user.email}</Htag>
-			<Formik
-				initialValues={{
-					email: props.user.email,
-					createdAt: new Date(props.user.createdAt),
-					updatedAt: new Date(props.user.updatedAt),
-					roles: props.user.roles.includes(0) ? [Roles.User] : [Roles.Admin],
-				}}
-				validationSchema={Yup.object({
-					email: Yup.string()
-						.required('Required')
-						.email('Invalid email')
-						.min(4, 'Email address must be 4-30 characters')
-						.max(30, 'Email address must be 4-30 characters'),
-					roles: Yup.number()
-						.required('Required')
-						.oneOf([0, 1], 'Choose one of options')
-				})
-				}
-				onSubmit={
-					(values, { setSubmitting }) => {
-						submitHandler(values);
-						setSubmitting(false);
-					}
-				}
-				validateOnMount
-			>
-				{props => (
-					<Form className="row">
-						<div className="col-12">
-							<p><label className="form-label">Email:</label></p>
-							<Field name="email" className="form-control" type="email" />
-							<ErrorMessage name="email" render={msg => <div className="form-error-message">{msg}</div>} />
-						</div>
-						<br />
-						<div className="col-12">
-							<p><label className="form-label">Roles:</label></p>
-							<Field name="roles" className="form-input">
-								{   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-									({ field }: FieldAttributes<any>) => {
-										return rolesOptions.map(option => {
-											return (
-												<React.Fragment key={option.key}>
-													<input
-														type="checkbox"
-														id={option.value}
-														{...field}
-														value={option.value}
-														checked={field.value.includes(parseInt(option.value.toString()))}
-													/>
-													<span> </span>
-													<label htmlFor={option.value.toString()}>{option.key}</label>
-													<span> </span>
-												</React.Fragment>
-											);
-										});
-									}
-								}
-							</Field>
-							<ErrorMessage name="roles" render={msg => <div className="form-error-message">{msg}</div>} />
-						</div>
-						<br />
-						<p> </p>
-						<br />
-						<div className="col-12">
-							<Link href="/admin/users">
-								<a className="btn btn-secondary">Go Back</a>
-							</Link>
-							<span> </span>
-							<button type="submit" className="btn btn-primary" disabled={!props.isValid || props.isSubmitting}>
-								{
-									props.isSubmitting ?
-										<>
-											<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-											<span> Loading...</span>
-										</>
-										:
-										<span>Save</span>
-								}
-							</button>
-						</div>
-					</Form>
-				)}
-			</Formik>
-		</>
+		<div id="page-wrapper">
+			<div className="header">
+				<h1 className="page-header"> User Info </h1>
+				<ol className="breadcrumb">
+					<li><a href="/admin">Home</a></li>
+					<li><a href="/admin/users">Users </a></li>
+					<li className="active">Data</li>
+				</ol>
+			</div>
+			<div id="page-inner">
+				<div className="card">
+					<Formik
+						initialValues={{
+							email: props.user.email,
+							createdAt: new Date(props.user.createdAt),
+							updatedAt: new Date(props.user.updatedAt),
+							roles: props.user.roles.includes(0) ? [Roles.User] : [Roles.Admin],
+						}}
+						validationSchema={Yup.object({
+							email: Yup.string()
+								.required('Required')
+								.email('Invalid email')
+								.min(4, 'Email address must be 4-30 characters')
+								.max(30, 'Email address must be 4-30 characters'),
+							roles: Yup.number()
+								.required('Required')
+								.oneOf([0, 1], 'Choose one of options')
+						})
+						}
+						onSubmit={
+							(values, { setSubmitting }) => {
+								submitHandler(values);
+								setSubmitting(false);
+							}
+						}
+						validateOnMount
+					>
+						{props => (
+							<div className="card-content">
+								<Form className="col s12">
+									<div className="col s12">
+										<p>Email:</p>
+										<Field name="email" className="form-control" type="email" />
+										<ErrorMessage name="email" render={msg => <div className="form-error-message">{msg}</div>} />
+									</div>
+									<br />
+									<div className="col s12">
+										<p>Roles:</p>
+										<Field name="roles" className="form-input">
+											{   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+												({ field }: FieldAttributes<any>) => {
+													return rolesOptions.map(option => {
+														return (
+															<div key={option.key}>
+																<input
+																	type="checkbox"
+																	id={option.value}
+																	{...field}
+																	value={option.value}
+																	checked={field.value.includes(parseInt(option.value.toString()))}
+																/>
+																<span> </span>
+																<label htmlFor={option.value.toString()}>{option.key}</label>
+																<span> </span>
+															</div>
+														);
+													});
+												}
+											}
+										</Field>
+										<ErrorMessage name="roles" render={msg => <div className="form-error-message">{msg}</div>} />
+									</div>
+									<br />
+									<p> </p>
+									<br />
+									<div className="col s12">
+										<Link href="/admin/users">
+											<a className="btn btn-secondary">Go Back</a>
+										</Link>
+										<span> </span>
+										<button type="submit" className="btn btn-primary" disabled={!props.isValid || props.isSubmitting}>
+											{
+												props.isSubmitting ?
+													<>
+														<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+														<span> Loading...</span>
+													</>
+													:
+													<span>Save</span>
+											}
+										</button>
+									</div>
+								</Form>
+							</div>
+						)}
+					</Formik>
+				</div>
+			</div>
+		</div>
 	);
 }
 
@@ -168,4 +180,4 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 	}
 };
 
-export default withAdminLayout(User);
+export default withAdminPanel(User);

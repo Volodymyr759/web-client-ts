@@ -1,5 +1,4 @@
 import { UserListProps } from './user-list.props';
-import styles from './user-list.module.css';
 import { UserItem } from '../UserItem/user-item';
 
 export const UserList = ({ users, sortByEmail }: UserListProps): JSX.Element => {
@@ -8,7 +7,12 @@ export const UserList = ({ users, sortByEmail }: UserListProps): JSX.Element => 
 			<table className="table">
 				<thead>
 					<tr>
-						<th scope="col"><span>Email </span><a className={styles.sorting} onClick={sortByEmail}></a></th>
+						<th scope="col">
+							<a onClick={sortByEmail}>
+								<span>Email </span>
+								<i className="fa fa-arrows-v"></i>
+							</a>
+						</th>
 						<th scope="col">Registered</th>
 						<th scope="col">Roles</th>
 						<th scope="col">Options</th>

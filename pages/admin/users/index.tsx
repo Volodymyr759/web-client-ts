@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import { Htag, Pagination, UserList } from '../../../components';
+import { Pagination, UserList } from '../../../components';
 import { AppConstants } from '../../../infrastructure/app.constants';
 import { IUser } from '../../../infrastructure/interfaces/user.interface';
-import { withAdminLayout } from '../../../layouts/admin/AdminLayout';
 import { useRefreshToken } from '../../../infrastructure/hooks/use-refresh-token.hook';
+import { withAdminPanel } from '../../../layouts/admin/admin-panel';
 
 function Users(props: { users: IUser[] }): JSX.Element {
 	const [usersState, setUsersState] = useState(props.users);
@@ -45,11 +45,20 @@ function Users(props: { users: IUser[] }): JSX.Element {
 		});
 	}
 	return (
-		<>
-			<Htag tag="h3">Users</Htag>
-			<UserList users={usersState} sortByEmail={sortUsersByEmail} />
-			<Pagination itemsPerPage={usersPerPage} totalItems={usersState.length} paginate={paginate} />
-		</>
+		<div id="page-wrapper">
+			<div className="header">
+				<h1 className="page-header"> Users </h1>
+				<ol className="breadcrumb">
+					<li><a href="/admin">Home</a></li>
+					<li><a href="/admin/users">Users </a></li>
+					<li className="active">Data</li>
+				</ol>
+			</div>
+			<div id="page-inner">
+				<UserList users={usersState} sortByEmail={sortUsersByEmail} />
+				<Pagination itemsPerPage={usersPerPage} totalItems={usersState.length} paginate={paginate} />
+			</div>
+		</div>
 	);
 }
 
@@ -97,4 +106,4 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 	}
 };
 
-export default withAdminLayout(Users);
+export default withAdminPanel(Users);
