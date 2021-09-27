@@ -1,9 +1,8 @@
 import { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Htag } from '../../components';
 import { AuthContext } from '../../infrastructure/context/auth-context';
 import { Roles } from '../../infrastructure/roles.enum';
-import { withAdminLayout } from '../../layouts/admin/AdminLayout';
+import { withAdminPanel } from '../../layouts/admin/admin-panel';
 
 function UserRoles(): JSX.Element {
 	const router = useRouter();
@@ -15,20 +14,28 @@ function UserRoles(): JSX.Element {
 
 	return (
 		<>
-			<Htag tag="h3">User Roles</Htag>
-			<div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
-				<div className="card" style={{ width: '18rem' }}>
-					<div className="card-body">
-						<h5 className="card-title">Admin</h5>
-						<h6 className="card-subtitle mb-2 text-muted">role 'Administrator'</h6>
-						<p className="card-text">Administrator-role: allows to read/write everything.</p>
-					</div>
+			<div id="page-wrapper">
+				<div className="header">
+					<h1 className="page-header">
+						User roles
+					</h1>
+					<ol className="breadcrumb">
+						<li><a href="/admin">Home</a></li>
+						<li><a href="/admin/roles">Roles </a></li>
+						<li className="active">Data</li>
+					</ol>
+
 				</div>
-				<div className="card" style={{ width: '18rem' }}>
-					<div className="card-body">
-						<h5 className="card-title">User</h5>
-						<h6 className="card-subtitle mb-2 text-muted">role 'registered User'</h6>
-						<p className="card-text">User-role: registered user can send message to the site administration.</p>
+				<div id="page-inner">
+					<div className="card">
+						<div className="card-content">
+							<div className="alert alert-success">
+								<strong>User-role:</strong> registered user can send message to the site administration.
+							</div>
+							<div className="alert alert-info">
+								<strong>Administrator-role:</strong> allows to read/write everything.
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -36,4 +43,4 @@ function UserRoles(): JSX.Element {
 	);
 }
 
-export default withAdminLayout(UserRoles);
+export default withAdminPanel(UserRoles);

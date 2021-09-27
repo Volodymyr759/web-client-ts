@@ -1,0 +1,634 @@
+/*
+ * cssCharts v0.3.0
+ * jquery plugin to create donut and bar charts with css
+ * https://github.com/sultantarimo
+ *
+ * (c)2015 Sultan Tarimo - sultantarimo@me.com
+ * Released under the MIT license
+ */
+.chart *,
+.chart { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; margin: 0; padding: 0; }
+
+.chart {
+	position: relative;
+
+	display: block;
+
+	width: auto;
+	margin: 0 auto;
+
+	font-family: sans-serif;
+	font-size: 14px;
+}
+
+/* bar chart */
+
+.chart.bar { height: 200px; }
+
+.bar-chart {
+	position: absolute;
+	z-index: 20;
+	left: 0;
+
+	display: table;
+
+	width: auto;
+	height: 100%;
+	margin: 0 auto;
+
+	table-layout: fixed;
+}
+
+.bar-chart ul {
+	display: block;
+	float: left;
+
+	height: 100%;
+	margin-left: 34px;
+}
+
+.bar-chart li {
+	position: relative;
+
+	display: table-cell;
+
+	height: 100px;
+
+	vertical-align: bottom;
+}
+
+.bar-chart span {
+	position: relative;
+
+	display: block;
+
+	width: 34px;
+	margin: 0 6px;
+
+	-webkit-transition: all 100ms ease-in-out;
+	-moz-transition: all 100ms ease-in-out;
+	transition: all 100ms ease-in-out;
+
+	-webkit-animation: drawbar 0.3s ease-in-out;
+	-moz-animation: drawbar 0.3s ease-in-out;
+	animation: drawBar 0.3s ease-in-out;
+
+	background: rgb(241, 127, 73);
+}
+
+.bar-chart li:hover span {
+	cursor: pointer;
+
+	box-shadow: 0 0 0 4px rgb(241, 127, 73);
+}
+
+.bar-chart li:nth-child(2n+1):hover span {
+	box-shadow: 0 0 0 4px #BD380F;
+}
+
+.bar-chart li:nth-child(2n+1) span { background-color: #BD380F; }
+.bar-chart ul:last-of-type li:last-child span { margin-right: 0; }
+.bar-chart ul:first-of-type li:first-child span { margin-left: 0; }
+.bar-chart ul:last-of-type { margin-right: 0; }
+.bar-chart ul:first-of-type { margin-left: 0; }
+.bar-chart.left-bar ul:last-of-type { margin-right: 0; }
+
+.bar-chart.left-bar ul {
+	float: left;
+
+	margin-right: 34px;
+	margin-left: 0;
+}
+
+.bar-chart span::before {
+	position: absolute;
+	bottom: 100%;
+
+	left: 50%;
+
+	display: block;
+
+	width: auto;
+	margin-bottom: 10px;
+
+	content: attr(title);
+
+	-webkit-transform: translateX(-50%);
+	-moz-transform: translateX(-50%);
+	transform: translateX(-50%);
+	text-align: center;
+	word-wrap: break-word;
+
+	font-size: 12px;
+}
+
+.bar-chart li span::before {
+	-webkit-transition: all 100ms ease-in-out;
+	-moz-transition: all 100ms ease-in-out;
+	transition: all 100ms ease-in-out;
+}
+
+@-webkit-keyframes drawBar { 0% { height: 0; } }
+
+@-moz-keyframes drawBar { 0% { height: 0; } }
+
+@keyframes drawBar { 0% { height: 0; } }
+
+/* donut chart */
+
+.chart.donut {
+	width: 200px;
+	height: 200px;
+}
+
+.donut-chart {
+	position: relative;
+
+	width: 100%;
+	height: 100%;
+
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+}
+
+.donut-chart.fill {
+	background: rgb(241, 127, 73);
+}
+
+.donut-chart::after {
+	position: absolute;
+	z-index: 400;
+	top: 50%;
+	left: 50%;
+
+	width: 86%;
+	height: 86%;
+	margin: 0 auto;
+
+	content: "";
+
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+	pointer-events: none;
+
+	-webkit-border-radius: 100%;
+	-moz-border-radius: 100%;
+	border-radius: 100%;
+	background: #FFF;
+}
+
+.donut-chart h2 {
+	position: absolute;
+	z-index: 500;
+	top: 50%;
+
+	width: 100%;
+	margin-top: -30px;
+
+	text-align: center;
+	pointer-events: none;
+
+	color: rgb(0, 0, 0);
+
+	font-size: 26px;
+	font-weight: 400;
+	line-height: 140%;
+}
+
+.donut-chart h2 span {
+	display: block;
+
+	width: 100%;
+	margin-top: -10px;
+
+	color: rgb(142, 143, 143);
+
+	font-size: 14px;
+}
+
+.donut-chart .spinner {
+	z-index: 200;
+
+	-webkit-transition: all 160ms ease-in-out;
+	-moz-transition: all 160ms ease-in-out;
+	transition: all 160ms ease-in-out;
+
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	transform: rotate(0deg);
+
+	-webkit-animation: rotatedonut 0.3s ease-in-out;
+	-moz-animation: rotatedonut 0.3s ease-in-out;
+	animation: rotateDonut 0.3s ease-in-out;
+
+	border-right: none;
+
+	-webkit-border-radius: 100% 0 0 100% / 50% 0 0 50%;
+	-moz-border-radius: 100% 0 0 100% / 50% 0 0 50%;
+	border-radius: 100% 0 0 100% / 50% 0 0 50%;
+}
+
+.spinner ~ .pie {
+	pointer-events: none;
+}
+
+.donut-chart.fill .pie,
+.pie-chart .pie {
+	-webkit-box-shadow: 0 0 0 4px #BD380F;
+	-moz-box-shadow: 0 0 0 4px #BD380F;
+	box-shadow: 0 0 0 4px #BD380F;
+}
+
+@-webkit-keyframes rotateDonut { 0% { transform: rotate(0deg); } }
+
+@-moz-keyframes rotateDonut { 0% { transform: rotate(0deg); } }
+
+@keyframes rotateDonut { 0% { transform: rotate(0deg); } }
+
+.donut-chart .spinner.temp { display: none; }
+
+.donut-chart .pie {
+	position: absolute;
+
+	width: 50%;
+	height: 100%;
+
+	-webkit-transform-origin: 100% 50%;
+	-moz-transform-origin: 100% 50%;
+	transform-origin: 100% 50%;
+
+	background: #BD380F;
+}
+
+.donut-chart .mask {
+	z-index: 400;
+
+	margin-left: -1px;
+
+	background: rgb(248, 248, 248);
+}
+
+.pie-chart::after {
+	display: none;
+}
+
+.chart.donut .pie-chart h2,
+.chart.donut .pie-chart h2 span { color: #FFF; }
+
+/* pie chart */
+.chart.pie svg { width: 100%; height: 100%; }
+
+.chart.pie {
+	width: 200px;
+	height: 200px;
+}
+
+.chart.pie svg text {
+	text-anchor: middle;
+	fill: white;
+	stroke-width: 0;
+
+	transform: translate(120, -80);
+}
+
+.chart.pie svg path:hover {
+	stroke-width: 10px;
+}
+
+.charts-tip {
+	position: absolute;
+	z-index: 100;
+
+	display: block;
+
+	width: auto;
+	padding: 6px 12px;
+
+	pointer-events: none;
+
+	color: #FFF;
+
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background: rgba(0, 0, 0, 0.8);
+
+	font-family: sans-serif;
+	font-size: 16px;
+}
+
+.chart.pie .pie-legend {
+	position: absolute;
+	top: 50%;
+	right: 0;
+
+	margin-right: -30px;
+
+	transform: translateX(100%) translateY(-50%);
+}
+
+.chart.pie .pie-legend li {
+	display: block;
+	clear: both;
+
+	margin-bottom: 14px;
+}
+
+.chart.pie .pie-legend li i {
+	position: relative;
+	top: 1px;
+
+	display: block;
+	float: left;
+
+	width: 14px;
+	height: 14px;
+	margin-right: 10px;
+
+	background: #DDD;
+
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+.chart.pie .pie-legend li p { display: inline; clear: both; }
+
+/* pie chart */
+
+/* line chart */
+
+.chart.line {
+	position: relative;
+
+	width: auto;
+	height: auto;
+	margin: 0 auto;
+}
+
+.chart .line-chart {
+	position: relative;
+	z-index: 20;
+
+	display: block;
+
+	width: 100%;
+	min-width: 100px;
+	height: 100%;
+	min-height: 100px;
+	margin: 0 auto;
+}
+
+/* line chart borders and grids */
+.line-chart::after {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+
+	display: block;
+
+	width: 100%;
+	height: 1px;
+	padding-right: 10px;
+
+	content: "";
+
+	background: rgb(238, 238, 238);
+}
+
+.chart .grid {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+}
+
+.chart hr {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+
+	width: 100%;
+	height: 1px;
+
+	border: none;
+	outline: none;
+	background: rgb(238, 238, 238);
+}
+
+.chart hr::before {
+	position: absolute;
+	top: 0;
+	right: 100%;
+
+	margin-right: 20px;
+
+	content: attr(data-y);
+
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+	text-align: right;
+
+	color: rgba(0, 0, 0, 0.4);
+
+	font-size: 12px;
+}
+
+/* line chart borders and grids */
+
+/* line chart line */
+.line-chart li {
+	position: relative;
+	position: absolute;
+
+	display: block;
+	float: left;
+
+	height: 1px;
+}
+
+/* line chart points tooltip */
+.line-chart li a:hover::before,
+.line-chart li a:hover::after {
+	z-index: 10;
+
+	display: block;
+}
+
+.line-chart li a::before {
+	position: absolute;
+	z-index: 40;
+	bottom: 100%;
+	left: 50%;
+
+	display: none;
+
+	width: 40px;
+	margin-bottom: -4px;
+	padding: 8px;
+
+	content: attr(data-y);
+	cursor: pointer;
+
+	-webkit-transform: translateX(-50%);
+	-moz-transform: translateX(-50%);
+	transform: translateX(-50%);
+	text-align: center;
+
+	color: #FFF;
+
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	background: rgba(0, 0, 0, 0.8);
+
+	font-size: 14px;
+}
+
+.line-chart li a::after {
+	position: absolute;
+	z-index: 50;
+	bottom: 100%;
+	left: 50%;
+
+	display: none;
+
+	width: 0;
+	height: 0;
+	margin-bottom: -16px;
+
+	content: "";
+
+	-webkit-transform: translateX(-50%);
+	-moz-transform: translateX(-50%);
+	transform: translateX(-50%);
+
+	border: 6px solid rgba(0, 0, 0, 0);
+	border-top: 6px solid rgba(0, 0, 0, 0.8);
+}
+
+.line-chart li a {
+	position: absolute;
+	z-index: 30;
+	top: 0;
+
+	left: 0;
+
+	display: block;
+
+	width: 40px;
+	height: 40px;
+
+	cursor: pointer;
+
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+}
+
+/* line chart points tooltip */
+
+/* line chart points */
+
+.line-chart li span {
+	position: absolute;
+
+	display: block;
+	float: left;
+
+	height: 1px;
+
+	background: rgb(241, 127, 73);
+}
+
+.line-chart.no-points li span {
+	display: none;
+}
+
+.line-chart li span::before {
+	position: absolute;
+	bottom: -4px;
+	left: -4px;
+
+	display: block;
+
+	width: 6px;
+	height: 6px;
+
+	content: "";
+
+	-webkt-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+}
+
+.line-chart li:hover span::before {
+	-webkit-transition: all 200ms ease-in-out;
+	-moz-transition: all 200ms ease-in-out;
+	transition: all 200ms ease-in-out;
+	-webkit-transform: scale(1.3);
+	-moz-transform: scale(1.3);
+	transform: scale(1.3);
+}
+
+.line-chart li span::before,
+.line-chart li span::after {
+	border: 2px solid #BD380F;
+	background: rgb(241, 127, 73);
+
+	-webkit-box-shadow: 0 0 0 4px #FFF;
+	-moz-box-shadow: 0 0 0 4px #FFF;
+	box-shadow: 0 0 0 4px #FFF;
+}
+
+/* line chart points */
+
+/* line chart line */
+.chart.line svg,
+.chart.line > div {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+
+	-webkit-animation: drawline 0.3s ease-in-out;
+	-moz-animation: drawline 0.3s ease-in-out;
+	animation: drawLine 0.3s ease-in-out;
+
+	opacity: 1;
+}
+
+.chart.line svg path {
+	fill: rgba(241, 127, 73, 0);
+	stroke: rgb(241, 127, 73);
+	stroke-width: 2px;
+}
+
+.chart.line.dotted svg path {
+	/* if you want it dashed instead of filled */
+	stroke-dasharray: 3;
+}
+
+.chart.line .fill svg path {
+	fill: rgba(241, 127, 73, 0.1);
+	stroke: none;
+	stroke-width: 0;
+}
+
+/* line chart animation */
+@-webkit-keyframes drawLine { 0% { opacity: 0; } }
+
+@-moz-keyframes drawLine { 0% { opacity: 0; } }
+
+@keyframes drawLine { 0% { opacity: 0; } }
+
+@-webkit-keyframes drawChart { 0% { width: 0; } }
+
+@-moz-keyframes drawChart { 0% { width: 0; } }
+
+@keyframes drawChart { 0% { width: 0; } }
