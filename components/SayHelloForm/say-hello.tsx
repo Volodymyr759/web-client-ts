@@ -158,7 +158,7 @@ export const SayHelloForm = (): JSX.Element => {
 					</Formik>
 				</div>
 				<div style={{ margin: 'auto' }}>
-					<img src="/images/contact-us.jpeg" />
+					<img src="/images/contact-us.webp" />
 				</div>
 			</div>
 		</>
