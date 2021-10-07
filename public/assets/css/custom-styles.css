@@ -20,6 +20,7 @@ body {
 #page-wrapper {
 	/* min-height: 600px; */
 	min-height: 100vh;
+	margin: 0 0 0 260px;
 	padding: 15px 15px;
 
 	background: #ECECEC;
