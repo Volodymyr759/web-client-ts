@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Description:
 
-## Getting Started
+This is a [Next.js](https://nextjs.org/) project written in MERN-stack.
 
-First, run the development server:
+SPA presents company's site:
+Demo: https://web-client-ts.vercel.app
+API: https://polar-castle-18354.herokuapp.com/swagger/
+BACKEND - repository: https://github.com/Volodymyr759/test-eivolo-api
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Public area is designed from scratch using bootstrap-css and grids, is sensitive to all screen resolutions.
+Private (admin) area uses layout based on source: https://webthemez.com/target-free-responsive-bootstrap-admin-template/, it possible to grant credentials of the admin-user upon request.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Application is easy scalable to add new features (for example 'News' / 'Vacancies').
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Hosting and domain name for frontend-part are free, site is deployed to: https://vercel.com/
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Functionality:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Authentication by email / Authorization: OAuth-2.0, encrypted JWT - access/refresh tokens, expiration time: access_token: 30 min, refresh_token: 30 days, data storage: cookie.
 
-## Learn More
+User roles: anonymous, "user" - registered user, "admin".
 
-To learn more about Next.js, take a look at the following resources:
+Registered users allowed to see profile, change email/password and send messages to administrator.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Admin (administrator) uses /admin part of site, can manage (CRUD) users and messages.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Contact
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Regarding to create frontend / backend (frameworks Next.js / Nest.js), please use the mail: logisticmaster.2000@gmail.com
